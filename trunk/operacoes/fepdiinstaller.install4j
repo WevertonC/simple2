@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install4j version="3.2.2">
+  <directoryPresets config="E:/user/Eduardo/Workspace/FePDI/Resource/Help" />
+  <application name="Ferramenta de Processamento Digital de Imagens" distributionSourceDir="" applicationId="7405-9769-8756-1274" mediaDir="C:/Documents and Settings/Duda/Meus documentos" mediaFilePattern="%SHORT_NAME%_%VERSION%_%PLATFORM%" compression="6" lzmaCompression="false" keepModificationTimes="false" shortName="FePDI" publisher="Laboratório de Visão Computacional" publisherWeb="www.dsc.ufcg.edu.br/~yuska/pihm" version="1.0" allPathsRelative="false" backupOnSave="false" autoSave="false" macSignature="????" javaMinVersion="1.5.0_01" javaMaxVersion="" allowBetaVM="false">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <variables />
+  </application>
+  <files>
+    <mountPoints>
+      <mountPoint name="" id="4" location="" mode="755" />
+    </mountPoints>
+    <entries>
+      <dirEntry mountPoint="4" file="E:/user/Eduardo/Workspace/FePDI" overwrite="4" shared="false" mode="644" dontUninstall="false" excludeSuffixes="" dirMode="755">
+        <exclude />
+      </dirEntry>
+    </entries>
+    <components />
+  </files>
+  <launchers>
+    <launcher name="jai-1_1_3.exe" id="41" external="true" excludeFromMenu="false" menuName="Instalar JAI" externalFile="jai-1_1_3.exe" />
+    <launcher name="FePDI.exe" id="5" external="true" excludeFromMenu="false" menuName="FePDI" externalFile="FePDI.exe" />
+  </launchers>
+  <installerGui installerType="1" runUninstallerOnUpdate="false" addOnAppId="" suggestPreviousLocations="true" allowUnattendedInstall="false" useCustomHeaderImage="false" customHeaderImage="" customSize="false" customWidth="500" customHeight="390">
+    <customCode preAction="false" preActionClass="" postAction="false" postActionClass="" preUninstallAction="false" preUninstallActionClass="" postUninstallAction="false" postUninstallActionClass="" initHandler="false" initHandlerClass="" directoryValidator="false" directoryValidatorClass="" installationHandler="false" installationHandlerClass="" />
+    <standardScreens>
+      <screen id="welcome" enabled="true" useCustomBanner="false" bannerImageFile="" background="255,255,255" />
+      <screen id="license" enabled="true" file="E:/user/Eduardo/Workspace/FePDI/Resource/Help/sobre.txt" />
+      <screen id="location" enabled="true" showSpace="true" suggestAppDir="true" />
+      <screen id="components" enabled="false" allSelected="false" firstMandatory="true">
+        <selectedComponents>
+          <componentIds refId="7" />
+        </selectedComponents>
+        <mandatoryComponents />
+      </screen>
+      <screen id="programGroup" enabled="true" />
+      <screen id="fileAssociations" enabled="true">
+        <associations />
+      </screen>
+      <screen id="services" enabled="true" allSelected="true">
+        <selectedServiceLaunchers />
+      </screen>
+      <screen id="additionalTasks" enabled="true" customTasksPlacement="1">
+        <customTasks />
+      </screen>
+      <screen id="preInfo" enabled="true" file="E:/user/Eduardo/Workspace/FePDI/Resource/Help/equipe.txt" />
+      <screen id="install" enabled="true" />
+      <screen id="postInfo" enabled="true" file="E:/user/Eduardo/Workspace/FePDI/Resource/Help/aviso_jai.txt" />
+      <screen id="finished" enabled="true" useCustomBanner="false" bannerImageFile="" background="255,255,255" />
+    </standardScreens>
+    <customScreens />
+  </installerGui>
+  <mediaSets>
+    <win32 name="Windows" id="16" mediaFileName="" installDir="FePDI" allLaunchers="true" includedJRE="" manualJREEntry="false" bundleType="1" jreURL="" jreFtpURL="" jreShared="false" customInstallBaseDir="" allowUserStartAfterFinish="true" launchExecutableId="5" createUninstallIcon="true" overrideLicenseFile="false" licenseFile="" overridePreInformationFile="false" preInformationFile="" overridePostInformationFile="false" postInformationFile="" adminRequired="false" languageID="pt" modeDesktopIcon="3" desktopLauncherId="5" programGroup="FePDI" allowUserDisableStartMenuCreation="true" reboot="false" rebootUninstaller="false" modeQuickLaunchIon="2">
+      <selectedLaunchers>
+        <launcher id="5" />
+      </selectedLaunchers>
+      <messageSet language="English" />
+      <exclude />
+      <variables />
+      <excludedScreenIds />
+      <additionalStartMenuEntries>
+        <entry name="Instalar JAI" target="jai-1_1_3.exe" icon="" />
+      </additionalStartMenuEntries>
+    </win32>
+  </mediaSets>
+  <buildIds buildAll="true" />
+</install4j>
+

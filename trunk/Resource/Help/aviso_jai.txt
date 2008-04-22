@@ -1,0 +1,5 @@
+Atenção: 
+
+Para um melhor desenpenho do FePDi recomenda-se a instalação da biblioteca JAI,
+caso desejar instalar-lá selecione o atalho "Instalar JAI" que será criado no 
+Menu Iniciar, juntamente com os atalhos do FePDI e de Desintalação. 
