@@ -1,5 +1,5 @@
+#summary Descrição do processo de desenvolvimento usado, incluindo alternâncias de gerência
 #labels gerência,processo,xp1
-#Descrição do processo de desenvolvimento usado, incluindo alternâncias de gerência
 
 = Processo =
 
