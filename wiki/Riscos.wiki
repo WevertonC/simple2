@@ -1,3 +1,5 @@
 #summary Tabela de gerência e contenção de riscos do projeto
 
 = Tabela de Riscos =
+
+|| Descrição do risco || Data em que foi identificado || Gravidade (baixo, médio, alto) || Ordem (1 = pior risco) || Ordem semana passada || Número de semanas na lista ||Responsável por fazer o risco sumir || Observações ||
