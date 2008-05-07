@@ -3,3 +3,11 @@
 = Artefatos =
 
   * [Visao Documento de Visão]
+  * [UserStories User Stories]
+  * [Iteracao  Plano de Iteração]
+  * [Releases  Plano de Releases]
+  * [Arquitetura Projeto Arquitetural]
+  * [NaoFuncionais Requisitos Não Funcionais]
+  * [Processo Processo de Desenvolvimento Adotado]
+  * [BigChart  BigChart]
+  * [Riscos Tabela de Riscos]
