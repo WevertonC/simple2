@@ -1,3 +1,9 @@
 #summary Requisitos Não Funcionais
 
 = Requisitos Não Funcionais=
+
+  * A implementação deve ser feita em Java;
+  * As funcionalidades a serem acrescentadas na ferramenta SImPLe devem possuir código fonte aberto;
+  * O tempo de resposta da ferramenta deve ser baixo;
+  * Multiplataforma;
+  * A usabilidade deve ser priorizada;
