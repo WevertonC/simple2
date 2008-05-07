@@ -2,4 +2,4 @@
 
 = Bigchart =
 
-BigChart do Projeto
+Bigchart do Projeto
