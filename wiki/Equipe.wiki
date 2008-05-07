@@ -4,9 +4,9 @@
 
 ==== Elloá B. Guedes ====
 
-É aluna do sétimo período do Curso de Ciência da Computação na Universidade Federal de Campina Grande (UFCG). Atua principalmente na área da Computação Quântica com foco em algoritmos quânticos, teoria da computação quântica e complexidad computacional.
-Home page: http://dsc.ufcg.edu.br/~elloa
-E-mail: elloaguedes@gmail.com
+É aluna do sétimo período do Curso de Ciência da Computação na Universidade Federal de Campina Grande (UFCG). Atua principalmente na área da Computação Quântica com foco em algoritmos quânticos, teoria da computação quântica e complexidade computacional.
+  * Home page: http://dsc.ufcg.edu.br/~elloa
+  * E-mail: elloaguedes@gmail.com
 
 ==== Odilon F. de Lima Jr ====
 
