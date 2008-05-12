@@ -2,8 +2,25 @@
 
 = Requisitos Não Funcionais=
 
-  * A implementação deve ser feita em Java;
-  * As funcionalidades a serem acrescentadas na ferramenta SImPLe devem possuir código fonte aberto;
-  * O tempo de resposta da ferramenta deve ser baixo;
-  * Multiplataforma;
-  * A usabilidade deve ser priorizada;
+|| Atributo || Detalhe ou condição limite ||
+|| Tipo de interface desejada || ||
+|| Quem utilizará o produto || ||
+||Facilidade de uso necessária || ||
+|| Volume de utilização (número de usuários, número de transações, ...) || ||
+|| Hardware e software alvo para o produto || ||
+|| Qualidade/robustez || ||
+|| Tolerância a falha || ||
+|| Desempenho|| ||
+|| Segurança|| ||
+|| Compatibilidade com outros produtos/versões e necessidades de migração || ||
+|| Necessidades de internacionalização do produto || ||
+|| Necessidades de customização do produto pelo cliente || ||
+|| Suporte || ||
+|| Preço da solução || ||
+|| Documentação necessária || ||
+|| Uso de padrões || ||
+|| Aspectos legais || ||
+|| Integração com outros produtos || ||
+|| Packaging || ||
+|| Requisitos de instalação || ||
+|| Riscos aceitáveis || ||
