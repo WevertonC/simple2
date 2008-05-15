@@ -7,9 +7,9 @@
 || Quem utilizará o produto || O produto será utilizado por alunos e professores de Ciência da Computação que estejam envolvidos no ensino/aprendizagem de técnicas de Processamento Digital de Imagens.||
 ||Facilidade de uso necessária || É necessário que a ferramenta seja de uso fácil e consiga ilustrar claramente os conceitos que implementa. ||
 || Volume de utilização (número de usuários, número de transações, ...) || Baixo. A ferramenta é destinada ao usuário desktop. ||
-|| Hardware e software alvo para o produto || ||
+|| Hardware e software alvo para o produto || Máquinas Desktop, sem hardware específico, mas que tenham capacidade de manter uma máquina virtual Java sendo executada com bom desempenho. ||
 || Qualidade/robustez || ||
-|| Tolerância a falha || ||
+|| Tolerância a falha || Baixa. ||
 || Desempenho|| ||
 || Segurança|| Não existem requisitos de segurança associados à esta aplicação. ||
 || Compatibilidade com outros produtos/versões e necessidades de migração || Deve ser compatível com a versão do SImPLe desenvolvida anteriormente. ||
@@ -19,7 +19,7 @@
 || Preço da solução || Gratuita. ||
 || Documentação necessária || Documentação de código, manuais para o usuário. ||
 || Uso de padrões || ||
-|| Aspectos legais || ||
+|| Aspectos legais || O módulo desenvolvido deve estar sob a GNU Public License. ||
 || Integração com outros produtos || Não. ||
 || Packaging || Sim. ||
 || Requisitos de instalação || É necessário desenvolver um instalador compatível com Windows. ||
