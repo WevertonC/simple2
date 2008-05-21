@@ -1,5 +1,0 @@
-Descrição
-
-	Salva as alterações feitas na imagem selecionada.
-	Preserva o nome, o tipo (extensão) e o local onde a 
-	imagem está salva

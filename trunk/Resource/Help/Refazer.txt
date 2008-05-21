@@ -1,3 +1,0 @@
-Descrição
-
-	Refaz as 5(cinco) últimas operações realizadas na imagem

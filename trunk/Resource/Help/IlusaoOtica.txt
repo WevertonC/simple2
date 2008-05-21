@@ -1,6 +1,0 @@
-Descrição
-
-  Exibe uma ilusão de ótica. Esse tipo de imagem não pode ser
-  manipulado como as demais, ou seja, nenhuma operação pode ser
-  realizada em cima da ilusão de ótica. É permitido, apenas,
-  visualizar a ilusão de ótica exibida

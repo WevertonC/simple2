@@ -1,6 +1,0 @@
-Passos
-
-	1 - Informar valor dda máscara desejada
-	2 - Confimar a operação - pressionar o botão Ok
-	ou
-	2 - Cancelar a operação - pressionar o botão Cancelar

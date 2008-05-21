@@ -1,7 +1,0 @@
-Descrição
-
-  Captura uma imagem a partir do scanner ou da câmera
-
-Passos
-  
-  Ainda não definidos, função não implementada

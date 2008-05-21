@@ -1,8 +1,0 @@
-A segmentação de imagem consiste em dividir a imagem em regiões que dizem respeito ao mesmo conteúdo e aplicação. A Segmentação Global é baseada em conhecimento global, relativo à intensidade do pixel.
-
-Passos
-
-	1 - Informar valor do limiar global (valor maior que zero)
-	2 - Confimar a operação - pressionar o botão Ok
-	ou
-	2 - Cancelat a operação - pressionar o botão Cancelar

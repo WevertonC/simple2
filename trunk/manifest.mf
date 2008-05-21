@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: main.Main
-Class-Path: jai_codec.jar jai_core.jar mlibwrapper.jar
-SplashScreen-Image: Peppers.png
