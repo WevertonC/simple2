@@ -1,3 +1,10 @@
 #summary Plano de Iteração
 
 = Plano de Iteração =
+
+|| Etapas || Atividades || Data Limite ||
+||Iteração 1  || Implementação das User-stories US0 e US1 || 23/ junho/2008 ||
+|| Iteração 2 || Execução da US2|| 07/julho/2008 ||
+||Iteração 3 || Execução da US3|| 21/Julho/2008 ||
+|| Iteração 4 || Execução da US4|| 04/Agosto/2008 ||
+|| Iteração 5 || Execução da US5 || 18/Agosto/2008 ||
