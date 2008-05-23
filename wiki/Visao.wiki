@@ -2,3 +2,14 @@
 
 = Documento de Visão =
 
+Os primeiros computadores poderosos o suficiente para lidar com tarefas relativas ao processamento digital de imagens surgiram nos anos 60. O nascimento do conceito de Processamento Digital de Imagens (PDI) pode ser traduzido na viabilidade destas máquinas e nas primeiras aplicações daquele período em promoverem melhorias e alterações em imagens. Então, neste período que há também o surgimento dos primeiros conceitos e técnicas para manipulação de imagens.
+
+Apesar de ser recente, é uma área que possuiu uma rápida e efetiva consolidação. Uma das razões, em particular, é pela existência de um grande número de técnicas para a manipulação de imagens já desenvolvidas. Uma destas técnicas que merece destaque é o processamento digital de imagens no domínio da freqüência, na qual, com a utilização da Transformada de Fourier, é possível obter resultados e informações relevantes a partir da imagem original.
+
+Ao passo que é uma área bastante consolidada e existe uma vasta quantidade de materiais didáticos, há também a preocupação com os alunos que possuam interesse nesta área de pesquisa, sejam estes jovens pesquisadores ou alunos de disciplinas de Processamento Digital de Imagens dos cursos de Ciência da Computação. Esta preocupação reside em tornar a fundamentação teórica mais interativa e atrativa, de modo que possa ser acompanhada de uma parte prática na qual o aluno possa executar os algoritmos estudados verificar como esta execução é dada e qual o seu resultado.
+
+Visando atender a esta proposta, foi desenvolvida a ferramenta SImPLe (Software for Image Processing Learning), sob a orientação do Professor Eustáquio Rangel (DSC/UFCG). Esta ferramenta se caracteriza por um software que implementa diversas técnicas de processamento digital de imagens no domínio do espaço e possui o intuito de se tornar uma ferramenta didática que ilustre a aplicação dos conceitos nela abordados fazendo com que isto reforce o aprendizado dos mesmos.
+
+Dado o perfil da ferramenta SImPLe, se identificou como necessidade para a melhoria deste software o desenvolvimento de algoritmos para o processamento digital de imagens no domínio da freqüência. A demanda pela implementação de técnicas de processamento digital de imagens no domínio da freqüência é oriunda do grande número de técnicas que esta forma de processamento abrange e da relevância na aplicação das mesmas, tornando-se essencial em uma ferramenta de cunho didático.
+
+Deste modo, o projeto em questão visa a implementação de um modulo que contenha técnicas para o processamento digital de imagens no domínio da freqüência e a incorporação deste módulo ao SImPLe, fazendo com que esta ferramenta adquira novas funcionalidades e se torne mais abrangente no domínio que se refere.
