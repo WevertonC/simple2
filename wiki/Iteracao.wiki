@@ -8,3 +8,30 @@
 ||Iteração 3 || Execução da US3|| 21/Julho/2008 ||
 || Iteração 4 || Execução da US4|| 04/Agosto/2008 ||
 || Iteração 5 || Execução da US5 || 18/Agosto/2008 ||
+
+= Iteração 1 =
+
+== User Story 0 ==
+
+A US0 visa a fundamentação teórica do Processamento Digital de Imagens. A divisão abaixo refere-se à construção da parte escrita que é o deliverable desta etapa.
+
+|| Atividades || Responsável || Percentual ||
+|| Processamento Digital de Imagens || Elloá || ||
+|| Processamento Digital de Imagens no Domínio do Espaço || Elloá || ||
+|| Operações pixel a pixel || Odilon|| ||
+|| Histograma || Odilon|| ||
+|| Filtragem ||  Elloá || ||
+|| Segmentação || Odilon || ||
+|| Morfologia || Elloá || ||
+|| Segmentação || Odilon || ||
+
+== User Story 1 ==
+
+A US1 visa a fundamentação teórica do Processamento Digital de Imagens no domínio da freqüência. A divisão abaixo refere-se à construção da parte escrita que é o deliverable desta etapa.
+
+|| Atividades || Responsável || Percentual ||
+|| Transformada de Fourier para sinais bidimensionais || Odilon || ||
+|| Processamento Digital de Imagens no Domínio do Espaço || Elloá || ||
+|| Propriedades da transformada de Fourier para sinais bidimensionais (2-D) || Elloá e Odilon || ||
+|| Transformada Rápida de Fourier || Elloá || ||
+|| Técnicas de Filtragem no Domínio da Freqüência ||  Elloá e Odilon || ||
