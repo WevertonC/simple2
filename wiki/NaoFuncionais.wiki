@@ -8,17 +8,17 @@
 ||Facilidade de uso necessária || É necessário que a ferramenta seja de uso fácil e consiga ilustrar claramente os conceitos que implementa. ||
 || Volume de utilização (número de usuários, número de transações, ...) || Baixo. A ferramenta é destinada ao usuário desktop. ||
 || Hardware e software alvo para o produto || Máquinas Desktop, sem hardware específico, mas que tenham capacidade de manter uma máquina virtual Java sendo executada com bom desempenho. ||
-|| Qualidade/robustez || ||
-|| Tolerância a falha || Baixa. ||
-|| Desempenho|| ||
+|| Qualidade/robustez || Não são prioritárias. ||
+|| Tolerância a falha || Baixa. Os algoritmos de processamento digital de imagens devem ser implementados de modo que apliquem às imagens o procedimento correto descrito na literatura. ||
+|| Desempenho|| Existe um custo computacional alto relacionado à alguns algoritmos. Porém, alternativas de implementação devem ser buscadas no intuito de sempre minimizar a espera do usuário pelo resultado do processamento.  ||
 || Segurança|| Não existem requisitos de segurança associados à esta aplicação. ||
 || Compatibilidade com outros produtos/versões e necessidades de migração || Deve ser compatível com a versão do SImPLe desenvolvida anteriormente. ||
 || Necessidades de internacionalização do produto || É desejável que a ferramenta seja de fácil internacionalização. Este requisito não é primordial no escopo de Projeto 1. ||
 || Necessidades de customização do produto pelo cliente || Não existem necessidades de customização do produto pelo cliente. ||
-|| Suporte || ||
-|| Preço da solução || Gratuita. ||
+|| Suporte || Deve ser criada uma sessão no help da ferramenta que ilustre não só a utilização do software, mas a fundamentação teórica do módulo implementado. ||
+|| Preço da solução || Gratuita. Seguindo a GLP II. ||
 || Documentação necessária || Documentação de código, manuais para o usuário. ||
-|| Uso de padrões || ||
+|| Uso de padrões || - ||
 || Aspectos legais || O módulo desenvolvido deve estar sob a GNU Public License. ||
 || Integração com outros produtos || Não. ||
 || Packaging || Sim. ||
