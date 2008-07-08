@@ -10,4 +10,4 @@ A imagem no domínio da freqüência pode ser utilizada como saída, mas também
 
 O módulo de processamento digital no domínio da freqüência visa a ser parte integrante da Ferramenta Simple.
 
-http://simple2.googlecode.com/files/projetoArquitetural.png
+http://simple2.googlecode.com/files/projetoArquitetural2.png
