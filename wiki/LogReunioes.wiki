@@ -2,22 +2,26 @@
 
 = Log de Reuniões =
 
-|| 1ª Reunião - Apresentação do projeto||
-|| Participantes: Equipe, Joseana e Isabella ||
-|| Data: 03/12/2007 ||
-|| Horário: 8h até 8h40min ||
-|| Descrição: Os clientes enviaram o artigo. O material continha a descrição geral do modelo no qual se baseia o FLOApp Contest. A reunião foi objetiva, já que os requisitos puderam ser extraídos do artigo. Ficamos de acordo em enviar um esboço do Documento de Visão para ser validado na terça-feira (04/12/2007) . ||
+== 1.a Iteração ==
 
+|| 1ª Reunião - Apresentação da US0||
+|| Participantes: Equipe, Joseana e Eustáquio ||
+|| Data: 24/06/2008 ||
+|| Descrição: Realização de um seminário ministrado por Elloá e Odilon com o intuito de apresentar os resultados da US0. ||
 
-|| 2ª Reunião - Validação dos requisitos e levantamento de User Stories ||
-|| Participantes: Equipe e Isabella ||
-|| Data: 11/12/2007 ||
-|| Horário: 15:30h até 17h00min ||
-|| Descrição: Isabella validou a descrição do projeto e os requisitos extraídos do artigo e adicionou novos. Definimos as User Stories que serão seguidas. Também foram discutidas as arquiteturas que serão utilizadas e foi incluído AJAX na lista. Isabella também mostrou um modelo do fluxo de um concurso o que ajudou no entendimento do que seria o escopo do projeto. Também discutimos o template das interfaces. Ficou acertado que ela enviaria: os scripts do banco de dados existente, para que possamos extrair o modelo de entidades e implementar a camada de persistência; e o logotipo protótipo do FLOApp contest, que guiará o desenho das interfaces. ||
+|| 2ª Reunião - Aprsentação da US1||
+|| Participantes: Equipe, Joseana e Eustáquio ||
+|| Data: 08/07/2008 ||
+|| Descrição: Realização de um seminário ministrado por Elloá e Odilon com o intuito de apresentar os resultados da US1. Em virtude de uma aula de Eustáquio e da necessidade de Elloá em ir ao médico, ficou faltando a apresentação das propriedades da Transformada de Fourier. ||
 
+== 2.a Iteração ==
 
-|| 3ª Reunião - (Não aconteceu)||
-|| Participantes: - ||
-|| Data: 18/12/2007 ||
-|| Horário: 15:30h até 17h00min ||
-|| Descrição: Cliente não respondeu emails confirmando presença no horário marcado. ||
+A ser realizada
+|| 1ª Reunião - Aprsentação da US2||
+|| Participantes: Equipe, Joseana e Eustáquio ||
+|| Data: 15/07/2008 ||
+|| Descrição:  Apresentar as propriedades da Transformada de Fourier e código referente à US2.||
+
+== 3.a Iteração ==
+
+---
