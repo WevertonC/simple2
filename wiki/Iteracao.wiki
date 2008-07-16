@@ -33,7 +33,7 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 || Processamento Digital de Imagens no Domínio do Espaço || Elloá || 100% ||
 || Propriedades da transformada de Fourier para sinais bidimensionais (2-D) || Elloá e Odilon || 100% ||
 || Transformada Rápida de Fourier || Elloá || 100% ||
-|| Técnicas de Filtragem no Domínio da Freqüência ||  Elloá e Odilon || ||
+|| Técnicas de Filtragem no Domínio da Freqüência ||  Elloá e Odilon || 100% ||
 
 = Iteração 2 =
 
@@ -41,5 +41,6 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 || Implementação da FFT || Elloá  e Odilon || 100% ||
 
 = Iteração 3 =
+
 || Atividades || Responsável || Percentual ||
 || Filtragem no Domínio da Freqüência - Passa Alta || Elloá  e Odilon || 100% ||
