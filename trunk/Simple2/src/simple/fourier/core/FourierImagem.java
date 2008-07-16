@@ -16,7 +16,7 @@ import simple.fourier.exceptions.FourierException;
  * @author Odilon F. Lima Jr. - odilon@dsc.ufcg.edu.br
  *
  */
-public class FourierImage {
+public class FourierImagem {
 
 	private static final double DOIS_PI = 2.0 * Math.PI;
 
@@ -42,12 +42,12 @@ public class FourierImage {
 	 * em  imagens nesta escala de tons.
 	 */
 	private BufferedImage grayImage;
-	
+
 	/**
 	 * Construtor vazio default.
 	 */
-	public FourierImage(){
-		
+	public FourierImagem(){
+
 	}
 
 	/**
@@ -55,13 +55,13 @@ public class FourierImage {
 	 * @param image a imagem de entrada, que está no domínio do espaço.
 	 * @throws FourierException  caso a imagem não tenha altura e largura iguais.
 	 */
-	public FourierImage(BufferedImage image) throws FourierException {
+	public FourierImagem(BufferedImage image) throws FourierException {
 
-		
+
 		if (image.getHeight() != image.getWidth()) {
 			throw new FourierException(FourierException.DIMENSAO_IMAGEM);
 		}
-		
+
 		// A imagem é convertida para escala de cinza.
 		if (image.getType() != BufferedImage.TYPE_BYTE_GRAY) {
 			ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -92,14 +92,13 @@ public class FourierImage {
 			for (int x = 0; x < grayImage.getWidth(); ++x)
 				data[y * largura + x].real = raster.getSample(x, y, 0);
 
-		//transform();
 	}
 
 	/**
 	 * Retorna o comprimento da imagem no dominio de Fourier.
 	 * @return comprimento da imagem.
 	 */
-	public int getWidth() {
+	public int getLargura() {
 		return largura;
 	}
 
@@ -107,7 +106,7 @@ public class FourierImage {
 	 * Retorna a altura da imagem no dominio de Fourier.
 	 * @return altura da imagem
 	 */
-	public int getHeight() {
+	public int getAltura() {
 		return altura;
 	}
 
@@ -227,7 +226,7 @@ public class FourierImage {
 		int i = 0, value;
 		for (int y = 0; y < altura; ++y)
 			for (int x = 0; x < largura; ++x, ++i) {
-				value = Math.max(0, Math.min(255, bias
+				value =(int) Math.max(0, Math.min(255, bias
 						+ Math.round(data[i].real)));
 				raster.setSample(x, y, 0, value);
 			}
@@ -248,8 +247,8 @@ public class FourierImage {
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 
 		// Calcula a magnitude e encontra o máximo
-		float[] magData = new float[largura * altura];
-		float maximum = calculateMagnitudes(magData);
+		double[] magData = new double[largura * altura];
+		double maximum = calculateMagnitudes(magData);
 
 		// imagem a ser retornada
 		BufferedImage image = new BufferedImage(largura, altura,
@@ -287,8 +286,8 @@ public class FourierImage {
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 
 		// Calcula a magnitude e encontra o máximo
-		float[] magData = new float[largura * altura];
-		float maximum = calculateMagnitudes(magData);
+		double[] magData = new double[largura * altura];
+		double maximum = calculateMagnitudes(magData);
 		BufferedImage image = new BufferedImage(largura, altura,
 				BufferedImage.TYPE_BYTE_GRAY);
 		WritableRaster raster = image.getRaster();
@@ -312,7 +311,7 @@ public class FourierImage {
 	 * @return magnitude do ponto especificado ou zero se o ponto nao existe.
 	 * @throws FourierException se os dados espectrais nao estiverem disponiveis 
 	 */
-	public float getMagnitude(int u, int v) throws FourierException {
+	public double getMagnitude(int u, int v) throws FourierException {
 		if (!espectral)
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 		if (u >= 0 && u < largura && v >= 0 && v < altura)
@@ -328,7 +327,7 @@ public class FourierImage {
 	 * @return a fase do ponto especificado ou zero se o ponto nao existe.
 	 * @throws FourierException se os dados espectrais nao estiverem disponiveis
 	 */
-	public float getFase(int u, int v) throws FourierException {
+	public double getFase(int u, int v) throws FourierException {
 		if (!espectral)
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 		if (u >= 0 && u < largura && v >= 0 && v < altura)
@@ -344,7 +343,7 @@ public class FourierImage {
 	 * @param mag nova magnitude para o ponto especificado
 	 * @throws FourierException se os dados espectrais nao estiverem disponiveis
 	 */
-	public void setMagnitude(int u, int v, float mag) throws FourierException {
+	public void setMagnitude(int u, int v, double mag) throws FourierException {
 		if (!espectral)
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 		if (u >= 0 && u < largura && v >= 0 && v < altura) {
@@ -360,7 +359,7 @@ public class FourierImage {
 	 * @param fase nova fase para o ponto especificado
 	 * @throws FourierException se os dados espectrais nao estiverem disponiveis
 	 */
-	public void setFase(int u, int v, float fase) throws FourierException {
+	public void setFase(int u, int v, double fase) throws FourierException {
 		if (!espectral)
 			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
 		if (u >= 0 && u < largura && v >= 0 && v < altura) {
@@ -432,10 +431,10 @@ public class FourierImage {
 					int j = i + n2;
 					tmpr = wr * data[j].real - wi * data[j].im;
 					tmpi = wi * data[j].real + wr * data[j].im;
-					data[j].real = (float) (data[i].real - tmpr);
-					data[i].real += (float) tmpr;
-					data[j].im = (float) (data[i].im - tmpi);
-					data[i].im += (float) tmpi;
+					data[j].real = (double) (data[i].real - tmpr);
+					data[i].real += (double) tmpr;
+					data[j].im = (double) (data[i].im - tmpi);
+					data[i].im += (double) tmpi;
 				}
 				wtmp = wr;
 				wr = wtmp * wpr - wi * wpi + wr;
@@ -458,7 +457,7 @@ public class FourierImage {
 	 * @param d2 ponto central
 	 * @return coordenada deslocada
 	 */
-	private static final int shift(int d, int d2) {
+	public static final int shift(int d, int d2) {
 		return (d >= d2 ? d - d2 : d + d2);
 	}
 
@@ -468,13 +467,31 @@ public class FourierImage {
 	 * @param mag array que armazena os dados espectrais
 	 * @return magnitude maxima
 	 */
-	private float calculateMagnitudes(float[] mag) {
-		float maximum = 0.0f;
+	private double calculateMagnitudes(double[] mag) {
+		double maximum = 0.0f;
 		for (int i = 0; i < data.length; ++i) {
 			mag[i] = data[i].getMagnitude();
 			if (mag[i] > maximum)
 				maximum = mag[i];
 		}
 		return maximum;
+	}
+
+	/**
+	 * Retorna o valor complexo da imagem no domínio da freqüência de acordo com o índice passado como parâmetro
+	 * @param i o índice.
+	 * @return o valor indicado pelo índice.
+	 */
+	public Complexo getData(int i){
+		return data[i];
+	}
+
+	/**
+	 * Modifica o valor complexo da imagem no domínio da freqüência.
+	 * @param c o novo valor complexo.
+	 * @param i o índice cujo conteúdo será modificado.
+	 */
+	public void setData(Complexo c, int i){
+		data[i] = c;
 	}
 }

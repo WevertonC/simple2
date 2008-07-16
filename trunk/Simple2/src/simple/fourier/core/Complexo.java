@@ -11,22 +11,31 @@ package simple.fourier.core;
 public class Complexo {
 
 	/** Parte real do numero complexo. */
-	public float real;
+	public double real;
 
 	/** Parte imaginaria do numero complexo.*/
-	public float im;
+	public double im;
 
 	/**
 	 * Construtor vazio default.
 	 */
 	public Complexo() {}
+	
+	/**
+	 * Constrói um número complexo a partir de outro número complexo já instanciado.
+	 * @param c
+	 */
+	public Complexo(Complexo c){
+		this.real = c.real;
+		this.im = c.im;
+	}
 
 	/**
 	 * Constrói um número complexo a partir dos valores reais e imaginários passados como parâmetro
 	 * @param real valor real
 	 * @param imaginario valor imaginario
 	 */
-	public Complexo(float real, float imaginario) {
+	public Complexo(double real, double imaginario) {
 		this.real = real;
 		im = imaginario;
 	}
@@ -36,8 +45,8 @@ public class Complexo {
 	 * vetorial deste número.
 	 * @return a magnitude do número complexo
 	 */
-	public float getMagnitude() {
-		return (float) Math.sqrt(real*real + im*im);
+	public double getMagnitude() {
+		return (double) Math.sqrt(real*real + im*im);
 	}
 
 	/**
@@ -45,8 +54,8 @@ public class Complexo {
 	 * real e a parte imaginária.
 	 * @return o ângulo da fase, em radianos.
 	 */
-	public float getFase() {
-		return (float) Math.atan2(im, real);
+	public double getFase() {
+		return (double) Math.atan2(im, real);
 	}
 
 	/**
@@ -55,8 +64,8 @@ public class Complexo {
 	 * @param theta o ângulo da coordeanda
 	 */
 	public void setPolar(double r, double theta) {
-		real = (float)(r*Math.cos(theta));
-		im = (float)(r*Math.sin(theta));
+		real = (double)(r*Math.cos(theta));
+		im = (double)(r*Math.sin(theta));
 	}
 
 	public String toString() {
@@ -68,7 +77,7 @@ public class Complexo {
 	 * @param value
 	 */
 	public void swapWith(Complexo value) {
-		float temp = real;
+		double temp = real;
 		real = value.real;
 		value.real = temp;
 		temp = im;
@@ -80,7 +89,7 @@ public class Complexo {
 	 * Retorna a parte real de um número complexo
 	 * @return a parte real do número
 	 */
-	public float getReal() {
+	public double getReal() {
 		return real;
 	}
 
@@ -88,7 +97,7 @@ public class Complexo {
 	 * Modifica a parte real de um número complexo
 	 * @param real o novo valor da parte real
 	 */
-	public void setReal(float real) {
+	public void setReal(double real) {
 		this.real = real;
 	}
 
@@ -96,7 +105,7 @@ public class Complexo {
 	 * Retonra a parte imaginária de um número complexo
 	 * @return a parte imaginária
 	 */
-	public float getIm() {
+	public double getIm() {
 		return im;
 	}
 
@@ -104,7 +113,7 @@ public class Complexo {
 	 * Modifica a parte imaginária de um número complexo
 	 * @param im a nova parte imaginária
 	 */
-	public void setIm(float im) {
+	public void setIm(double im) {
 		this.im = im;
 	}
 

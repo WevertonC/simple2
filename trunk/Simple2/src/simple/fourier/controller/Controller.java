@@ -1,12 +1,14 @@
 package simple.fourier.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.image.BufferedImage;
+
 import javax.imageio.ImageIO;
 
-import simple.fourier.core.FourierImage;
+import simple.fourier.core.FourierImagem;
 import simple.fourier.exceptions.FourierException;
+import simple.fourier.filtering.PassaAlta;
 
 /**
  * Controlador para o módulo Fourier. O controlador permite, de uma forma mais ligada ao
@@ -55,7 +57,7 @@ public class Controller {
 		// Persistência em arquivo com formato bmp
 		File outputFile = new File(outputFileName);
 		try {
-			ImageIO.write(resultadoFFT, "BMP", outputFile);
+			ImageIO.write(resultadoFFT, "JPG", outputFile);
 		} catch (IOException e) {
 			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
 		}
@@ -75,7 +77,7 @@ public class Controller {
 	 */
 	public BufferedImage computeSpectrum(BufferedImage src) throws FourierException {
 
-		FourierImage fft = new FourierImage(src);
+		FourierImagem fft = new FourierImagem(src);
 		fft.transform();
 
 		return fft.getEspectro();
@@ -96,6 +98,36 @@ public class Controller {
 	 */
 	public void setFile(File file) {
 		this.inputFile = file;
+	}
+	
+	public boolean passaAlta(String inputFileName, String outputFileName, double raio) throws FourierException{
+		
+		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
+		BufferedImage src = null, resultado = null;
+		
+		
+		// Armazena arquivo imagem numa BufferedImage
+		try {
+			src = ImageIO.read(inputFile);
+		} catch (IOException e1) {
+			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
+		}
+		
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		PassaAlta.passaAlta(fr, raio);
+		resultado = fr.getEspectro();
+		
+
+		// Persistência em arquivo com formato bmp
+		File outputFile = new File(outputFileName);
+		try {
+			ImageIO.write(resultado, "BMP", outputFile);
+		} catch (IOException e) {
+			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
+		}
+
+		return true;
 	}
 
 }

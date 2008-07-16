@@ -6,24 +6,24 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import simple.fourier.core.FourierImage;
+import simple.fourier.core.FourierImagem;
 import simple.fourier.exceptions.FourierException;
 import junit.framework.TestCase;
 
-public class FourierImageTest extends TestCase {
+public class FourierImagemTest extends TestCase {
 
 	BufferedImage src;
-	FourierImage f0;
+	FourierImagem f0;
 	
 	public void startUp(){
 		try {
-			src = ImageIO.read(new File("./images/lena-gray.jpg"));
+			src = ImageIO.read(new File("./images/lena.bmp"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
 		try {
-			f0 = new FourierImage(src);
+			f0 = new FourierImagem(src);
 		} catch (FourierException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,14 +33,14 @@ public class FourierImageTest extends TestCase {
 	public void testFourierImage() {
 
 		try {
-			src = ImageIO.read(new File("./images/lena-gray.jpg"));
+			src = ImageIO.read(new File("./images/lena.bmp"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
-		FourierImage f = new FourierImage();
+		FourierImagem f = new FourierImagem();
 		try {
-			f = new FourierImage(src);
+			f = new FourierImagem(src);
 		} catch (FourierException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,8 +52,8 @@ public class FourierImageTest extends TestCase {
 		f = null;
 
 		try {
-			src = ImageIO.read(new File("./images/lena-error.jpg"));
-			f = new FourierImage(src);
+			src = ImageIO.read(new File("./images/lena-error.bmp"));
+			f = new FourierImagem(src);
 			fail();
 		} catch (FourierException e) {
 			assertEquals(e.getMessage(),FourierException.DIMENSAO_IMAGEM);
@@ -65,8 +65,8 @@ public class FourierImageTest extends TestCase {
 		/* Imagem que não existe no arquivo */
 		
 		try {
-			src = ImageIO.read(new File("./images/lena-invalid.jpg"));
-			f = new FourierImage(src);
+			src = ImageIO.read(new File("./images/not-lena.bmp"));
+			f = new FourierImagem(src);
 			fail();
 		} catch (FourierException e) {
 			assertEquals(e.getMessage(),FourierException.DIMENSAO_IMAGEM);
@@ -81,14 +81,14 @@ public class FourierImageTest extends TestCase {
 
 	public void testGetWidth() {
 		startUp();
-		assertEquals(f0.getWidth(),512);
-		assertEquals(f0.getWidth(),f0.getHeight());
+		assertEquals(f0.getLargura(),512);
+		assertEquals(f0.getLargura(),f0.getAltura());
 	}
 
 	public void testGetHeight() {
 		startUp();
-		assertEquals(f0.getHeight(),512);
-		assertEquals(f0.getWidth(),f0.getHeight());
+		assertEquals(f0.getAltura(),512);
+		assertEquals(f0.getLargura(),f0.getAltura());
 	}
 
 	public void testIsSpectral() {
