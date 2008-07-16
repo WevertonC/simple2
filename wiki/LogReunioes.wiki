@@ -16,12 +16,18 @@
 
 == 2.a Iteração ==
 
-A ser realizada
 || 1ª Reunião - Aprsentação da US2||
-|| Participantes: Equipe, Joseana e Eustáquio ||
+|| Participantes: Equipe e Eustáquio (Joseana estava viajando)||
 || Data: 15/07/2008 ||
-|| Descrição:  Apresentar as propriedades da Transformada de Fourier e código referente à US2.||
+|| Descrição:  Apresentar as propriedades da Transformada de Fourier e código referente à US2. Foi apresentada uma proposta de publicação e o cliente concordou. ||
 
 == 3.a Iteração ==
 
----
+A ser realizada
+|| 1ª Reunião - Aprsentação da US2||
+|| Participantes: Equipe e Eustáquio (Joseana estava viajando)||
+|| Data: 22/07/2008 ||
+|| Descrição:  Apresentar a filtragem no domínio da freqüência e apresentação da US3.  ||
+
+
+---- 
