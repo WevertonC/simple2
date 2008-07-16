@@ -38,4 +38,8 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 = Iteração 2 =
 
 || Atividades || Responsável || Percentual ||
-|| Implementação da FFT || Elloá  e Odilon || 70% ||
+|| Implementação da FFT || Elloá  e Odilon || 100% ||
+
+= Iteração 3 =
+|| Atividades || Responsável || Percentual ||
+|| Filtragem no Domínio da Freqüência - Passa Alta || Elloá  e Odilon || 100% ||
