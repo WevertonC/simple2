@@ -13,7 +13,7 @@ import simple.fourier.exceptions.FourierException;
  * Representa a imagem de Fourier, ou seja, uma imagem no domínio da freqüência.
  * 
  * @author Elloa B. Guedes - elloa@dsc.ufcg.edu.br
- * @author Odilon F. Lima Jr. - odilon@dsc.ufcg.edu.br
+ * @author Odilon F. Lima Junior - odilonflj@dsc.ufcg.edu.br
  *
  */
 public class FourierImagem {

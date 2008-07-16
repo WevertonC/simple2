@@ -4,8 +4,23 @@ import simple.fourier.core.Complexo;
 import simple.fourier.core.FourierImagem;
 import simple.fourier.exceptions.FourierException;
 
-public class PassaAlta {
+/**
+ * Realiza filtragens no dominio da frequencia.
+ * 
+ * @author Elloa B. Guedes - elloa@dsc.ufcg.edu.br
+ * @author Odilon F. Lima Junior - odilonflj@dsc.ufcg.edu.br
+ *
+ */
+public class Filtro {
 
+	/**
+	 * Realiza a filtragem passa alta ideal em uma imagem espectral (no dominio da frequencia).
+	 * @param img imagem no dominio espectral
+	 * @param raio raio do filtro
+	 * @return FourierImagem filtrada
+	 * @throws FourierException se a imagem não estiver no dominio da frequencia ou 
+	 * 						se o raio do filtro for invalido.
+	 */
 	public static FourierImagem passaAlta(FourierImagem img, double raio) throws FourierException {
 
 		if ((raio < 0)||(raio > (double)1)){

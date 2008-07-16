@@ -8,14 +8,14 @@ import javax.imageio.ImageIO;
 
 import simple.fourier.core.FourierImagem;
 import simple.fourier.exceptions.FourierException;
-import simple.fourier.filtering.PassaAlta;
+import simple.fourier.filtering.Filtro;
 
 /**
  * Controlador para o módulo Fourier. O controlador permite, de uma forma mais ligada ao
  * domínio da aplicação, o acesso às funcionalidades deste módulo.
  * 
  * @author Elloa B. Guedes - elloa@dsc.ufcg.edu.br
- * @author Odilon F. Lima Jr. - odilon@dsc.ufcg.edu.br
+ * @author Odilon F. Lima Junior - odilonflj@dsc.ufcg.edu.br
  *
  */
 public class Controller {
@@ -115,7 +115,7 @@ public class Controller {
 		
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
-		PassaAlta.passaAlta(fr, raio);
+		Filtro.passaAlta(fr, raio);
 		resultado = fr.getEspectro();
 		
 

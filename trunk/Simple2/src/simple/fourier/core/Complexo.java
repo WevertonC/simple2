@@ -5,7 +5,7 @@ package simple.fourier.core;
  * 
  * 
  * @author Elloa B. Guedes - elloa@dsc.ufcg.edu.br
- * @author Odilon F. Lima Jr. - odilon@dsc.ufcg.edu.br
+ * @author Odilon F. Lima Junior - odilonflj@dsc.ufcg.edu.br
  *
  */
 public class Complexo {
