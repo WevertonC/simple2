@@ -2,4 +2,4 @@
 
 = Bigchart =
 
-|| Iteração || Classes || Classes de Teste de Unidade || Classes de Teste de Aceitação || User Stories Cobertas ||
+http://simple2.googlecode.com/files/BigChartGraficos.pdf
