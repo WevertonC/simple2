@@ -56,7 +56,12 @@ public class Facade {
 	public static void main(String[] args) {
 		Facade facade = new Facade();
 		try {
-			facade.passaAlta("./images/lena.bmp",0.5);
+			if(args[0].equalsIgnoreCase("-fft")){
+				facade.fft(args[1]);
+			} else if(args[0].equalsIgnoreCase("-hpf")){
+				facade.passaAlta(args[1],0.5);
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
