@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import simple.fourier.core.FourierImagem;
 import simple.fourier.exceptions.FourierException;
-import simple.fourier.filtering.Filtro;
+import simple.fourier.filtering.Filtragem;
 
 /**
  * Controlador para o módulo Fourier. O controlador permite, de uma forma mais ligada ao
@@ -50,7 +50,7 @@ public class Controller {
 		} catch (IOException e1) {
 			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
 		}
-		
+
 		// Espectro de fourier como saída
 		resultadoFFT = computeSpectrum(src);
 
@@ -66,7 +66,7 @@ public class Controller {
 
 	}
 
-	
+
 	/**
 	 * Transforma a imagem de entrada no domínio do espaço em uma imagem no domínio da freqüência com a realização da transformada
 	 * rápida de Fourier.
@@ -99,25 +99,94 @@ public class Controller {
 	public void setFile(File file) {
 		this.inputFile = file;
 	}
-	
+
+	/**
+	 * Realiza a operação de filtragem com o filtro passa alta.
+	 * 
+	 * @param inputFileName
+	 * @param outputFileName
+	 * @param raio raio do filtro
+	 * @return
+	 * @throws FourierException
+	 */
 	public boolean passaAlta(String inputFileName, String outputFileName, double raio) throws FourierException{
-		
+
 		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
 		BufferedImage src = null, resultado = null;
-		
-		
+
+
 		// Armazena arquivo imagem numa BufferedImage
 		try {
 			src = ImageIO.read(inputFile);
 		} catch (IOException e1) {
 			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
 		}
-		
+
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
-		Filtro.passaAlta(fr, raio);
+		Filtragem.passaAlta(fr, raio,1);
+		resultado = fr.toImage(fr.getGrayImage());
+
+
+		// Persistência em arquivo com formato bmp
+		File outputFile = new File(outputFileName);
+		try {
+			ImageIO.write(resultado, "BMP", outputFile);
+		} catch (IOException e) {
+			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
+		}
+
+		return true;
+	}
+
+	public boolean passaBaixa(String inputFileName, String outputFileName, double raio) throws FourierException{
+
+		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
+		BufferedImage src = null, resultado = null;
+
+
+		// Armazena arquivo imagem numa BufferedImage
+		try {
+			src = ImageIO.read(inputFile);
+		} catch (IOException e1) {
+			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
+		}
+
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.passaBaixa(fr, raio);
 		resultado = fr.getEspectro();
-		
+
+
+		// Persistência em arquivo com formato bmp
+		File outputFile = new File(outputFileName);
+		try {
+			ImageIO.write(resultado,"BMP", outputFile);
+		} catch (IOException e) {
+			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
+		}
+
+		return true;
+	}
+	
+	public boolean passaFaixa(String inputFileName, String outputFileName, double raioInterno, double raioExterno) throws FourierException{
+
+		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
+		BufferedImage src = null, resultado = null;
+
+
+		// Armazena arquivo imagem numa BufferedImage
+		try {
+			src = ImageIO.read(inputFile);
+		} catch (IOException e1) {
+			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
+		}
+
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.passaFaixa(fr, raioInterno,raioExterno);
+		resultado = fr.getEspectro();
+
 
 		// Persistência em arquivo com formato bmp
 		File outputFile = new File(outputFileName);
@@ -131,3 +200,4 @@ public class Controller {
 	}
 
 }
+

@@ -11,6 +11,10 @@ package simple.fourier.exceptions;
  */
 public class FourierException extends Exception {
 
+	/**
+	 * Serial version UID
+	 */
+	private static final long serialVersionUID = 1L;
 	public static String ARQUIVO_N_EXISTE = "Arquivo não encontrado. Forneça uma imagem válida como entrada.";
 	public static String ERRO_SALVAR_SAIDA = "O arquivo já existe ou não pode ser salvo. Verifique imagem de saída passada como parâmetro.";
 	public static String DOMINIO_FREQUENCIA = "A imagem deve estar no domínio da freqüência para que esta operação seja realizada.";

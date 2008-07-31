@@ -494,4 +494,14 @@ public class FourierImagem {
 	public void setData(Complexo c, int i){
 		data[i] = c;
 	}
+
+	public BufferedImage getGrayImage() {
+		return grayImage;
+	}
+
+	public void setGrayImage(BufferedImage grayImage) {
+		this.grayImage = grayImage;
+	}
+	
+	
 }
