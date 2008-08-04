@@ -112,7 +112,7 @@ public class Controller {
 	public boolean passaAlta(String inputFileName, String outputFileName, double raio) throws FourierException{
 
 		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
-		BufferedImage src = null, resultado = null;
+		BufferedImage src = null, resultadoEspaco = null, resultadoFreq;
 
 
 		// Armazena arquivo imagem numa BufferedImage
@@ -122,16 +122,22 @@ public class Controller {
 			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
 		}
 
+		// Filtragem no domínio da freqüência
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
-		Filtragem.passaAlta(fr, raio,1);
-		resultado = fr.toImage(fr.getGrayImage());
-
+		Filtragem.passaAlta(fr, raio);
+		resultadoFreq = fr.getEspectro();
+		
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
 
 		// Persistência em arquivo com formato bmp
-		File outputFile = new File(outputFileName);
+		File outputFileEspaco = new File(outputFileName + "-espaco.bmp");
+		File outputFileFreq = new File(outputFileName + "-freq.bmp");
 		try {
-			ImageIO.write(resultado, "BMP", outputFile);
+			ImageIO.write(resultadoFreq, "BMP", outputFileFreq);
+			ImageIO.write(resultadoEspaco, "BMP", outputFileEspaco);
 		} catch (IOException e) {
 			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
 		}
@@ -142,7 +148,7 @@ public class Controller {
 	public boolean passaBaixa(String inputFileName, String outputFileName, double raio) throws FourierException{
 
 		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
-		BufferedImage src = null, resultado = null;
+		BufferedImage src = null, resultado = null, resultadoFreq = null, resultadoEspaco;
 
 
 		// Armazena arquivo imagem numa BufferedImage
@@ -152,16 +158,22 @@ public class Controller {
 			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
 		}
 
+		// Filtragem no domínio da freqüência
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
 		Filtragem.passaBaixa(fr, raio);
-		resultado = fr.getEspectro();
-
+		resultadoFreq = fr.getEspectro();
+		
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
 
 		// Persistência em arquivo com formato bmp
-		File outputFile = new File(outputFileName);
+		File outputFileEspaco = new File(outputFileName + "-espaco.bmp");
+		File outputFileFreq = new File(outputFileName + "-freq.bmp");
 		try {
-			ImageIO.write(resultado,"BMP", outputFile);
+			ImageIO.write(resultadoFreq, "BMP", outputFileFreq);
+			ImageIO.write(resultadoEspaco, "BMP", outputFileEspaco);
 		} catch (IOException e) {
 			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
 		}
@@ -172,7 +184,7 @@ public class Controller {
 	public boolean passaFaixa(String inputFileName, String outputFileName, double raioInterno, double raioExterno) throws FourierException{
 
 		setFile(new File(inputFileName));	// Define objeto BufferedImage para encapsular a imagem
-		BufferedImage src = null, resultado = null;
+		BufferedImage src, resultadoFreq,resultadoEspaco = null;
 
 
 		// Armazena arquivo imagem numa BufferedImage
@@ -182,16 +194,22 @@ public class Controller {
 			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
 		}
 
+		// Filtragem no domínio da freqüência
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
 		Filtragem.passaFaixa(fr, raioInterno,raioExterno);
-		resultado = fr.getEspectro();
-
+		resultadoFreq = fr.getEspectro();
+		
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
 
 		// Persistência em arquivo com formato bmp
-		File outputFile = new File(outputFileName);
+		File outputFileEspaco = new File(outputFileName + "-espaco.bmp");
+		File outputFileFreq = new File(outputFileName + "-freq.bmp");
 		try {
-			ImageIO.write(resultado, "BMP", outputFile);
+			ImageIO.write(resultadoFreq, "BMP", outputFileFreq);
+			ImageIO.write(resultadoEspaco, "BMP", outputFileEspaco);
 		} catch (IOException e) {
 			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
 		}

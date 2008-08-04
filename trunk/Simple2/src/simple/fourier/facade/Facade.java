@@ -42,7 +42,7 @@ public class Facade {
 
 	public void passaAlta(String imagePath, double raio){
 		int pos = imagePath.substring(1).indexOf(".");
-		String outputFileName = imagePath.substring(0, pos+1) + "-output-passaAlta" + ".jpg";
+		String outputFileName = imagePath.substring(0, pos+1) + "-passaAlta";
 
 		try {
 			if (controller.passaAlta(imagePath, outputFileName,raio)){
@@ -55,7 +55,7 @@ public class Facade {
 
 	public void passaBaixa(String imagePath, double raio){
 		int pos = imagePath.substring(1).indexOf(".");
-		String outputFileName = imagePath.substring(0, pos+1) + "-output-passaBaixa" + ".jpg";
+		String outputFileName = imagePath.substring(0, pos+1) + "-passaBaixa";
 
 		try {
 			if (controller.passaBaixa(imagePath, outputFileName,raio)){
@@ -68,7 +68,7 @@ public class Facade {
 	
 	public void passaFaixa(String imagePath, double raioInterno,double raioExterno){
 		int pos = imagePath.substring(1).indexOf(".");
-		String outputFileName = imagePath.substring(0, pos+1) + "-output-passaFaixa" + ".jpg";
+		String outputFileName = imagePath.substring(0, pos+1) + "-passaFaixa";
 
 		try {
 			if (controller.passaFaixa(imagePath, outputFileName,raioInterno,raioExterno)){
