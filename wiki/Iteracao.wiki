@@ -13,7 +13,7 @@
 
 == User Story 1 ==
 
-A US1 visa a fundamentação teórica do Processamento Digital de Imagens no domínio da freqüência. A divisão abaixo refere-se à construção da parte escrita que é o deliverable desta etapa.
+TODO -> escrever detalhamento.
 
 || Atividades || Responsável || Percentual ||
 || Refatoração das classes relativas à lógica de negócio || Elloá e Odilon ||  ||
@@ -22,11 +22,19 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 
 = Iteração 2 =
 
+== User Story 2 ==
+
+TODO -> escrever detalhamento.
+
 || Atividades || Responsável || Percentual ||
 || Refatoração das classes relativas à interface gráfica || Elloá e Odilon ||  ||
 || Escrita da monografia || Elloá e Odilon ||  ||
 
 = Iteração 3 =
+
+== User Story 3 ==
+
+TODO -> escrever detalhamento.
 
 || Atividades || Responsável || Percentual ||
 || Implementação do filtro homomórfico || Elloá e Odilon ||  ||
@@ -36,12 +44,20 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 
 = Iteração 4 =
 
+== User Story 4 ==
+
+TODO -> escrever detalhamento.
+
 || Atividades || Responsável || Percentual ||
 || Implementação do filtro de suavização de Butterworth || Elloá e Odilon ||  ||
 || Implementação do filtro de aguçamento de Butterworth || Elloá e Odilon ||  ||
 || Escrita da monografia || Elloá e Odilon ||  ||
 
 = Iteração 5 =
+
+== User Story 5 ==
+
+TODO -> escrever detalhamento.
 
 || Atividades || Responsável || Percentual ||
 || Refatoração e criação de novos arquivos de ajuda || Elloá e Odilon ||  ||
