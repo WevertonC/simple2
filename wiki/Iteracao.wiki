@@ -32,9 +32,17 @@ A US1 visa a fundamentação teórica do Processamento Digital de Imagens no dom
 || Implementação do filtro homomórfico || Elloá e Odilon ||  ||
 || Implementação do filtro de suavização gaussiana || Elloá e Odilon ||  ||
 || Implementação do filtro de aguçamento gaussiano || Elloá e Odilon ||  ||
+|| Escrita da monografia || Elloá e Odilon ||  ||
 
 = Iteração 4 =
 
 || Atividades || Responsável || Percentual ||
 || Implementação do filtro de suavização de Butterworth || Elloá e Odilon ||  ||
 || Implementação do filtro de aguçamento de Butterworth || Elloá e Odilon ||  ||
+|| Escrita da monografia || Elloá e Odilon ||  ||
+
+= Iteração 5 =
+
+|| Atividades || Responsável || Percentual ||
+|| Refatoração e criação de novos arquivos de ajuda || Elloá e Odilon ||  ||
+|| Escrita da monografia || Elloá e Odilon ||  ||
