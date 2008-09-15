@@ -16,18 +16,25 @@
 A US1 visa a fundamentação teórica do Processamento Digital de Imagens no domínio da freqüência. A divisão abaixo refere-se à construção da parte escrita que é o deliverable desta etapa.
 
 || Atividades || Responsável || Percentual ||
-|| Transformada de Fourier para sinais bidimensionais || Odilon || 100% ||
-|| Processamento Digital de Imagens no Domínio do Espaço || Elloá || 100% ||
-|| Propriedades da transformada de Fourier para sinais bidimensionais (2-D) || Elloá e Odilon || 100% ||
-|| Transformada Rápida de Fourier || Elloá || 100% ||
-|| Técnicas de Filtragem no Domínio da Freqüência ||  Elloá e Odilon || 100% ||
+|| Refatoração das classes relativas à lógica de negócio || Elloá e Odilon ||  ||
+|| Escrita da monografia || Elloá e Odilon ||  ||
+
 
 = Iteração 2 =
 
 || Atividades || Responsável || Percentual ||
-|| Implementação da FFT || Elloá  e Odilon || 100% ||
+|| Refatoração das classes relativas à interface gráfica || Elloá e Odilon ||  ||
+|| Escrita da monografia || Elloá e Odilon ||  ||
 
 = Iteração 3 =
 
 || Atividades || Responsável || Percentual ||
-|| Filtragem no Domínio da Freqüência - Passa Alta || Elloá  e Odilon || 100% ||
+|| Implementação do filtro homomórfico || Elloá e Odilon ||  ||
+|| Implementação do filtro de suavização gaussiana || Elloá e Odilon ||  ||
+|| Implementação do filtro de aguçamento gaussiano || Elloá e Odilon ||  ||
+
+= Iteração 4 =
+
+|| Atividades || Responsável || Percentual ||
+|| Implementação do filtro de suavização de Butterworth || Elloá e Odilon ||  ||
+|| Implementação do filtro de aguçamento de Butterworth || Elloá e Odilon ||  ||
