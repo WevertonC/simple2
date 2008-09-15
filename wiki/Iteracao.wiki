@@ -3,26 +3,13 @@
 = Plano de Iteração =
 
 || Etapas || Atividades || Data Limite ||
-||Iteração 1  || Implementação das User-stories US0 e US1 || 23/ junho/2008 ||
-|| Iteração 2 || Execução da US2|| 07/julho/2008 ||
-||Iteração 3 || Execução da US3|| 21/Julho/2008 ||
-|| Iteração 4 || Execução da US4|| 04/Agosto/2008 ||
-|| Iteração 5 || Execução da US5 || 18/Agosto/2008 ||
+|| Iteração 1 || Execução da US1 || 26/setembro/2008 ||
+|| Iteração 2 || Execução da US2 || 10/outubro/2008 ||
+|| Iteração 3 || Execução da US3 || 24/outubro/2008 ||
+|| Iteração 4 || Execução da US4 || 07/novembro/2008 ||
+|| Iteração 5 || Execução da US5 || 21/novembro/2008 ||
 
 = Iteração 1 =
-
-== User Story 0 ==
-
-A US0 visa a fundamentação teórica do Processamento Digital de Imagens. A divisão abaixo refere-se à construção da parte escrita que é o deliverable desta etapa.
-
-|| Atividades || Responsável || Percentual ||
-|| Processamento Digital de Imagens || Elloá || 100% ||
-|| Processamento Digital de Imagens no Domínio do Espaço || Elloá || 100% ||
-|| Operações pixel a pixel || Odilon|| ||
-|| Histograma || Odilon|| ||
-|| Filtragem ||  Elloá || 100% ||
-|| Segmentação || Odilon || ||
-|| Morfologia || Elloá || 100% ||
 
 == User Story 1 ==
 
