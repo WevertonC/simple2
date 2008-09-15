@@ -7,6 +7,7 @@
   * [Iteracao  Plano de Iteração]
   * [Releases  Plano de Releases]
   * [Arquitetura Projeto Arquitetural]
+  * [ReqFunc Requisitos Funcionais]
   * [NaoFuncionais Requisitos Não Funcionais]
   * [Processo Processo de Desenvolvimento Adotado]
   * [BigChart  BigChart]
