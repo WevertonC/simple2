@@ -1,13 +1,11 @@
-#summary One-sentence summary of this page.
+#summary descrição dos requisitos funcionais
 
-= Introduction =
+= Requisitos Funcionais =
 
-Add your content here.
+Para a etapa de Projeto 2, os requisitos funcionais descritos pelo cliente foram:
 
+* Implementação do filtro homomórfico
+* Implementação de filtros de Suavização e Aguçamento Gaussiano
+* Implementação do filtro Butterworth
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+A implementação destes filtros é de interesse pois, ao serem incorporados na ferramenta SImPLe, auxiliarão no aprendizado dos conceitos de processamento digital de imagens no domínio da freqüência.
