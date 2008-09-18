@@ -8,10 +8,10 @@
 || Iteração 1 ||  26/setembro/2008 ||
 || Iteração 2 || 10/outubro/2008 ||
 || Iteração 3 || 24/outubro/2008 ||
-|| Release 1 || 25/outubro/2008 ||
+|| *Release 1* || 25/outubro/2008 ||
 || Iteração 4 || 07/novembro/2008 ||
 || Iteração 5 || 21/novembro/2008 ||
-|| Release 2 || 22/novembro/2008 ||
+|| *Release 2* || 22/novembro/2008 ||
 
 
 == Projeto 1 ==
