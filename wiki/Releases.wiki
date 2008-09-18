@@ -2,6 +2,20 @@
 
 = Plano de Releases =
 
+== Projeto 2 ==
+
+|| Atividade || Data Limite ||
+|| Iteração 1 ||  26/setembro/2008 ||
+|| Iteração 2 || 10/outubro/2008 ||
+|| Iteração 3 || 24/outubro/2008 ||
+|| Release 1 || 25/outubro/2008 ||
+|| Iteração 4 || 07/novembro/2008 ||
+|| Iteração 5 || 21/novembro/2008 ||
+|| Release 2 || 22/novembro/2008 ||
+
+
+== Projeto 1 ==
+
 || Etapas || Atividades || Data Limite ||
 || Planejamento ||Definição das User Stories; Levantamento de Requisitos Funcionais; Levantamento de Requisitos Não Funcionais; Elaboração do projeto arquitetural; Definição do plano de releases; Definição do plano de iteração 1; Elaboração do site do projeto|| 09/junho/2008 ||
 ||Iteração 1  || Implementação das User-stories US0 e US1 || 23/ junho/2008 ||
