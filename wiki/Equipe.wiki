@@ -11,9 +11,3 @@
 ==== Odilon F. de Lima Jr ====
 
 Aluno do curso Ciência da Computação e Desenvolvedor da Universidade Federal de Campina Grande, Departamento de Sistemas e Computação, Modelos Computacionais e Cognitivos. Pesquisador em Visão Computacional, Processamento de Imagens e Reconhecimento de Padrões, juntamente com suas aplicações em Fotografia Digital no Projeto Iphotobot com a Cooperação da Hewlett Packard Brasil Ltda.
-
-=== Gerências ===
-
-=== Matriz de Competências ===
-
-=== Horários de Trabalho ===
