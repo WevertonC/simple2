@@ -2,4 +2,12 @@
 
 = Bigchart =
 
+== Projeto 2 ==
+
+|| Iteração || Classes	|| Testes de Unidade ||	User Stories ||
+|| 0 || 213 ||	29 || 0 ||
+|| 1 || || || ||		
+
+
+== Projeto 1 ==
 http://simple2.googlecode.com/files/BigChartGraficos.pdf
