@@ -1,0 +1,11 @@
+Descrição
+
+            Permite mudar o número de tons da imagem a partir de uma operação lógica.
+
+Passos
+
+            1 - Selecionar a operação lógica a ser utlizada: AND, OR ou IGS
+            2 - Selecionar o número de tons desejados para a requantização : 2, 4, 8, 16, 32, 64, 128
+            3 - Confirmar a operação - pressionar botão OK
+            ou
+            3 - Cancelar a operação - pressionar o botão CANCELAR

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Simple" default="all" basedir=".">
+    <description>Builds, tests, and runs the project blms.</description>
+     
+    <!-- Basic folders -->
+    <property name="bin" value="${basedir}/bin" />
+    <property name="source" value="${basedir}/src" />
+	 <!-- <property name="test" value="${basedir}/examples" /> -->
+    <property name="lib" value="${basedir}/lib" />
+	<property name="jar" value="${lib}/simple.jar" />
+    <property name="doc" value="${basedir}/doc" />
+        
+    <!-- Target that creates the necessary folders -->
+   
+    <target name="init">
+        <echo>Creating folders</echo>
+        <mkdir dir="${bin}" />
+    	<mkdir dir="${doc}" />
+        <tstamp/>
+    </target>
+    
+    <!-- Target that erases all .class files -->
+    <target name="limpa" depends="init">
+        <echo>Deleting .class files of the system and doc.</echo>
+        <delete>
+            <fileset dir="${bin}" includes="**/*.class" />
+            <fileset dir="${lib}">
+                <filename name="${jar}"/>
+            </fileset>
+            <fileset dir="${doc}">
+                <filename name="**/*.*"/>
+            </fileset>
+        </delete>
+    </target>
+    
+   <!-- Target that sets in the path all used jars -->
+    <path id="allJars">
+        <fileset dir="${lib}">
+                <include name="*.jar"/>
+        </fileset>
+    </path>
+    
+    <!-- Target that compiles the source code -->
+    <target name="compila" depends="init">
+        <echo> Compiling all classes. </echo>
+        <javac srcdir="${source}" destdir="${bin}" debug="true" optimize="on" classpathref="allJars"/>
+    </target>
+
+    <!-- Target that creates the application jar -->
+    <target name="jar" depends="init,limpa,compila">
+        <echo>Creating jar file</echo>
+        <jar destfile="${jar}" basedir="${bin}">
+        </jar>
+    </target>
+    
+    <!-- Target  default -->
+    <target name="all" depends="limpa, init, compila, jar, testa">
+        <echo>All: clean, init, compile, jar, testa</echo>
+    </target>
+
+    <!-- Target that runs all tests -->
+    <target name="testa" depends="unitTests" />
+    
+    <!-- Target that runs all units tests -->
+    <target name="unitTests" depends="jar">        
+        <echo>Starting Ford Unit Tests</echo>
+        <junit printsummary="true" dir="${basedir}" fork="true">
+        <formatter type="plain"/>
+                    <classpath refid="allJars"/>
+                    <test name="core.testes.AllUnitTests" />
+        </junit>
+    </target>
+
+    
+    
+    <!-- This target generates the javadoc for the system -->
+    <target name="doc" depends="">
+	<delete dir="${doc}"/>
+	<mkdir dir="${doc}" />
+	<javadoc access="package" author="true" classpath="allJars" destdir="${doc}" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="blms.dataBase,blms.exceptions,blms.facade,blms.servlet,blms.users" source="1.5" sourcepath="${source}" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
+

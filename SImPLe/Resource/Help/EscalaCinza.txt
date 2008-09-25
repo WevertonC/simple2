@@ -1,0 +1,4 @@
+Descrição
+
+  Exibe a imagem selecionada em Tons de Cinza.
+  A imagem exibida pode ser salva, caso desejado.
