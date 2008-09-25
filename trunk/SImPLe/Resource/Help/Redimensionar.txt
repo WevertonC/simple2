@@ -1,0 +1,20 @@
+Redimensionar
+
+    Proporciona o aumento ou diminuição do tamanho da imagem. O usuário deve escolher se deseja informar a alteração em termos de pixels ou porcentagem. Também deve ser informado qual o tipo de redimensionamento é desejado: Bicúbico, Bi-Linear ou Vizinhaça.
+
+Passos
+
+  1 - Selecionar a forma desejada para a entrada dos novos valores (Pixel ou Porcentagem)
+  Para Pixel
+    2 - Informar um valor para a nova altura da imagem. Faixa de valores permitida entre 1 e 1000
+    3 - Informar um valor para a nova largura da imagem. Faixa de valores permitida entre 1 e 1000
+    4 - Selecionar um dos métodos de Redimensionamento: "Bicúbico", "Bi-Linear" ou "Vizinhaça".
+    5 - Confimar a operação - pressinar botão OK
+    ou
+    5 - Cancelar a operação - pressionar botão CANCELAR
+  Para Porcentagem
+    2 - Informar uma porcentagem entre 1 e 400.
+    3 - Escolher um dos métodos de Redimensionamento: "Bicúbico", "Bi-Linear" ou "Vizinhaça".
+    4 - Confimar a operação - pressinar botão OK
+    ou
+    4 - Cancelar a operação - pressionar botão CANCELAR

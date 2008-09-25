@@ -1,0 +1,27 @@
+SOBRE A FERRAMENTA
+
+A FePDI foi concebida para ser utilizada no ambiente
+academico como fonte de pesquisa na área de 
+Processamento Digital de Imagens. 
+
+Com esse suporte ferramental, os exemplos e algoritmos
+vistos na teoria, em sala de aula, tornam-se concretos,
+uma vez que alunos de Processamento Digital de Imagens,
+ou apenas  interessados pelo tema, passam a ter a 
+possibilidade de visualizar o processamento digital de
+determinada imagem, e em seguida acompanhar a execução
+do  código, algoritmo,  gerador do resultado requerido. 
+
+É uma ferramenta de código livre, passível de melhorias, 
+desenvolvida no período de Setembro a Novembro de 2005
+por alunos da graduação do Curso de Ciência da 
+Computação da Universidade Federal de Campina Grande,
+sob o gerenciamento de uma aluna da Pós-Graduação em
+Informática da mesma universidade e sob a orientação do
+Professor Doutor Eustáquio Rangel.
+
+Página de acompanhamento do projeto, contendo todos os
+artefatos gerados, e a versão mais atualizada da 
+ferramenta, disponível em: 
+          www.dsc.ufcg.edu.br/~yuska/pihm.
+

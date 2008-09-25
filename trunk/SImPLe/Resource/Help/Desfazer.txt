@@ -1,0 +1,3 @@
+Descrição
+
+  Desfaz as 5(cinco) últimas operações realizadas

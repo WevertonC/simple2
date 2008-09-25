@@ -1,0 +1,11 @@
+Descrição
+
+  Abre um novo arquivo de imagem com as dimensões estabelecidas pelo usuário.
+	
+Passos 
+
+  1 - Informar alturada nova imagem, em pixel
+  2 - Informar largura da nova imagem, em pixel
+  3 - Confimar a operação - pressinar botão OK 
+  ou 
+  3 - Cancelar a operação - pressionar botão CANCELAR

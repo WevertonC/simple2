@@ -1,0 +1,12 @@
+Descrição
+
+  Abre um arquivo de imagem já existente.
+  Para tanto é necessário que o usuário informe o local onde o mesmo está salvo
+
+Passos
+
+  1 - Localizar o arquivo
+  2 - Selecionar o arquivo 
+  3 - Confirmar a operação - pressionar botão Abrir Arquivo
+  ou
+  3 - Cancelar a operação - pressionar o botão CANCELAR
