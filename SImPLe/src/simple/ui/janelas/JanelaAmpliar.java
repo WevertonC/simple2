@@ -30,14 +30,10 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import simple.ajuda.AjudaZoom;
 import simple.manipulacoes.util.AjudaButton;
 
 
-import ajuda.AjudaZoom;
-/** 
- * Summary description for JanelaZoom 
- * 
- */ 
 public class JanelaAmpliar extends JDialog implements ActionListener, ChangeListener, KeyListener{
 	
 	private static final long serialVersionUID = 1L;

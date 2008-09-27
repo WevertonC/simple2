@@ -27,10 +27,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 
+import simple.ajuda.AjudaOperacoesAritmeticasBasica;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.MyDragList;
 
-import ajuda.AjudaOperacoesAritmeticasBasica;
 
 /**
  * Janela responsável pela Operação de Aritmética Básica

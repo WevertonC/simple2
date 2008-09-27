@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ajuda.AjudaRedimensionar;
+import simple.ajuda.AjudaRedimensionar;
 
 public class JanelaFrequencia extends JDialog implements KeyListener, ActionListener, ChangeListener {
 

@@ -23,10 +23,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
+import simple.ajuda.AjudaFechar;
 import simple.manipulacoes.util.AjudaButton;
-
-import ajuda.AjudaFechar;
-
 import simple.ui.som.Sound;
 /**
  * Classe que cria uma janela para fornecer a opção de fechar os frames abertos

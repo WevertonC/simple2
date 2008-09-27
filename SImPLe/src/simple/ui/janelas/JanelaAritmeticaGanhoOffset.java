@@ -13,10 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import simple.ajuda.AjudaOperacoesAritmeticasPessoal;
 import simple.manipulacoes.util.AjudaButton;
 
-
-import ajuda.AjudaOperacoesAritmeticasPessoal;
 
 public class JanelaAritmeticaGanhoOffset extends JDialog implements ActionListener, KeyListener {
 	

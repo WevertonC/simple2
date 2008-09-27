@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-
+import simple.ajuda.AjudaCombinarCanais;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.Modificador;
 import simple.manipulacoes.util.MyBufferedImage;
@@ -41,7 +41,6 @@ import simple.modules.propriedades.decomporCanais.DecompositorRGB;
 import simple.modules.propriedades.decomporCanais.DecompositorXYZ;
 import simple.modules.propriedades.decomporCanais.DecompositorYCrCb;
 
-import ajuda.AjudaCombinarCanais;
 
 /**
  * Classe que gera uma janela responsável pela cominucação entre o usuário e o programa para
