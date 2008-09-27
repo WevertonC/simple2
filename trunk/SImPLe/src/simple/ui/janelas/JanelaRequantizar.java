@@ -23,11 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-
+import simple.ajuda.AjudaRequantizacao;
 import simple.manipulacoes.util.AjudaButton;
 import simple.modules.propriedades.requantizar.Requantizador;
-
-import ajuda.AjudaRequantizacao;
 
 /**
  * Classe que cria uma janela para fornecer a opcao de requantizar uma imagem
