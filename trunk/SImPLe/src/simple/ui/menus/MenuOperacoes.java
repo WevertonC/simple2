@@ -162,5 +162,9 @@ public class MenuOperacoes extends SimpleMenu{
 	public void redimensionar(){
 		geometricas.redimensionar();
 	}
+	
+	public void emboss(){
+		radiometricas.emboss();
+	}
 
 }

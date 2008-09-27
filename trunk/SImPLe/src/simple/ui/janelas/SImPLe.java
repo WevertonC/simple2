@@ -611,7 +611,6 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 	public void actionPerformed(ActionEvent evt) {
 
 		String evento = evt.getActionCommand();
-		System.out.println("Evento: " + evento);
 		verificaFrames();
 		// ***********************************************************************//
 		// ****************        Menu Arquivo                   ****************//
@@ -778,26 +777,7 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 			meuMenuOperacoes.gaussiano();	
 		}
 		else if(evento.equals("Emboss")) {
-			//TODO retirar daqui
-			MyJInternalFrame f = (MyJInternalFrame) dp.getSelectedFrame();
-			final String name = f.getName();
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			try {
-				Emboss img = new Emboss(f.getImage());
-				MyJInternalFrame segmentado = new MyJInternalFrame(this, facade,name + " - Emboss",new MyImage(img.getBufferedImage()));
-				segmentado.setFoiOperacao(true);
-				dp.add(segmentado,BorderLayout.CENTER);
-				dp.setSelectedFrame(segmentado);
-				this.addPropertyChangeListener(segmentado.getScrollPane());
-				segmentado.setSelected(true);	
-				segmentado.setLocation(facade.getPosicao(),facade.getPosicao());
-				facade.incrementaPosicao();
-				this.addPropertyChangeListener(segmentado.getScrollPane());	
-				this.firePropertyChange("show-color", false, showColors);
-			} catch (Exception e){
-				
-			}
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			meuMenuOperacoes.emboss();
 		}
 		else if (evento.equals("Frei & Chen")){
 				meuMenuOperacoes.freiChen();
