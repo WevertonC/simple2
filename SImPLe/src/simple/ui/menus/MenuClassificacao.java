@@ -31,6 +31,11 @@ import simple.ui.janelas.JanelaSegmentacaoAdaptativa;
 import simple.ui.janelas.JanelaSegmentacaoGlobal;
 import simple.ui.janelas.SImPLe;
 
+/**
+ * Responsável pela criação do Menu Classificação, dos seus respectivos submenus
+ * e acesso às funcionalides providas por eles.
+ *
+ */
 public class MenuClassificacao extends SimpleMenu {
 
 	private static final long serialVersionUID = -5222981100700996029L;
@@ -83,6 +88,9 @@ public class MenuClassificacao extends SimpleMenu {
 		add(classificadores);
 	}
 
+	/**
+	 * Realização da segmentação global
+	 */
 	public void global(){
 
 		JanelaSegmentacaoGlobal j = new JanelaSegmentacaoGlobal();
@@ -98,6 +106,9 @@ public class MenuClassificacao extends SimpleMenu {
 
 	}
 
+	/**
+	 * Realização da segmentação adaptativa
+	 */
 	public void adaptativa(){
 		
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();		
@@ -135,6 +146,9 @@ public class MenuClassificacao extends SimpleMenu {
 		setEnabled(habilita);
 	}
 	
+	/**
+	 * Realização da classificação do tipo paralelepípedo
+	 */
 	public void paralelepipedo(){
 		
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
@@ -215,6 +229,9 @@ public class MenuClassificacao extends SimpleMenu {
 		}			
 	}
 	
+	/**
+	 * Efetua a operação de crescimento de regiões da imagem.
+	 */
 	public void crescimentoRegiao(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();

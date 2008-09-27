@@ -9,6 +9,10 @@ import simple.ui.janelas.JanelaAjuda;
 import simple.ui.janelas.JanelaSobre;
 import simple.ui.janelas.SImPLe;
 
+/**
+ * Classe responsável pela criação do Menu Ajuda e dos seus respectivos sub-menus.
+ * 
+ */
 public class MenuAjuda extends SimpleMenu {
 
 	private static final long serialVersionUID = -1627739151434643493L;
@@ -17,6 +21,11 @@ public class MenuAjuda extends SimpleMenu {
 	private JanelaAjuda janelaAjuda;
 	private JanelaSobre janelaSobre;
 	
+	/**
+	 * Instanciação do Menu Ajuda e dos seus respectivos sub-menus.
+	 * 
+	 * @param simple -- Uma instância única do SImPLe
+	 */
 	public MenuAjuda(SImPLe simple) {
 		super(MENU_AJUDA, simple);
 		configureMenu();
@@ -31,11 +40,17 @@ public class MenuAjuda extends SimpleMenu {
 		this.add(sobre);
 	}
 
+	/**
+	 * Acesso aos tópicos de ajuda
+	 */
 	public void topicos() {
 		janelaAjuda = new JanelaAjuda();
 		janelaAjuda.exibeJanela();
 	}
 	
+	/**
+	 * Acesso ao "Sobre" do SImPLe
+	 */
 	public void sobre(){
 		janelaSobre = new JanelaSobre();
 		janelaSobre.exibeJanela();

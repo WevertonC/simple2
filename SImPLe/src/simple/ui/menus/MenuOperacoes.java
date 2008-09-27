@@ -4,11 +4,13 @@ import java.awt.event.KeyEvent;
 
 import simple.ui.janelas.SImPLe;
 
+/**
+ * Responsável pela instanciação do menu operações e da invocação das respectivas
+ * funcionalidades associadas aos itens do menu.
+ * 
+ */
 public class MenuOperacoes extends SimpleMenu{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private MenuRadiometricas radiometricas;
 	private MenuGeometricas geometricas;
@@ -31,7 +33,9 @@ public class MenuOperacoes extends SimpleMenu{
 		return radiometricas;
 	}
 
-
+	/**
+	 * Chamada da janela para exibição das operações lógicas
+	 */
 	public void operacoesLogicas(){
 		radiometricas.operacoesLogicas();
 	}
@@ -40,18 +44,30 @@ public class MenuOperacoes extends SimpleMenu{
 		setEnabled(habilita);
 	}
 	
+	/**
+	 * Realiza a equalização de uma imagem
+	 */
 	public void equalizar(){
 		radiometricas.equalizar();
 	}
 	
+	/**
+	 * Invoca uma janela que exibe o ganho/offset de uma imagem
+	 */
 	public void ganhoOffset(){
 		radiometricas.ganhoOffset();
 	}
 	
+	/**
+	 * Exibição da janela de operações aritméticas
+	 */
 	public void operacoesAritmeticas(){
 		radiometricas.operacoesAritmeticas();
 	}
 	
+	/**
+	 * Realiza a dilatação 4 de uma imagem
+	 */
 	public void dilatacao4(){
 		radiometricas.dilatacao4();
 	}
