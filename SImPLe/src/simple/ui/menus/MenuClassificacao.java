@@ -99,16 +99,21 @@ public class MenuClassificacao extends SimpleMenu {
 	}
 
 	public void adaptativa(){
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+		
+		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();		
 		JanelaSegmentacaoAdaptativa j = new JanelaSegmentacaoAdaptativa();
+		
 		int dimensao = j.getDimensao();
+		
 		if (dimensao >= 0) {
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				
 				MyJInternalFrame segmentado = new MyJInternalFrame(getSimple(),
 						getSimple().getFacade(), "Segmentação Adaptativa", new MyImage(
 								getSimple().getFacade().segmentacaoAdaptativa(getSimple().getImagefromFrame(),
 										dimensao)));
+				
 				segmentado.setFoiOperacao(true);
 				getSimple().addPropertyChangeListener(segmentado.getScrollPane());
 				getSimple().getDesktopPane().add(segmentado, BorderLayout.CENTER);

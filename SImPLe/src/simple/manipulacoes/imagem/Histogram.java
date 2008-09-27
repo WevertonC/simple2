@@ -62,8 +62,6 @@ public class Histogram
 	histogram = new int[depth];
 	int rows = matrix.length;
 	int cols = matrix[0].length;
-	System.out.println("rows = " + rows);
-	System.out.println("cols = " + cols);
 
 	int v;
 	//find the histogram

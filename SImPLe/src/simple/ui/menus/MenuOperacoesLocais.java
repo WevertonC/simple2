@@ -1,5 +1,7 @@
 package simple.ui.menus;
 
+import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -8,8 +10,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import simple.manipulacoes.imagem.DeteccaoBordas;
+import simple.manipulacoes.util.Emboss;
 import simple.manipulacoes.util.MyBufferedImage;
 import simple.manipulacoes.util.MyImage;
+import simple.manipulacoes.util.MyJInternalFrame;
 import simple.modules.fourier.exceptions.FourierException;
 import simple.modules.operacoes.ruido.GeradorDeRuido;
 import simple.modules.operacoes.ruido.RuidoGaussiano;
@@ -361,6 +365,14 @@ public class MenuOperacoesLocais extends SimpleMenu {
 			getSimple().buildFrame(resultingImage, "  Ruído Gaussiano");	
 		
 		}
+			
+	}
+
+	public void emboss() {
+			Emboss img = new Emboss(getSimple().getImagefromFrame());
+			
+			BufferedImage resultingImage = img.getBufferedImage();
+			getSimple().buildFrame(resultingImage, "  Emboss");
 			
 	}
 

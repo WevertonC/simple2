@@ -1269,7 +1269,6 @@ public class Opcao3 extends javax.swing.JFrame {
 	        }
 	        
 	        if (numeroClasses == 3 && numeroCores == 2 && corExcluida == 1) {
-	        	System.out.println("luciana");
 	        	classeL3.setBackground(Color.lightGray);
 	        	miniValorText3R.setEditable(false);
 	        	miniValorText3R.setOpaque(true);

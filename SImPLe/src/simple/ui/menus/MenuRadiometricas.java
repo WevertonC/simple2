@@ -138,4 +138,9 @@ public class MenuRadiometricas extends SimpleMenu{
 		locais.ruidoGaussiano();
 	}
 
+	public void emboss() {
+		locais.emboss();
+		
+	}
+
 }
