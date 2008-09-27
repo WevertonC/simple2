@@ -24,6 +24,12 @@ import simple.ui.janelas.SImPLe;
 import simple.excecoes.OperacaoAritmeticaException;
 import simple.excecoes.OperacaoLogicaException;
 
+/**
+ * 
+ * Constrói o menu que realiza todas as operações pontuais em uma imagem. Apresenta
+ * métodos que contém todas as funcionalidades providas por estes menus.
+ *
+ */
 public class MenuOperacoesPontuais extends SimpleMenu{
 	
 	private static final long serialVersionUID = -1181861870195340849L;

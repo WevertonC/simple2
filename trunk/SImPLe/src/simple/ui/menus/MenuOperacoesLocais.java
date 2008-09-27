@@ -24,6 +24,10 @@ import simple.ui.janelas.JanelaRuidoGaussiano;
 import simple.ui.janelas.SImPLe;
 import simple.excecoes.ImageProcessingException;
 
+/**
+ * Constrói o menu que realiza todas as operações locais em uma imagem. Apresenta
+ * métodos que contém todas as funcionalidades providas por estes menus.
+ */
 public class MenuOperacoesLocais extends SimpleMenu {
 
 	private static final long serialVersionUID = -1866526303421367909L;

@@ -39,6 +39,11 @@ import simple.ui.janelas.JanelaRequantizar;
 import simple.ui.janelas.SImPLe;
 import simple.excecoes.PseudoColorException;
 
+/**
+ * Responsável pela instanciação do menu de imagem e acesso às suas respectivas
+ * funcionalidades.
+ * 
+ */
 public class MenuImagem extends SimpleMenu {
 
 	private static final long serialVersionUID = 1L;

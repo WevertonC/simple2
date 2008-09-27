@@ -7,6 +7,10 @@ import javax.swing.KeyStroke;
 
 import simple.ui.janelas.SImPLe;
 
+/**
+ * Superclasse de um menu do SImPLe
+ *
+ */
 public class SimpleMenu extends JMenu {
 
 	/**
@@ -20,27 +24,42 @@ public class SimpleMenu extends JMenu {
 	public static String MENU_AJUDA = "Ajuda";
 	public static String MENU_OPERACOES = "Operações";
 	public static String MENU_CLASSIFICACAO = "Classificação";
-	
-	
+
+
 	public static String OP_RADIOMETRICAS = "Radiométricas";
 	public static String OP_PONTUAIS = "Pontuais";
 	public static String OP_LOCAIS = "Locais";
 	public static String OP_GEOMETRICAS = "Geométricas";
-	
-	
+
+
 	private SImPLe simple;
 	public static int NO_VALUE = -1;
-	
-	
+
+
 	public SimpleMenu(String menuName, SImPLe simple){
 		super(menuName);
 		this.simple = simple;
 	}
-	
+
+	/**
+	 * Retorna uma instância única do SImPLe
+	 * @return
+	 */
 	public SImPLe getSimple(){
 		return simple;
 	}
-	
+
+	/**
+	 * Padronização para a construção de objetos do tipo JMenuITem.
+	 * 
+	 * @param name
+	 * @param key
+	 * @param stroke
+	 * @param action
+	 * @param mnemonic
+	 * @param pathToIcon
+	 * @return
+	 */
 	public JMenuItem configureMenuItem(String name, int key, int stroke, int action, int mnemonic,  String 
 			pathToIcon){
 		JMenuItem temp = new JMenuItem(name,key);
@@ -54,7 +73,7 @@ public class SimpleMenu extends JMenu {
 		temp.addActionListener(this.getSimple());
 		return temp;
 	}
-	
-	
-	
+
+
+
 }

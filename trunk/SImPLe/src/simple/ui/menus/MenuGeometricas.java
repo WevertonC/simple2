@@ -21,6 +21,12 @@ import simple.ui.janelas.JanelaRedimensionar;
 import simple.ui.janelas.JanelaRotacionar;
 import simple.ui.janelas.SImPLe;
 
+/**
+ * Responsável pela instanciação do menu de operações geométricas e acesso às suas respectivas
+ * funcionalidades.
+ * 
+ *
+ */
 public class MenuGeometricas extends SimpleMenu {
 
 	private static final long serialVersionUID = 3893704783286438149L;
@@ -45,6 +51,9 @@ public class MenuGeometricas extends SimpleMenu {
 		add(ampliar);
 	}
 	
+	/**
+	 * Redimensiona uma imagem
+	 */
 	public void redimensionar(){
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 		JanelaRedimensionar m = new JanelaRedimensionar();
@@ -111,6 +120,9 @@ public class MenuGeometricas extends SimpleMenu {
 		}
 	}
 	
+	/**
+	 * Rotaciona uma imagem
+	 */
 	public void rotacionar(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
@@ -128,6 +140,9 @@ public class MenuGeometricas extends SimpleMenu {
 		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 	
+	/** 
+	 * Amplia as dimensões de uma imagem
+	 */
 	public void ampliar(){
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 		try {
@@ -145,6 +160,9 @@ public class MenuGeometricas extends SimpleMenu {
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 	
+	/**
+	 * Permite que a imagem seja visualizada com mais zoom
+	 */
 	public void zoomMais(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
@@ -158,6 +176,9 @@ public class MenuGeometricas extends SimpleMenu {
 		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 	
+	/**
+	 * Permite que a imagem seja visualizada com menos zoom
+	 */
 	public void zoomMenos(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
