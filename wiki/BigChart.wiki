@@ -6,7 +6,7 @@
 
 || Iteração || Classes	|| Testes de Unidade ||	User Stories ||
 || 0 || 213 ||	29 || 0 ||
-|| 1 || || || ||		
+|| 1 || 222 || 29 || 2 ||		
 
 
 == Projeto 1 ==
