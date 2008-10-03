@@ -9,15 +9,28 @@ package simple.ui.janelas;
  * CopyRight FePDI all rigths reserved 
  */
 
-import java.awt.*; 
-import java.awt.event.*; 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import javax.swing.*; 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-
-import simple.ajuda.AjudaRedimensionar;
 
 /**
  * Classe que cria uma janela para fornecer a opção de Redimensionar uma imagem
@@ -250,7 +263,9 @@ public class JanelaRedimensionar extends JDialog implements ActionListener, KeyL
 			initializeVariables();
 			this.dispose();
 		}
-		else if(evento.equals("?"))	new AjudaRedimensionar();
+		else if(evento.equals("?"))	{
+			new Ajuda(Ajuda.AJUDA_REDIMENSIONAR);
+		}
 	}
 	
 	/**
@@ -302,7 +317,9 @@ public class JanelaRedimensionar extends JDialog implements ActionListener, KeyL
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaRedimensionar();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_REDIMENSIONAR);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				if(tipo.equals("")){
 					JOptionPane.showMessageDialog(null,"Por favor, escolha o tipo de redimensionamento desejado" 

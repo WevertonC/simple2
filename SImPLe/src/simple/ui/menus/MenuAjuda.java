@@ -1,5 +1,7 @@
 package simple.ui.menus;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenuItem;
@@ -13,7 +15,7 @@ import simple.ui.janelas.SImPLe;
  * Classe responsável pela criação do Menu Ajuda e dos seus respectivos sub-menus.
  * 
  */
-public class MenuAjuda extends SimpleMenu {
+public class MenuAjuda extends SimpleMenu implements ActionListener {
 
 	private static final long serialVersionUID = -1627739151434643493L;
 	
@@ -54,6 +56,17 @@ public class MenuAjuda extends SimpleMenu {
 	public void sobre(){
 		janelaSobre = new JanelaSobre();
 		janelaSobre.exibeJanela();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+		String evento = arg0.getActionCommand();
+		
+		if (evento.equals("Sobre o SImPLe")) {
+			System.out.println("AQUIII!");
+		}
+		
 	}
 
 

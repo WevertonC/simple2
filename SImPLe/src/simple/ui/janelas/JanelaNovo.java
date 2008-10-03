@@ -22,10 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-
-import simple.ajuda.AjudaAbrirNovo;
 
 
 
@@ -157,7 +155,9 @@ public class JanelaNovo extends JDialog implements ActionListener, KeyListener{
 						,"ERRO NAS INFORMAÇÕES", JOptionPane.ERROR_MESSAGE);
 			}
 		}else if(evento.equals("Cancelar")) dispose();
-		else if(evento.equals("?")) new AjudaAbrirNovo();
+		else if(evento.equals("?")){ 
+			new Ajuda(Ajuda.AJUDA_ABRIR_NOVO);
+		}
 	}		
 	
 	/**
@@ -175,7 +175,9 @@ public class JanelaNovo extends JDialog implements ActionListener, KeyListener{
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaAbrirNovo();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_ABRIR_NOVO);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				foiOk = true;
 				try{
@@ -200,7 +202,5 @@ public class JanelaNovo extends JDialog implements ActionListener, KeyListener{
 	
 	public void keyTyped(KeyEvent e) {
 	}
-	public static void main(String[] args) {
-		new JanelaNovo(SImPLe.getInstance());
-	}
+	
 }

@@ -25,9 +25,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-import simple.ajuda.AjudaFiltro;
 
 
 /**
@@ -151,7 +150,9 @@ public class JanelaFiltro extends JDialog implements ActionListener, KeyListener
 						,"ERRO NAS INFORMAÇÕES", JOptionPane.ERROR_MESSAGE);
 			} else dispose();
 		}
-		else if(evento.equals("?")) new AjudaFiltro();	
+		else if(evento.equals("?")){
+			new Ajuda(Ajuda.AJUDA_FILTRO);
+		}
 	}
 	
 	/**

@@ -23,7 +23,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
-import simple.ajuda.AjudaFechar;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.ui.som.Sound;
 /**
@@ -114,7 +114,9 @@ public class JanelaFechar extends JDialog implements ActionListener, WindowListe
 			acaoSelecionada = "Cancelar";
 			this.setVisible(false);
 		}
-		else if(evento.equals("?")) new AjudaFechar();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_FECHAR);
+		}
 	}
 	
 	/**
@@ -154,7 +156,9 @@ public class JanelaFechar extends JDialog implements ActionListener, WindowListe
 			this.setVisible(false);
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaFechar();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_FECHAR);
+			}
 			else if (salvar.isFocusOwner()) {
 				acaoSelecionada = "Sim";	
 				this.setVisible(false);

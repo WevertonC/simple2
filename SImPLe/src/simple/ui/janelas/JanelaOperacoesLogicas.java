@@ -27,10 +27,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.MyDragList;
-
-import simple.ajuda.AjudaOperacoesLogicas;
 
 /**
  * Janela responsável pela Operação de Aritmética Básica
@@ -169,7 +168,9 @@ public class JanelaOperacoesLogicas extends JDialog implements ActionListener, K
 			selecionados = null;
 			dispose();
 		}
-		else if(evento.equals("?")) new AjudaOperacoesLogicas();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_OP_LOGICA);
+		}
 	}
 	
 	/**

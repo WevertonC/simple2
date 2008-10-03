@@ -22,10 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-
-import simple.ajuda.AjudaDecomporCanais;
 
 /**
  * Classe que cria uma janela para fornecer a opcao Decompor uma imagem
@@ -167,7 +165,7 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 			modelo = "";
 			this.dispose();
 		}else if (evt.equalsIgnoreCase("?"))
-			new AjudaDecomporCanais();
+			new Ajuda(Ajuda.AJUDA_DECOMPOR_CANAIS);
 	}
 	
 	/**
@@ -196,7 +194,9 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (buttonAjuda.isFocusOwner()) new AjudaDecomporCanais();
+			if (buttonAjuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_DECOMPOR_CANAIS);
+			}
 			else if (buttonOk.isFocusOwner() || !buttonOk.isFocusOwner() && !buttonCancel.isFocusOwner()) {
 				ok = true;
 				if(modelo.equals("")){
