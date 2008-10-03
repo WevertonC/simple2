@@ -1,5 +1,8 @@
 package simple.ui.menus;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -11,7 +14,7 @@ import simple.ui.janelas.SImPLe;
  * Superclasse de um menu do SImPLe
  *
  */
-public class SimpleMenu extends JMenu {
+public class SimpleMenu extends JMenu implements ActionListener {
 
 	/**
 	 * 
@@ -72,6 +75,12 @@ public class SimpleMenu extends JMenu {
 		temp.setIcon(new ImageIcon(pathToIcon));
 		temp.addActionListener(this.getSimple());
 		return temp;
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		
+		System.out.println("LALALA");
+		
 	}
 
 

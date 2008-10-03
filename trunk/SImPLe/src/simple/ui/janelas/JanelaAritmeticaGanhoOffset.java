@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import simple.ajuda.AjudaOperacoesAritmeticasPessoal;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 
 
@@ -121,8 +121,9 @@ public class JanelaAritmeticaGanhoOffset extends JDialog implements ActionListen
 			foiOk = false;
 			dispose();
 		}
-		else if(evento.equals("?")) 
-			new AjudaOperacoesAritmeticasPessoal();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_OP_ARIT_PESSOAL);
+		}
 	}
 	
 	public double getGain(){
@@ -144,7 +145,9 @@ public class JanelaAritmeticaGanhoOffset extends JDialog implements ActionListen
 			dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaOperacoesAritmeticasPessoal();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_OP_ARIT_PESSOAL);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				try{
 					foiOk = true;

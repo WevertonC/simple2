@@ -20,11 +20,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.MyJInternalFrame;
-
-
-import simple.ajuda.AjudaPseudoColorizacao;
 
 /**
  * Classe que cria uma janela para fornecer a opcao colorir uma imagem preto e pranco a partir de
@@ -125,8 +123,9 @@ public class JanelaPseudoColorizacao extends JDialog implements ActionListener, 
 		}else if(evt.equals("Cancelar")){
 			ok = false;
 			this.dispose();
-		}else if(evt.equals("?"))
-			new AjudaPseudoColorizacao();
+		}else if(evt.equals("?")){
+			new Ajuda(Ajuda.AJUDA_PSEUDOCOLORIZACAO);
+		}
 	}
 	
 	/**
@@ -171,7 +170,9 @@ public class JanelaPseudoColorizacao extends JDialog implements ActionListener, 
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (buttonAjuda.isFocusOwner()) new AjudaPseudoColorizacao();
+			if (buttonAjuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_PSEUDOCOLORIZACAO);
+			}
 			else if (buttonOk.isFocusOwner() || !buttonOk.isFocusOwner() && !buttonCancel.isFocusOwner()) {
 				ok = true;
 				this.dispose();

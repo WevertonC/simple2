@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.WindowConstants;
 
-import simple.ajuda.AjudaOperacoesAritmeticasBasica;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.MyDragList;
 
@@ -158,7 +158,9 @@ public class JanelaAritmetica extends JDialog implements ActionListener, KeyList
 			selecionados = null;
 			dispose();
 		}
-		else if(evento.equals("?")) new AjudaOperacoesAritmeticasBasica();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_OP_ARIT_BASICA);
+		}
 	}
 	
 	/**
@@ -183,8 +185,9 @@ public class JanelaAritmetica extends JDialog implements ActionListener, KeyList
 			dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner())
-				new AjudaOperacoesAritmeticasBasica();
+			if (ajuda.isFocusOwner()){
+				new Ajuda(Ajuda.AJUDA_OP_ARIT_BASICA);
+			}
 			else if (jButton1.isFocusOwner() || !jButton1.isFocusOwner() && !jButton2.isFocusOwner()) {
 				selecionados = m.getListaSelecionada();
 				int frames = getSelecionados().size();

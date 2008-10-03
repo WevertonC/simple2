@@ -855,14 +855,14 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		}
 		else if (evento.equals("Fechamento 8")){
 			meuMenuOperacoes.fechamento8();
-		}
+//		}
 		
 		
 		// ***********************************************************************//
 		// ****************              Menu Ajuda                  *************//
 		// ***********************************************************************//
-		else if (evento.equals("Sobre o SImPLe")){
-			meuMenuAjuda.sobre();
+//		else if (evento.equals("Sobre o SImPLe")){
+//			meuMenuAjuda.sobre();
 		} else if (evento.equals("Tópicos de Ajuda")){
 			meuMenuAjuda.topicos();
 		}

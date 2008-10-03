@@ -30,10 +30,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import simple.manipulacoes.util.AjudaButton;
-
-import simple.ajuda.AjudaHistogramaColorido;
+import simple.ajuda.Ajuda;
 import simple.facade.Facade;
+import simple.manipulacoes.util.AjudaButton;
 
 /**
  * Classe que cria a janela do Histograma
@@ -165,7 +164,9 @@ public class JanelaHistogramaColorido extends JDialog implements ActionListener,
 	 * Metodo actionPerformed que Captura o evento
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("?")) new AjudaHistogramaColorido();
+		if(e.getActionCommand().equals("?")) {
+			new Ajuda(Ajuda.AJUDA_HISTOGRAMA_COLORIDO);
+		}
 	}
 	
 	/**

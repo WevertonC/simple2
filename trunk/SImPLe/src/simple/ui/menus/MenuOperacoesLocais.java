@@ -219,12 +219,20 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	public void passaAlta(){
 		// Janela contendo o slider
 		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
 
 		if (jf.isAplicaFiltro()) {
 			try {
-				MyImage myImage = new MyImage(fourierFacade.passaAltaFreq(getSimple().getImagefromFrame(),jf.getValorRaio()));
+				MyImage myImage = new MyImage(fourierFacade.passaAltaFreq(src,jf.getValorRaio()));
 				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 				getSimple().buildFrame(img, "  Passa-Alta no domínio da frequência");	
+			} catch (FourierException e) {
+			}
+			
+			try {
+				MyImage myImage = new MyImage(fourierFacade.passaAltaEsp(src,jf.getValorRaio()));
+				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+				getSimple().buildFrame(img, "  Passa-Alta no domínio do espaço");	
 			} catch (FourierException e) {
 			}
 		}

@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import simple.ajuda.AjudaRedimensionar;
+import simple.ajuda.Ajuda;
 
 public class JanelaFrequencia extends JDialog implements KeyListener, ActionListener, ChangeListener {
 
@@ -111,7 +111,9 @@ public class JanelaFrequencia extends JDialog implements KeyListener, ActionList
 			initializeVariables();
 			this.dispose();
 		}
-		else if(evento.equals("?"))	new AjudaRedimensionar();
+		else if(evento.equals("?"))	{
+			new Ajuda(Ajuda.AJUDA_FOURIER);
+		}
 	}
 
 

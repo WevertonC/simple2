@@ -29,10 +29,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
-import simple.manipulacoes.util.AjudaButton;
-
-import simple.ajuda.AjudaHistogramaCanal;
+import simple.ajuda.Ajuda;
 import simple.facade.Facade;
+import simple.manipulacoes.util.AjudaButton;
 
 /**
  * Classe que cria a janela do Histograma
@@ -206,7 +205,9 @@ public class JanelaHistogramaPorCanal extends JDialog implements ActionListener,
 		if(actionCmd.equalsIgnoreCase("RED")) gerarHistograma(facade.getRedHistograma(),REDBANDA);
 		else if(actionCmd.equalsIgnoreCase("GREEN"))gerarHistograma(facade.getGreenHistograma(),GREENBANDA);
 		else if(actionCmd.equalsIgnoreCase("BLUE")) gerarHistograma(facade.getBlueHistograma(),BLUEBANDA);
-		else if(actionCmd.equalsIgnoreCase("?")) new AjudaHistogramaCanal();
+		else if(actionCmd.equalsIgnoreCase("?")) {
+			new Ajuda(Ajuda.AJUDA_HISTOGRAMA_CANAL);
+		}
 	}
 	
 	/**

@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import simple.ajuda.AjudaCombinarCanais;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.manipulacoes.util.Modificador;
 import simple.manipulacoes.util.MyBufferedImage;
@@ -371,7 +371,9 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 			}}else if(evento.equals("Cancelar")){
 			ok = false;
 			return;
-		}else if(evento.equals("?")) new AjudaCombinarCanais();
+		}else if(evento.equals("?")){
+			new Ajuda(Ajuda.AJUDA_COMBINAR_CANAIS);
+		}
 	}
 	
 	/**
@@ -406,8 +408,10 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (botaoAjuda.isFocusOwner())  new AjudaCombinarCanais(); else
-			if (botaoOK.isFocusOwner() || !botaoOK.isFocusOwner() && !botaoCancelar.isFocusOwner()) {
+			if (botaoAjuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_COMBINAR_CANAIS); 
+			}
+			else if (botaoOK.isFocusOwner() || !botaoOK.isFocusOwner() && !botaoCancelar.isFocusOwner()) {
 				ok = true;
 				if(!modelo.equals("")){
 					if(modelo.equals("RGB")){
