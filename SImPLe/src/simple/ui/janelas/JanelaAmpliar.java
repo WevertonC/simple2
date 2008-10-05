@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import simple.ajuda.AjudaZoom;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 
 
@@ -146,7 +146,9 @@ public class JanelaAmpliar extends JDialog implements ActionListener, ChangeList
 		if(arg0.getActionCommand().equals("Cancelar")){
 			zoom = 0;
 			dispose();
-		} else if(arg0.getActionCommand().equals("?")) new AjudaZoom();
+		} else if(arg0.getActionCommand().equals("?")) {
+			new Ajuda(Ajuda.AJUDA_ZOOM);
+		}
 	} 
 	
 	public void stateChanged(ChangeEvent e) {
@@ -172,7 +174,9 @@ public class JanelaAmpliar extends JDialog implements ActionListener, ChangeList
 			dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaZoom();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_ZOOM);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				zoom = jSlider1.getValue();
 				dispose();

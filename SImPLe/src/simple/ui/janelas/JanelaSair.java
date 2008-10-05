@@ -26,7 +26,7 @@ import javax.swing.UIManager;
 
 import simple.manipulacoes.util.AjudaButton;
 
-import simple.ajuda.AjudaSair;
+import simple.ajuda.Ajuda;
 
 import simple.ui.som.Sound;
 
@@ -151,7 +151,9 @@ public class JanelaSair extends JDialog implements ActionListener, WindowListene
 			acaoSelecionada = "Nao";
 			this.dispose();
 		}	
-		else if(evento.equals("?")) new AjudaSair();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_SAIR);
+		}
 	}
 	
 	/**
@@ -190,7 +192,9 @@ public class JanelaSair extends JDialog implements ActionListener, WindowListene
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaSair();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_SAIR);
+			}
 			else if (salvar.isFocusOwner() || !salvar.isFocusOwner() && !naoSalvar.isFocusOwner()) {
 				acaoSelecionada = "Sim";
 				dispose();

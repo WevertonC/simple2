@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
-import simple.ajuda.AjudaRequantizacao;
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
 import simple.modules.propriedades.requantizar.Requantizador;
 
@@ -259,7 +259,9 @@ public class JanelaRequantizar extends JDialog implements ActionListener, KeyLis
 		}else if(evt.equals("Cancelar")){
 			ok = false;
 			this.dispose();
-		}else if(evt.equals("?")) new AjudaRequantizacao();
+		}else if(evt.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_REQUANTIZACAO);
+		}
 	}
 	
 	/**
@@ -329,7 +331,9 @@ public class JanelaRequantizar extends JDialog implements ActionListener, KeyLis
 			this.dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (buttonAjuda.isFocusOwner()) new AjudaRequantizacao(); 
+			if (buttonAjuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_REQUANTIZACAO); 
+			}
 			else if (buttonOk.isFocusOwner() || !buttonOk.isFocusOwner() && !buttonCancel.isFocusOwner()) {
 				ok = true;
 				Requantizador r = new Requantizador(i);

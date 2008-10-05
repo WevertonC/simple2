@@ -22,9 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-import simple.ajuda.AjudaSegmentacaoAdaptativa;
 
 
 /**
@@ -132,7 +131,9 @@ public class JanelaSegmentacaoAdaptativa extends JDialog implements ActionListen
 			this.dispose();
 			dimensao = -1;
 		}
-		else if(evento.equals("?")) new AjudaSegmentacaoAdaptativa();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_SEGMENTACAO_BASICA);
+		}
 	}
 	
 	/**
@@ -159,7 +160,9 @@ public class JanelaSegmentacaoAdaptativa extends JDialog implements ActionListen
 			dimensao = -1;
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaSegmentacaoAdaptativa();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_SEGMENTACAO_BASICA);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner() ) {
 				foiOk = true;
 				try {

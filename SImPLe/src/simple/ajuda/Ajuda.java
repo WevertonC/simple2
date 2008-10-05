@@ -59,6 +59,15 @@ public class Ajuda extends JDialog implements KeyListener {
 	public static final String AJUDA_PSEUDOCOLORIZACAO = "Pseudo Colorização";
 	public static final String AJUDA_REDIMENSIONAR = "Redimensionar";
 	public static final String AJUDA_FOURIER = "Fourier";
+	public static final String AJUDA_REFAZER = "Refazer";
+	public static final String AJUDA_REQUANTIZACAO = "Requantização";
+	public static final String AJUDA_ROTACIONAR = "Rotacionar";
+	public static final String AJUDA_SAIR = "Sair";
+	public static final String AJUDA_SALVAR = "Salvar";
+	public static final String AJUDA_SALVAR_COMO = "Salvar Como";
+	public static final String AJUDA_SEGMENTACAO_BASICA = "Segmentação Adaptativa Básica";
+	public static final String AJUDA_SEGMENTACAO_GLOBAL = "Segmentação Global";
+	public static final String AJUDA_ZOOM = "Zoom";
 	
 	/**
 	 * Construtor da Ajuda
@@ -115,6 +124,15 @@ public class Ajuda extends JDialog implements KeyListener {
 		topicos.put(AJUDA_PSEUDOCOLORIZACAO,"Pseudo-Colorizacao.txt");
 		topicos.put(AJUDA_REDIMENSIONAR,"Redimensionar.txt");
 		topicos.put(AJUDA_FOURIER,"Fourier.txt");
+		topicos.put(AJUDA_REFAZER,"Refazer.txt");
+		topicos.put(AJUDA_REQUANTIZACAO,"Requantizacao.txt");
+		topicos.put(AJUDA_ROTACIONAR,"Rotacionar.txt");
+		topicos.put(AJUDA_SAIR, "Sair.txt");
+		topicos.put(AJUDA_SALVAR, "Salvar.txt");
+		topicos.put(AJUDA_SALVAR_COMO, "SalvarComo.txt");
+		topicos.put(AJUDA_SEGMENTACAO_BASICA, "Segmentação Adaptativa Básica.txt");
+		topicos.put(AJUDA_SEGMENTACAO_GLOBAL, "Segmentação Global.txt");
+		topicos.put(AJUDA_ZOOM, "Zoom.txt");
 		
 		
 	}

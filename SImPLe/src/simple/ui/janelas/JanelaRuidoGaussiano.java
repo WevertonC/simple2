@@ -22,10 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-
-import simple.ajuda.AjudaRotacionar;
 /**
  * Classe que cria uma janela para fornecer a opção de Rotacionar uma imagem
  * 
@@ -122,7 +120,7 @@ public class JanelaRuidoGaussiano extends JDialog implements ActionListener, Key
 			this.dispose();
 		}
 		else if(evento.equals("?")) {
-			new AjudaRotacionar();
+			new Ajuda(Ajuda.AJUDA_ROTACIONAR);
 			ajuda = true;
 		}
 		if (!ajuda) {
@@ -155,7 +153,9 @@ public class JanelaRuidoGaussiano extends JDialog implements ActionListener, Key
 			dp = 0;
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaRotacionar();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_ROTACIONAR);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				try {
 					dp = Integer.parseInt(text.getText());
