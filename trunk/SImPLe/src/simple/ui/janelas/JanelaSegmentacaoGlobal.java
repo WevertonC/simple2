@@ -22,9 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import simple.ajuda.Ajuda;
 import simple.manipulacoes.util.AjudaButton;
-
-import simple.ajuda.AjudaSegmentacaoGlobal;
 
 /**
  * Classe que cria uma janela para fornecer a opção segmentar uma imagem de forma global
@@ -122,7 +121,9 @@ public class JanelaSegmentacaoGlobal extends JDialog implements ActionListener, 
 			limiar = -1;
 			dispose();
 		}
-		else if(evento.equals("?")) new AjudaSegmentacaoGlobal();
+		else if(evento.equals("?")) {
+			new Ajuda(Ajuda.AJUDA_SEGMENTACAO_GLOBAL);
+		}
 	}
 	
 	/**
@@ -142,7 +143,9 @@ public class JanelaSegmentacaoGlobal extends JDialog implements ActionListener, 
 			dispose();
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaSegmentacaoGlobal();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_SEGMENTACAO_GLOBAL);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				try {
 					limiar = Integer.parseInt(text.getText());

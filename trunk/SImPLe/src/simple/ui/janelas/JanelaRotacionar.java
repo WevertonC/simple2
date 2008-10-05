@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 import simple.manipulacoes.util.AjudaButton;
 
 
-import simple.ajuda.AjudaRotacionar;
+import simple.ajuda.Ajuda;
 /**
  * Classe que cria uma janela para fornecer a opção de Rotacionar uma imagem
  * 
@@ -121,7 +121,7 @@ public class JanelaRotacionar extends JDialog implements ActionListener, KeyList
 			this.dispose();
 		}
 		else if(evento.equals("?")) {
-			new AjudaRotacionar();
+			new Ajuda(Ajuda.AJUDA_ROTACIONAR);
 			ajuda = true;
 		}
 		if (!ajuda) {
@@ -154,7 +154,9 @@ public class JanelaRotacionar extends JDialog implements ActionListener, KeyList
 			angulo = 0;
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			if (ajuda.isFocusOwner()) new AjudaRotacionar();
+			if (ajuda.isFocusOwner()) {
+				new Ajuda(Ajuda.AJUDA_ROTACIONAR);
+			}
 			else if (ok.isFocusOwner() || !ok.isFocusOwner() && !cancelar.isFocusOwner()) {
 				try {
 					angulo = Integer.parseInt(text.getText());
