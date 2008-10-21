@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import simple.modules.fourier.core.FourierImagem;
 import simple.modules.fourier.exceptions.FourierException;
 import simple.modules.fourier.filtering.Filtragem;
+import simple.modules.fourier.filtering.FiltragemHomomorfica;
 
 
 /**
@@ -25,12 +26,14 @@ public class Controller {
 	 * Imagem de entrada passada como parâmetro.
 	 */
 	private File inputFile;
+	
+	private FiltragemHomomorfica filtragemHomomorfica;
 
 	/**
 	 * Construtor vazio default.
 	 */
 	public Controller() {
-
+		filtragemHomomorfica = new FiltragemHomomorfica();
 	}
 
 	/**
@@ -113,7 +116,7 @@ public class Controller {
 	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
 	 * no procedimento
 	 */
-	public BufferedImage passaAltaFreq(BufferedImage src, double raio) throws FourierException{
+	public static BufferedImage passaAltaFreq(BufferedImage src, double raio) throws FourierException{
 
 		BufferedImage resultadoFreq = null;
 
@@ -137,7 +140,7 @@ public class Controller {
 	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
 	 * no procedimento
 	 */
-	public BufferedImage passaAltaEsp(BufferedImage src, double raio) throws FourierException{
+	public static BufferedImage passaAltaEsp(BufferedImage src, double raio) throws FourierException{
 
 		BufferedImage resultadoEspaco;
 
@@ -164,7 +167,7 @@ public class Controller {
 	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
 	 * no procedimento
 	 */
-	public BufferedImage passaBaixaFreq(BufferedImage src, double raio) throws FourierException{
+	public static BufferedImage passaBaixaFreq(BufferedImage src, double raio) throws FourierException{
 
 		BufferedImage resultadoFreq = null;
 
@@ -188,7 +191,7 @@ public class Controller {
 	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
 	 * no procedimento
 	 */
-	public BufferedImage passaBaixaEsp(BufferedImage src, double raio) throws FourierException{
+	public static BufferedImage passaBaixaEsp(BufferedImage src, double raio) throws FourierException{
 
 		BufferedImage resultadoEspaco;
 
@@ -255,6 +258,262 @@ public class Controller {
 		resultadoEspaco = fr.toImage(fr.getGrayImage());
 		return resultadoEspaco;
 	}
+	
+	public BufferedImage rejeitaFaixaFreq(BufferedImage src, double raioInterno, double raioExterno) throws FourierException{
+
+		if ((raioInterno < 0) ||(raioInterno > 1) || (raioExterno <0) || (raioExterno >1)) {
+			throw new FourierException(FourierException.RAIO_FAIXA);
+		}
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.rejeitaFaixa(fr, raioInterno,raioExterno);
+		return fr.getEspectro();
+	}
+	
+	public BufferedImage rejeitaFaixa(BufferedImage src, double raioInterno, double raioExterno) throws FourierException{
+
+		BufferedImage resultadoEspaco = null;
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.rejeitaFaixa(fr, raioInterno,raioExterno);
+
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
+		return resultadoEspaco;
+	}
+	
+	
+	
+	public BufferedImage reflectanciaFreq(BufferedImage src, double corte) throws FourierException{
+		return filtragemHomomorfica.reflectanciaFreq(src, corte);
+	}
+	
+	public BufferedImage reflectanciaEsp(BufferedImage src, double corte) throws FourierException{
+		return filtragemHomomorfica.reflectanciaEsp(src, corte);
+	}
+	
+	public BufferedImage iluminacaoFreq(BufferedImage src, double corte) throws FourierException{
+		return filtragemHomomorfica.iluminacaoFreq(src, corte);
+	}
+	
+	public BufferedImage iluminacaoEsp(BufferedImage src, double corte) throws FourierException{
+		return filtragemHomomorfica.iluminacaoEsp(src, corte);
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa baixa gaussiano, retornando a imagem resultante no domínio da 
+	 * freqüência
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage gaussianoPassaBaixaFreq(BufferedImage src, double raio) throws FourierException{
+
+		BufferedImage resultadoFreq = null;
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroGaussianoPassaBaixa(fr, raio);
+		resultadoFreq = fr.getEspectro();
+
+		return resultadoFreq;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa baixa gaussiano, retornando a imagem resultante no domínio do 
+	 * espaço, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage gaussianoPassaBaixaEsp(BufferedImage src, double raio) throws FourierException{
+
+		BufferedImage resultadoEspaco;
+
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroGaussianoPassaBaixa(fr, raio);
+
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
+
+		return resultadoEspaco;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa alt  gaussiano, retornando a imagem resultante no domínio da 
+	 * freqüência
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage gaussianoPassaAltaFreq(BufferedImage src, double raio) throws FourierException{
+
+		BufferedImage resultadoFreq = null;
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroGaussianoPassaAlta(fr, raio);
+		resultadoFreq = fr.getEspectro();
+
+		return resultadoFreq;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa alta gaussiano, retornando a imagem resultante no domínio do 
+	 * espaço, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage gaussianoPassaAltaEsp(BufferedImage src, double raio) throws FourierException{
+
+		BufferedImage resultadoEspaco;
+
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroGaussianoPassaAlta(fr, raio);
+
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
+
+		return resultadoEspaco;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa baixa butterworth, retornando a imagem resultante no domínio da 
+	 * freqüência
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage butterworthPassaBaixaFreq(BufferedImage src, double raio, int n) throws FourierException{
+
+		BufferedImage resultadoFreq = null;
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroButterworthPassaBaixa(fr,n, raio);
+		resultadoFreq = fr.getEspectro();
+
+		return resultadoFreq;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa baixa butterworth, retornando a imagem resultante no domínio do 
+	 * espaço, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage butterworthPassaBaixaEsp(BufferedImage src, double raio, int n) throws FourierException{
+
+		BufferedImage resultadoEspaco;
+
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroButterworthPassaBaixa(fr, n, raio);
+
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
+
+		return resultadoEspaco;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa alta butterworth, retornando a imagem resultante no domínio da 
+	 * freqüência
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage butterworthPassaAltaFreq(BufferedImage src, double raio, int n) throws FourierException{
+
+		BufferedImage resultadoFreq = null;
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroButterworthPassaAlta(fr,n, raio);
+		resultadoFreq = fr.getEspectro();
+
+		return resultadoFreq;
+	}
+	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro passa alta butterworth, retornando a imagem resultante no domínio do 
+	 * espaço, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raio o raio do filtro passa alta
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros
+	 * no procedimento
+	 */
+	public static BufferedImage butterworthPassaAltaEsp(BufferedImage src, double raio, int n) throws FourierException{
+
+		BufferedImage resultadoEspaco;
+
+
+		// Filtragem no domínio da freqüência
+		FourierImagem fr = new FourierImagem(src);
+		fr.transform();
+		Filtragem.filtroButterworthPassaAlta(fr,n, raio);
+
+		// Voltar para o domínio do espaço
+		fr.transform();
+		resultadoEspaco = fr.toImage(fr.getGrayImage());
+
+		return resultadoEspaco;
+	}
+	
+	
 
 }
 

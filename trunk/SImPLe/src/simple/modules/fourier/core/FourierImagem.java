@@ -511,6 +511,18 @@ public class FourierImagem {
 	public void setGrayImage(BufferedImage grayImage) {
 		this.grayImage = grayImage;
 	}
+	
+	public Complexo[] getData(){
+		return data;
+	}
+	
+	public void diferenca(FourierImagem f0){
+		
+		for (int i = 0; i < f0.getAltura()*getLargura(); i ++){
+			this.data[i] = data[i].menos(f0.getData()[i]);
+		}
+		
+	}
 
 
 }

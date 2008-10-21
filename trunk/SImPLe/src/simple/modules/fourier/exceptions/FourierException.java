@@ -21,6 +21,8 @@ public class FourierException extends Exception {
 	public static String DIMENSAO_IMAGEM = "A imagem deve ter mesma altura e largura, ambas potências de 2";
 	public static String RAIO_INVALIDO = "O valor do raio deve ser maior que zero e menor que 1.";
 	public static String RAIO_FAIXA = "O valor dos raios devem ser maiores que zero e menores que 1";
+	public static String PIXELS_N_CAPTURADOS = "Nao foi possivel capturar os pixels da imagem!!";
+	public static String RAIO_OU_ORDEM_INVALIDO = "O valor da ordem do filtro deve ser maior que 1 e o valor da frequencia de corte deve ser maior que zero e menor que 1.";
 
 	/**
 	 * Construtor default. A mensagem de erro é passada como parâmetro. Esta classe contém

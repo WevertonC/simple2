@@ -139,6 +139,7 @@ public class PixelUtils {
     public static int notPixel(int x) {
         return ~(x);
     }
+    
   
     /**
      * Metodo or que auxilia o metodo orPixels
@@ -177,5 +178,28 @@ public class PixelUtils {
      */
     public static int nor(int x, int y) {
         return ~(x | y);
+    }
+    
+    /**
+     * Retorna o valor da função exponencial aplicada ao pixel
+     * 
+     * @param x
+     * @return Math.exp(x)
+     */
+    public static int exp(int x){
+    	
+    	return ((new Double(Math.exp(Math.abs((x))/46.02)).intValue()));    	
+    }
+    
+    /**
+     * Retorna o valor da função logaritmica aplicada ao pixel.
+     * @param x
+     * @return Math.log(x)
+     */
+    public static int log(int x){
+    	
+//    	System.out.println("X: " + x + " LOG: " + (new Double(Math.log(Math.abs((x)))*46.02).intValue() - 500));
+    	
+    	return (new Double(Math.log(Math.abs((x)))*46.02).intValue());
     }
 }

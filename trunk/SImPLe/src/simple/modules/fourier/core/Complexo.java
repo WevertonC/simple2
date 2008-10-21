@@ -117,5 +117,11 @@ public class Complexo {
 		this.im = im;
 	}
 
+	public Complexo menos(Complexo complexo) {
+//		System.out.println("THIS: REAL" + this.real + " IM: " + this.im);
+//		System.out.println("COMPLEXO: REAL" + complexo.real + " IM: " + complexo.im);
+		return new Complexo(this.real - complexo.real, this.im - complexo.im);
+	}
+
 
 }
