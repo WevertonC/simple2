@@ -123,6 +123,34 @@ public class MenuRadiometricas extends SimpleMenu{
 	public void passaBaixa(){
 		locais.passaBaixa();
 	}
+	
+	public void rejeitaFaixa(){
+		locais.rejeitaFaixa();
+	}
+	
+	public void reflectancia(){
+		locais.reflectancia();
+	}
+	
+	public void iluminacao(){
+		locais.iluminacao();
+	}
+	
+	public void gaussianoPassaAlta(){
+		locais.gaussianoPassaAlta();
+	}
+	
+	public void gaussianoPassaBaixa(){
+		locais.gaussianoPassaBaixa();
+	}
+	
+	public void butterworthPassaAlta(){
+		locais.butterworthPassaAlta();
+	}
+	
+	public void butterworthPassaBaixa(){
+		locais.butterworthPassaBaixa();
+	}
 
 	public void passaFaixa(){
 		locais.passaFaixa();

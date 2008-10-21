@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import simple.manipulacoes.imagem.DeteccaoBordas;
 import simple.manipulacoes.util.Emboss;
@@ -31,13 +32,13 @@ import simple.excecoes.ImageProcessingException;
 public class MenuOperacoesLocais extends SimpleMenu {
 
 	private static final long serialVersionUID = -1866526303421367909L;
-	
+
 	private JMenu locais, filtros,ruidos, espaciais, passaBaixa, passaAlta, frequencia, filtroMorfologico, abertura,
-	fechamento, geradorRuido;
+	fechamento, geradorRuido,homomorfico, gaussianoFourier, butterworth;
 
 	private JMenuItem media,mediana,moda, sobel, prewitt, roberts, laplace, gaussiano, emboss, freichen, passaAltaFreq, 
 	passaBaixaFreq, passaFaixaFreq, abertura4, abertura8, fechamento4, fechamento8, rank, morMediana, ruidoSaltPepper,
-	ruidoGaussiano;
+	ruidoGaussiano, reflectancia, iluminacao, rejeitaFaixa, gaussianoPassaAlta, gaussianoPassaBaixa, butterworthAlta, butterworthBaixa;
 
 	private simple.modules.fourier.facade.Facade fourierFacade = new simple.modules.fourier.facade.Facade();
 
@@ -206,11 +207,47 @@ public class MenuOperacoesLocais extends SimpleMenu {
 		passaAltaFreq = configureMenuItem("Passa-Alta", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
 		passaBaixaFreq = configureMenuItem("Passa-Baixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
 		passaFaixaFreq = configureMenuItem("Passa-Faixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		rejeitaFaixa = configureMenuItem("Rejeita-Faixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		
+		// ---- Homomórfico 
+		homomorfico = new JMenu("Filtragem Homomórfica");
+		homomorfico.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+				
+		reflectancia = configureMenuItem("Reflectância", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		iluminacao = configureMenuItem("Iluminação", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		
+		homomorfico.add(reflectancia);
+		homomorfico.add(iluminacao);
+		
+		// ---- Gaussiano
+		gaussianoFourier = new JMenu("Filtragem Gaussiana");
+		gaussianoFourier.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+		
+		gaussianoPassaAlta = configureMenuItem("Gaussiano Passa-Alta", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		gaussianoPassaBaixa = configureMenuItem("Gaussiano Passa-Baixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		
+		gaussianoFourier.add(gaussianoPassaAlta);
+		gaussianoFourier.add(gaussianoPassaBaixa);
+		
+		// ---- Butterworth
+		
+		butterworth = new JMenu("Filtragem Butterworth");
+		butterworth.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+		
+		butterworthAlta = configureMenuItem("Butterworth Passa-Alta", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		butterworthBaixa = configureMenuItem("Butterworth Passa-Baixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		
+		butterworth.add(butterworthAlta);
+		butterworth.add(butterworthBaixa);
 
 		// adicione ao menu
 		frequencia.add(passaAltaFreq);
 		frequencia.add(passaBaixaFreq);
 		frequencia.add(passaFaixaFreq);
+		frequencia.add(rejeitaFaixa);
+		frequencia.add(homomorfico);
+		frequencia.add(gaussianoFourier);
+		frequencia.add(butterworth);
 
 		filtros.add(frequencia);
 
@@ -226,14 +263,17 @@ public class MenuOperacoesLocais extends SimpleMenu {
 				MyImage myImage = new MyImage(fourierFacade.passaAltaFreq(src,jf.getValorRaio()));
 				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 				getSimple().buildFrame(img, "  Passa-Alta no domínio da frequência");	
-			} catch (FourierException e) {
-			}
 			
-			try {
-				MyImage myImage = new MyImage(fourierFacade.passaAltaEsp(src,jf.getValorRaio()));
-				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
-				getSimple().buildFrame(img, "  Passa-Alta no domínio do espaço");	
+				MyImage myImage2 = new MyImage(fourierFacade.passaAltaEsp(src,jf.getValorRaio()));
+				BufferedImage img2 = MyBufferedImage.makeBufferedImage(myImage2.getImage());
+				getSimple().buildFrame(img2, "  Passa-Alta no domínio do espaço");	
 			} catch (FourierException e) {
+				JOptionPane
+				.showMessageDialog(
+						null,
+						e.getMessage(),
+						"ERRO NAS INFORMAÇÕES",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -241,29 +281,227 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	public void passaBaixa(){
 		// Janela contendo o slider
 		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
 
 		if (jf.isAplicaFiltro()) {
 			try {
-				MyImage myImage = new MyImage(fourierFacade.passaBaixaFreq(getSimple().getImagefromFrame(),jf.getValorRaio()));
+				MyImage myImage = new MyImage(fourierFacade.passaBaixaFreq(src,jf.getValorRaio()));
 				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 				getSimple().buildFrame(img, "  Passa-Baixa no domínio da frequência");	
+			
+				MyImage myImage2 = new MyImage(fourierFacade.passaBaixaEsp(src,jf.getValorRaio()));
+				BufferedImage img2 = MyBufferedImage.makeBufferedImage(myImage2.getImage());
+				getSimple().buildFrame(img2, "  Passa-Baixa no domínio do espaço");	
 			} catch (FourierException e) {
+				JOptionPane
+				.showMessageDialog(
+						null,
+						e.getMessage(),
+						"ERRO NAS INFORMAÇÕES",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
 
 	public void passaFaixa(){
 		JanelaFrequenciaFaixa jf = new JanelaFrequenciaFaixa();
+		BufferedImage src = getSimple().getImagefromFrame();
 
 		if (jf.isAplicaFiltro()) {
 			try {
-				MyImage myImage = new MyImage(fourierFacade.passaFaixaFreq(getSimple().getImagefromFrame(),jf.getRaioExterno(),jf.getRaioInterno()));
+				MyImage myImage = new MyImage(fourierFacade.passaFaixaFreq(src,jf.getRaioExterno(),jf.getRaioInterno()));
 				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 				getSimple().buildFrame(img, "  Passa-Faixa no domínio da frequência");	
+			
+				MyImage other = new MyImage(fourierFacade.passaFaixaEsp(src,jf.getRaioExterno(),jf.getRaioInterno()));
+				BufferedImage otherIm = MyBufferedImage.makeBufferedImage(other.getImage());
+				getSimple().buildFrame(otherIm, "  Passa-Faixa no domínio do espaço");	
 			} catch (FourierException e) {
+				JOptionPane
+				.showMessageDialog(
+						null,
+						e.getMessage(),
+						"ERRO NAS INFORMAÇÕES",
+						JOptionPane.ERROR_MESSAGE);
 			}
+
+			
 		}
 	}
+	
+	public void rejeitaFaixa(){
+		JanelaFrequenciaFaixa jf = new JanelaFrequenciaFaixa();
+		BufferedImage src = getSimple().getImagefromFrame();
+
+		if (jf.isAplicaFiltro()) {
+			try {
+				MyImage myImage = new MyImage(fourierFacade.rejeitaFaixaFreq(src,jf.getRaioExterno(),jf.getRaioInterno()));
+				BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+				getSimple().buildFrame(img, "  Rejeita-Faixa no domínio da frequência");	
+			
+				MyImage other = new MyImage(fourierFacade.rejeitaFaixaEsp(src,jf.getRaioExterno(),jf.getRaioInterno()));
+				BufferedImage otherIm = MyBufferedImage.makeBufferedImage(other.getImage());
+				getSimple().buildFrame(otherIm, "  Rejeita-Faixa no domínio do espaço");	
+			} catch (FourierException e) {
+				JOptionPane
+				.showMessageDialog(
+						null,
+						e.getMessage(),
+						"ERRO NAS INFORMAÇÕES",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
+			
+		}
+	}
+
+	public void reflectancia(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.reflectanciaFreq(src,jf.getValorRaio()));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Reflectância no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.reflectanciaEsp(src,jf.getValorRaio()));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Reflectância no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	public void iluminacao(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.iluminacaoFreq(src,jf.getValorRaio()));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Iluminação no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.iluminacaoEsp(src,jf.getValorRaio()));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Iluminação no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	public void gaussianoPassaAlta(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.gaussianoPassaAltaFreq(src,jf.getValorRaio()));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Gaussiano Passa-Alta no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.gaussianoPassaAltaEsp(src,jf.getValorRaio()));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Gaussiano Passa-Alta no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	public void gaussianoPassaBaixa(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.gaussianoPassaBaixaFreq(src,jf.getValorRaio()));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Gaussiano Passa-Baixa no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.gaussianoPassaBaixaEsp(src,jf.getValorRaio()));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Gaussiano Passa-Baixa no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	public void butterworthPassaAlta(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+		int n = 1;
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.butterworthPassaAltaFreq(src,jf.getValorRaio(),n));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Butterworth Passa-Alta no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.butterworthPassaAltaEsp(src,jf.getValorRaio(),n));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Butterworth Passa-Alta no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	public void butterworthPassaBaixa(){
+		JanelaFrequencia jf = new JanelaFrequencia();
+		BufferedImage src = getSimple().getImagefromFrame();
+		int n =1;
+
+			if (jf.isAplicaFiltro()) {
+				try {
+					MyImage myImage = new MyImage(fourierFacade.butterworthPassaBaixaFreq(src,jf.getValorRaio(),n));
+					BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Butterworth Passa-Baixa no domínio da frequência");
+					
+					myImage = new MyImage(fourierFacade.butterworthPassaBaixaEsp(src,jf.getValorRaio(),n));
+					img = MyBufferedImage.makeBufferedImage(myImage.getImage());
+					getSimple().buildFrame(img, "  Butterworth Passa-Baixa no domínio do espaço");
+				} catch (FourierException e) {
+					JOptionPane
+					.showMessageDialog(
+							null,
+							e.getMessage(),
+							"ERRO NAS INFORMAÇÕES",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+	}
+	
+	
 
 	private void configureMorfologicas(){
 
@@ -307,85 +545,85 @@ public class MenuOperacoesLocais extends SimpleMenu {
 		filtroMorfologico.add(morMediana);
 		filtros.add(filtroMorfologico);
 	}
-	
+
 	public void fechamento4(){
-		
+
 		MyImage myImage = new MyImage(getSimple().getFacade().fechamento4(getSimple().getImagefromFrame()));
 		BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 		getSimple().buildFrame(img, "  Fechamento 4");	
 	}
-	
+
 	public void fechamento8(){
-		
+
 		MyImage myImage = new MyImage(getSimple().getFacade().fechamento8(getSimple().getImagefromFrame()));
 		BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 		getSimple().buildFrame(img, "  Fechamento 8");	
 	}
-	
+
 	public void abertura4(){
 		MyImage myImage = new MyImage(getSimple().getFacade().abertura4(getSimple().getImagefromFrame()));
 		BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 		getSimple().buildFrame(img, "  Abertura 4");	
 	}
-	
+
 	public void abertura8(){
 		MyImage myImage = new MyImage(getSimple().getFacade().abertura8(getSimple().getImagefromFrame()));
 		BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 		getSimple().buildFrame(img, "  Abertura 8");	
 	}
-	
+
 	public void configureGeraRuido(){
-		
+
 		geradorRuido = new JMenu("Geradores de Ruído");
 		geradorRuido.setMnemonic(KeyEvent.VK_R);
 		geradorRuido.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
-		
+
 		ruidoSaltPepper = new JMenuItem("Salt-and-Pepper");
 		ruidoSaltPepper.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
 		ruidoSaltPepper.addActionListener(getSimple());
-		
+
 		ruidoGaussiano = new JMenuItem("Gaussiano");
 		ruidoGaussiano.setText("Ruído Gaussiano");
 		ruidoGaussiano.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
 		ruidoGaussiano.addActionListener(getSimple());
-		
+
 		geradorRuido.add(ruidoSaltPepper);
 		geradorRuido.add(ruidoGaussiano);
 		add(geradorRuido);
-		
+
 	}
-	
+
 	public void saltPepper(){
-		
+
 		GeradorDeRuido img = new GeradorDeRuido(getSimple().getImagefromFrame());
 		MyImage myImage = new MyImage(img.salt_and_pepper());
-		
+
 		BufferedImage resultingImage = MyBufferedImage.makeBufferedImage(myImage.getImage());
 		getSimple().buildFrame(resultingImage, "  Salt-and-pepper");	
-		
+
 	}
-	
+
 	public void ruidoGaussiano(){
-		
+
 		JanelaRuidoGaussiano j = new JanelaRuidoGaussiano();
-		
+
 		if (j.getDesvioPadrao() != 0){
 			RuidoGaussiano img = new RuidoGaussiano(getSimple().getImagefromFrame());
 			MyImage myImage = new MyImage(img.Gaussian(j.getDesvioPadrao()));
-			
+
 			BufferedImage resultingImage = MyBufferedImage.makeBufferedImage(myImage.getImage());
 			getSimple().buildFrame(resultingImage, "  Ruído Gaussiano");	
-		
+
 		}
-			
+
 	}
 
 	public void emboss() {
-			Emboss img = new Emboss(getSimple().getImagefromFrame());
-			
-			BufferedImage resultingImage = img.getBufferedImage();
-			getSimple().buildFrame(resultingImage, "  Emboss");
-			
+		Emboss img = new Emboss(getSimple().getImagefromFrame());
+
+		BufferedImage resultingImage = img.getBufferedImage();
+		getSimple().buildFrame(resultingImage, "  Emboss");
+
 	}
 
 

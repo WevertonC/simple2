@@ -79,6 +79,7 @@ public class Main {
 		}
 	}
 	
+	
 	/**
 	 * Responsável pela exibição da tela "splash". A imagem a ser
 	 * exibida deve ser configurada na constante splashScreen.

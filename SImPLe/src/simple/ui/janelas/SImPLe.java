@@ -746,6 +746,20 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 			meuMenuOperacoes.passaBaixa();
 		} else if (evento.equals("Passa-Faixa")){
 			meuMenuOperacoes.passaFaixa();
+		} else if (evento.equals("Rejeita-Faixa")){
+			meuMenuOperacoes.rejeitaFaixa();
+		}	else if (evento.equals("Reflectância")){
+			meuMenuOperacoes.reflectancia();
+		} else if (evento.equals("Iluminação")){
+			meuMenuOperacoes.iluminacao();
+		} else if (evento.equals("Gaussiano Passa-Alta")){
+			meuMenuOperacoes.gaussianoPassaAlta();
+		} else if (evento.equals("Gaussiano Passa-Baixa")){
+			meuMenuOperacoes.gaussianoPassaBaixa();
+		} else if (evento.equals("Butterworth Passa-Alta")){
+			meuMenuOperacoes.butterworthPassaAlta();
+		} else if (evento.equals("Butterworth Passa-Baixa")){
+			meuMenuOperacoes.butterworthPassaBaixa();
 		}
 				
 		// ***************************//

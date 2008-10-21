@@ -135,6 +135,34 @@ public class MenuOperacoes extends SimpleMenu{
 		radiometricas.passaFaixa();
 	}
 	
+	public void rejeitaFaixa(){
+		radiometricas.rejeitaFaixa();
+	}
+	
+	public void reflectancia(){
+		radiometricas.reflectancia();
+	}
+	
+	public void iluminacao(){
+		radiometricas.iluminacao();
+	}
+	
+	public void gaussianoPassaAlta(){
+		radiometricas.gaussianoPassaAlta();
+	}
+	
+	public void gaussianoPassaBaixa(){
+		radiometricas.gaussianoPassaBaixa();
+	}
+	
+	public void butterworthPassaAlta(){
+		radiometricas.butterworthPassaAlta();
+	}
+	
+	public void butterworthPassaBaixa(){
+		radiometricas.butterworthPassaBaixa();
+	}
+	
 	public void fechamento4(){
 		radiometricas.fechamento4();
 	}

@@ -116,5 +116,60 @@ public class Facade {
 		return controller.passaFaixaFreq(img,raioInterno,raioExterno);
 	}
 	
+	public BufferedImage rejeitaFaixaFreq(BufferedImage img, double raioInterno,double raioExterno) throws FourierException{
+		return controller.rejeitaFaixaFreq(img,raioInterno,raioExterno);
+	}
+	
+	public BufferedImage rejeitaFaixaEsp(BufferedImage img, double raioInterno,double raioExterno) throws FourierException{
+		return controller.rejeitaFaixaFreq(img,raioInterno,raioExterno);
+	}
+	
+	public BufferedImage reflectanciaFreq(BufferedImage img, double corte) throws FourierException{
+		return controller.reflectanciaFreq(img, corte);
+	}
+	
+	public BufferedImage reflectanciaEsp(BufferedImage img, double corte) throws FourierException{
+		return controller.reflectanciaEsp(img, corte);
+	}
+	
+	public BufferedImage iluminacaoFreq(BufferedImage img, double corte) throws FourierException{
+		return controller.iluminacaoFreq(img, corte);
+	}
+	
+	public BufferedImage iluminacaoEsp(BufferedImage img, double corte) throws FourierException{
+		return controller.iluminacaoEsp(img, corte);
+	}
+	
+	public BufferedImage gaussianoPassaAltaFreq(BufferedImage img, double corte) throws FourierException{
+		return controller.gaussianoPassaAltaFreq(img, corte);
+	}
+	
+	public BufferedImage gaussianoPassaAltaEsp(BufferedImage img, double corte) throws FourierException{
+		return controller.gaussianoPassaAltaEsp(img, corte);
+	}
+	
+	public BufferedImage gaussianoPassaBaixaFreq(BufferedImage img, double corte) throws FourierException{
+		return controller.gaussianoPassaBaixaFreq(img, corte);
+	}
+	
+	public BufferedImage gaussianoPassaBaixaEsp(BufferedImage img, double corte) throws FourierException{
+		return controller.gaussianoPassaBaixaEsp(img, corte);
+	}
+	
+	public BufferedImage butterworthPassaAltaFreq(BufferedImage img, double corte, int n) throws FourierException{
+		return controller.butterworthPassaAltaFreq(img, corte,n);
+	}
+	
+	public BufferedImage butterworthPassaAltaEsp(BufferedImage img, double corte, int n) throws FourierException{
+		return controller.butterworthPassaAltaEsp(img, corte, n);
+	}
+	
+	public BufferedImage butterworthPassaBaixaFreq(BufferedImage img, double corte, int n) throws FourierException{
+		return controller.butterworthPassaBaixaFreq(img, corte,n);
+	}
+	
+	public BufferedImage butterworthPassaBaixaEsp(BufferedImage img, double corte, int n) throws FourierException{
+		return controller.butterworthPassaBaixaEsp(img, corte,n);
+	}
 
 }
