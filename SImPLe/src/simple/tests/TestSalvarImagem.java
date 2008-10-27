@@ -7,7 +7,7 @@
  * 
  * Copyright FEDPI all rights reserved
  */
-package simple.testes;
+package simple.tests;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;

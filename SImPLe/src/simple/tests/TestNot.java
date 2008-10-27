@@ -1,5 +1,5 @@
 /*
- * TestXOr
+ * TestNot
  * 
  * @version 1.0
  * 
@@ -8,7 +8,7 @@
  * Copyright FEDPI all rights reserved
  */
 
-package simple.testes;
+package simple.tests;
 
 import java.awt.image.PixelGrabber;
 
@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Classe que testa a classe XOr
+ * Classe que testa a classe Not
  * @version 1.0 03/10/05
  * @author Andre Cavalcente Hora
  * @author Eduardo Santiago Moura
@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  * @author Yuska Paola Aguiar
  */
 
-public class TestXOr extends TestCase{
+public class TestNot extends TestCase{
 	
 	protected ImageIcon i;
 	protected ImageIcon j;
@@ -36,7 +36,7 @@ public class TestXOr extends TestCase{
 	/**
 	 * Construtor do teste
 	 */
-	public TestXOr(String msg){
+	public TestNot(String msg){
 		super(msg);
 	}
 	/**
@@ -44,19 +44,19 @@ public class TestXOr extends TestCase{
 	 * @return O suite da classe
 	 */
 	public static Test suite(){
-	    return new TestSuite(TestXOr.class);
+	    return new TestSuite(TestNot.class);
 	}
 	/**
 	 * Metodo setUp que inicializa as variaveis de teste
 	 */
 	public void setUp(){
-		i = new ImageIcon("Imagens/xor.jpg");
-		j = new ImageIcon("Imagens/xorOriginal.jpg");				
+		i = new ImageIcon("Imagens/not.jpg");
+		j = new ImageIcon("Imagens/notOriginal.jpg");				
 	}
 	/**
 	 * Metodo testAdicao que verifica pixel a pixels se as imagens estao iguais
 	 */
-	public void testXor(){
+	public void testANot(){
 		int[] pixelsMeu = new int[j.getIconWidth()*j.getIconHeight()];
 		PixelGrabber pg1 = new PixelGrabber(j.getImage(),0,0,j.getIconWidth(),j.getIconHeight(),pixelsMeu,0,j.getIconWidth());
 		int[] pixelsOutro = new int[i.getIconWidth()*i.getIconHeight()];
