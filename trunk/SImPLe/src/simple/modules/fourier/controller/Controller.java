@@ -259,6 +259,17 @@ public class Controller {
 		return resultadoEspaco;
 	}
 	
+	/**
+	 * 
+	 * Realiza a operação de filtragem com o filtro rejeita faixa, retornando a imagem resultante no domínio da
+	 * freqüência, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raioInterno o raio interno do filtro
+	 * @param raioExterno o raio externo do filtro
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros no procedimento
+	 */
 	public BufferedImage rejeitaFaixaFreq(BufferedImage src, double raioInterno, double raioExterno) throws FourierException{
 
 		if ((raioInterno < 0) ||(raioInterno > 1) || (raioExterno <0) || (raioExterno >1)) {
@@ -272,14 +283,26 @@ public class Controller {
 		return fr.getEspectro();
 	}
 	
-	public BufferedImage rejeitaFaixa(BufferedImage src, double raioInterno, double raioExterno) throws FourierException{
+	/**
+	 * Realiza a operação de filtragem com o filtro rejeita faixa, retornando a imagem resultante no domínio do 
+	 * espaço, onde ficam mais evidentes os efeitos filtragem
+	 * 
+	 * @param src Image de entrada
+	 * @param raioInterno o raio interno do filtro
+	 * @param raioExterno o raio externo do filtro
+	 * @return a imagem filtrada
+	 * @throws FourierException caso não seja possível realizar a operação ou existam erros no procedimento
+	 */
+	public BufferedImage rejeitaFaixaEsp(BufferedImage src, double raioInterno, double raioExterno) throws FourierException{
 
+		
 		BufferedImage resultadoEspaco = null;
 
 		// Filtragem no domínio da freqüência
 		FourierImagem fr = new FourierImagem(src);
 		fr.transform();
 		Filtragem.rejeitaFaixa(fr, raioInterno,raioExterno);
+		
 
 		// Voltar para o domínio do espaço
 		fr.transform();

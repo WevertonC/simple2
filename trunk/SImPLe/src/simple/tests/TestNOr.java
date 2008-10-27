@@ -1,14 +1,14 @@
 /*
- * TestAdicao
+ * TestNOr
  * 
  * @version 1.0
  * 
- * Date: 20/09/05
+ * Date: 03/10/05
  * 
  * Copyright FEDPI all rights reserved
  */
 
-package simple.testes;
+package simple.tests;
 
 import java.awt.image.PixelGrabber;
 
@@ -19,8 +19,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Classe que testa a classe Adicao
- * @version 1.0 28/09/05
+ * Classe que testa a classe NOr
+ * @version 1.0 03/10/05
  * @author Andre Cavalcente Hora
  * @author Eduardo Santiago Moura
  * @author Paulo de Tarso Firmino Junior
@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  * @author Yuska Paola Aguiar
  */
 
-public class TestAdicao extends TestCase{
+public class TestNOr extends TestCase{
 	
 	protected ImageIcon i;
 	protected ImageIcon j;
@@ -36,7 +36,7 @@ public class TestAdicao extends TestCase{
 	/**
 	 * Construtor do teste
 	 */
-	public TestAdicao(String msg){
+	public TestNOr(String msg){
 		super(msg);
 	}
 	/**
@@ -44,19 +44,19 @@ public class TestAdicao extends TestCase{
 	 * @return O suite da classe
 	 */
 	public static Test suite(){
-	    return new TestSuite(TestAdicao.class);
+	    return new TestSuite(TestNOr.class);
 	}
 	/**
 	 * Metodo setUp que inicializa as variaveis de teste
 	 */
 	public void setUp(){
-		i = new ImageIcon("Imagens/add_baboon_barco.jpg");
-		j = new ImageIcon("Imagens/adiciondad.jpg");				
+		i = new ImageIcon("Imagens/nor.jpg");
+		j = new ImageIcon("Imagens/norOriginal.jpg");				
 	}
 	/**
 	 * Metodo testAdicao que verifica pixel a pixels se as imagens estao iguais
 	 */
-	public void testAdicao(){
+	public void testNOr(){
 		int[] pixelsMeu = new int[j.getIconWidth()*j.getIconHeight()];
 		PixelGrabber pg1 = new PixelGrabber(j.getImage(),0,0,j.getIconWidth(),j.getIconHeight(),pixelsMeu,0,j.getIconWidth());
 		int[] pixelsOutro = new int[i.getIconWidth()*i.getIconHeight()];

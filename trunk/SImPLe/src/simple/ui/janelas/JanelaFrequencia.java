@@ -3,6 +3,8 @@ package simple.ui.janelas;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +14,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
@@ -25,21 +29,21 @@ public class JanelaFrequencia extends JDialog implements KeyListener, ActionList
 
 
 	private static final long serialVersionUID = 1L;
-	private JTextField jTextField1;
+	private JTextField jTextField2;
 	private JButton ok,cancelar;
+	private JLabel jTextField1;
 	private JSlider slider;
-	private JLabel texto;
 	private double valorRaio;
 	private boolean aplicaFiltro = false;
 
 	/**
-	 * Construtor da classe Redimensionar
+	 * Construtor da classe JanelaFrequencia
 	 */
 	public JanelaFrequencia(){ 
 		initializeVariables();
 		initializeComponent(); 
 		this.setTitle("Filtragem no Domínio da Freqüência"); 
-		this.setSize(250,200);
+		this.setSize(258, 197);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(d.width/2 - 250/2,d.height/2 - 380/2);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); 
@@ -59,12 +63,14 @@ public class JanelaFrequencia extends JDialog implements KeyListener, ActionList
 			
 		JPanel contentPane = (JPanel)this.getContentPane(); 
 		contentPane.setLayout(null); 
+		
+		contentPane.add(getOk());
+		contentPane.add(getCancelar());
+		contentPane.add(getSlider());
+		contentPane.add(getTexto());
+		contentPane.add(getAreaTexto());
 
-		addComponent(contentPane, this.texto, 19,19,150,19);
-		addComponent(contentPane, jTextField1, 150,18,63,20); 
-		addComponent(contentPane, slider, 25,50,180,30); 
-		addComponent(contentPane, ok, 60,110,50,20); 
-		addComponent(contentPane, cancelar, 110,110,85,20);	
+		
 	} 
 
 	/** Add Component Without a Layout Manager (Absolute Positioning) */ 
@@ -77,35 +83,83 @@ public class JanelaFrequencia extends JDialog implements KeyListener, ActionList
 	 * Inicializa as variáveis utilizadas pela janela
 	 */
 	private void initializeVariables(){
-		texto = new JLabel();
-		texto.setText("Freqüência de corte:");
+//		this.valorRaio = (double)(slider.getValue())/1000;
+//		jTextField1.setText( String.valueOf(valorRaio));
 		
-		ok = new JButton("OK");
-		ok.addActionListener(this);
-
-		cancelar = new JButton("Cancelar"); 
-		cancelar.addActionListener(this);
-		
-		jTextField1 = new JTextField();
-		jTextField1.setEnabled(false);
-		
-		slider = new JSlider(JSlider.HORIZONTAL,0,1000,500);
-		slider.setEnabled(true);
-		this.valorRaio = (double)(slider.getValue())/1000;
-		jTextField1.setText( String.valueOf(valorRaio));
-		
-
-		
+	}
+	
+	public JButton getOk(){
+		if (ok == null) {
+			ok = new JButton();
+			ok.setText("OK");
+			ok.addActionListener(this);
+			ok.setSize(new Dimension(99, 25));
+			ok.setLocation(new Point(28, 124));
+		}
+		return ok;
+	}
+	
+	public JButton getCancelar(){
+		if (cancelar == null) {
+			cancelar = new JButton();
+			cancelar.setLocation(new Point(134, 124));
+			cancelar.setText("Cancelar");
+			cancelar.addActionListener(this);
+			cancelar.setSize(new Dimension(99, 25));
+		}
+		return cancelar;
+	}
+	
+	public JSlider getSlider(){
+		if (slider == null) { 
+			slider = new JSlider(JSlider.HORIZONTAL,0,1000,500);
+			slider.setEnabled(true);
+			slider.setName("slider");
+			slider.setBounds(new Rectangle(20, 72, 214, 28));
+		}
+		return slider;
+	}
+	
+	public JLabel getTexto(){
+		if (jTextField1 == null) {
+			jTextField1 = new JLabel();
+			jTextField1.setBounds(new Rectangle(21, 30, 138, 20));
+			jTextField1.setText("Freqüência de corte:");
+		}
+		return jTextField1;
+	}
+	
+	public JTextField getAreaTexto(){
+		if (jTextField2 == null){
+				jTextField2 = new JTextField();
+				jTextField2.setName("jTextField");
+				jTextField2.setEnabled(true);
+				jTextField2.setText("0.5");
+				this.valorRaio = 0.5;
+				jTextField2.setBounds(new Rectangle(162, 30, 75, 20));
+		}
+		return jTextField2;
 	}
 
 	/**
 	 * Captura o evento realizado pelo usuário
 	 */
 	public void actionPerformed(ActionEvent arg0) {
+
 		String evento = arg0.getActionCommand();
 		if(evento.equals("OK")){
-			this.aplicaFiltro  = true;
-			this.dispose();
+			
+			if ((Double.parseDouble(jTextField2.getText()) > 1.0)||(Double.parseDouble(jTextField2.getText()) < 0.0)){
+				JOptionPane
+				.showMessageDialog(
+						null,
+						"O valor fornecido deve estar entre zero e um!",
+						"ERRO NAS INFORMAÇÕES",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				this.aplicaFiltro  = true;
+				this.dispose();
+			}
 		}
 		else if(evento.equals("Cancelar")) {
 			initializeVariables();
@@ -143,7 +197,7 @@ public class JanelaFrequencia extends JDialog implements KeyListener, ActionList
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		this.valorRaio = (double)(slider.getValue())/1000;
-		jTextField1.setText( String.valueOf(valorRaio));
+		jTextField2.setText(String.valueOf(valorRaio));
 		
 	}
 

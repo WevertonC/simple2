@@ -1,6 +1,6 @@
-package simple.testes;
+package simple.tests;
 /*
- * TestSegmentacaoBasica
+ * TestFiltroMean
  * 
  * @version 1.0
  * 
@@ -8,6 +8,7 @@ package simple.testes;
  * 
  * Copyright FEDPI all rights reserved
  */
+
 
 import java.awt.image.PixelGrabber;
 
@@ -18,7 +19,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Classe que testa a classe SegmentacaoBasica
+ * Classe que testa a classe FiltroMean
  * @version 1.0 28/09/05
  * @author Andre Cavalcante Hora
  * @author Eduardo Santiago Moura
@@ -26,16 +27,16 @@ import junit.framework.TestSuite;
  * @author Vinicius de Araujo Porto
  * @author Yuska Paola Aguiar
  */
-public class TestSegmentacaoBasica extends TestCase {
+public class TestFiltroMean extends TestCase {
 	
-	protected ImageIcon imagem1, imagem2, imagem3, imagem4, imagem5, imagem6;
+	protected ImageIcon imagem1, imagem2, imagem3, imagem4, imagem5, imagem6, imagem7, imagem8;
 	protected int[] pixelsMeu, pixelsOutro;
 	protected PixelGrabber pg1 ,pg2;
 	
 	/**
 	 * Construtor do teste
 	 */
-	public TestSegmentacaoBasica(String st) {
+	public TestFiltroMean(String st) {
 		super(st);
 		
 	}
@@ -44,24 +45,28 @@ public class TestSegmentacaoBasica extends TestCase {
 	 * @return O suite da classe
 	 */
 	public static Test suite(){
-		return new TestSuite(TestSegmentacaoBasica.class);
+		return new TestSuite(TestFiltroMean.class);
 	}
 	/**
 	 * Metodo setUp que inicializa as variaveis de teste
 	 */
 	public void setUp() {		
-		imagem1 = new ImageIcon("Imagens/lenaBasicaD2.jpg");
-		imagem3 = new ImageIcon("Imagens/lenaBasicaD100.jpg");
-		imagem5 = new ImageIcon("Imagens/lenaBasicaD200.jpg");
+		imagem1 = new ImageIcon("Imagens/lenaMean3x3.jpg");
+		imagem3 = new ImageIcon("Imagens/lenaMean5x5.jpg");
+		imagem5 = new ImageIcon("Imagens/lenaMean7x7.jpg");
+		imagem7 = new ImageIcon("Imagens/lenaMean9x9.jpg");
 		
-		imagem2 = new ImageIcon("Imagens/lenaBasicaD2FePDI.jpg");
-		imagem4 = new ImageIcon("Imagens/lenaBasicaD100FePDI.jpg");
-		imagem6 = new ImageIcon("Imagens/lenaBasicaD200FePDI.jpg");
+		imagem2 = new ImageIcon("Imagens/lenaMean3x3FePDI.jpg");
+		imagem4 = new ImageIcon("Imagens/lenaMean5x5FePDI.jpg");
+		imagem6 = new ImageIcon("Imagens/lenaMean7x7FePDI.jpg");
+		imagem8 = new ImageIcon("Imagens/lenaMean9x9FePDI.jpg");
+		
+		
 	}
 	/**
-	 * Metodo testBasicaD2 que verifica pixel a pixel se as imagem estao iguais
+	 * Metodo testMean3x3 que verifica pixel a pixel se as imagem estao iguais
 	 */	
-	public void testBasicaD2() {
+	public void testMean3x3() {
 		
 		pixelsMeu = new int[imagem1.getIconWidth()*imagem1.getIconHeight()];
 		pg1 = new PixelGrabber(imagem1.getImage(),0,0,imagem1.getIconWidth(),imagem1.getIconHeight(),pixelsMeu,0,imagem1.getIconWidth());
@@ -77,10 +82,10 @@ public class TestSegmentacaoBasica extends TestCase {
 			assertEquals(pixelsMeu[i],pixelsOutro[i]);
 	}
 	/**
-	 * Metodo testBasicaD100 que verifica pixel a pixel se as imagem estao iguais
+	 * Metodo testMean5x5 que verifica pixel a pixel se as imagem estao iguais
 	 *
 	 */
-	public void testBasicaD100() {
+	public void testMean5x5() {
 		
 		pixelsMeu = new int[imagem3.getIconWidth()*imagem3.getIconHeight()];
 		pg1 = new PixelGrabber(imagem3.getImage(),0,0,imagem3.getIconWidth(),imagem3.getIconHeight(),pixelsMeu,0,imagem3.getIconWidth());
@@ -97,10 +102,10 @@ public class TestSegmentacaoBasica extends TestCase {
 	}
 	
 	/**
-	 * Metodo testBasicaD200 que verifica pixel a pixel se as imagem estao iguais
+	 * Metodo testMean7x7 que verifica pixel a pixel se as imagem estao iguais
 	 *
 	 */
-	public void testBasicaD200() {
+	public void testMean7x7() {
 		
 		pixelsMeu = new int[imagem5.getIconWidth()*imagem5.getIconHeight()];
 		pg1 = new PixelGrabber(imagem5.getImage(),0,0,imagem5.getIconWidth(),imagem5.getIconHeight(),pixelsMeu,0,imagem5.getIconWidth());
@@ -116,6 +121,25 @@ public class TestSegmentacaoBasica extends TestCase {
 			assertEquals(pixelsMeu[i],pixelsOutro[i]);
 	}
 	
+	/**
+	 * Metodo testMean9x9 que verifica pixel a pixel se as imagem estao iguais
+	 *
+	 */
+	public void testMean9x9() {
+		
+		pixelsMeu = new int[imagem7.getIconWidth()*imagem7.getIconHeight()];
+		pg1 = new PixelGrabber(imagem7.getImage(),0,0,imagem7.getIconWidth(),imagem7.getIconHeight(),pixelsMeu,0,imagem7.getIconWidth());
+		
+		pixelsOutro = new int[imagem8.getIconWidth()*imagem8.getIconHeight()];
+		pg2 = new PixelGrabber(imagem8.getImage(),0,0,imagem8.getIconWidth(),imagem8.getIconHeight(),pixelsOutro,0,imagem8.getIconWidth());
+		try {
+			pg1.grabPixels();
+			pg2.grabPixels();
+		} catch (InterruptedException e) {}
+		
+		for (int i = 0; i < imagem7.getIconWidth()*imagem7.getIconHeight(); i++) 
+			assertEquals(pixelsMeu[i],pixelsOutro[i]);
+	}
 	/**
 	 * Metodo main que executa a classe
 	 */

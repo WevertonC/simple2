@@ -8,7 +8,7 @@
  * Copyright FEDPI all rights reserved
  */
 
-package simple.testes;
+package simple.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

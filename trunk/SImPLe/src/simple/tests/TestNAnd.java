@@ -1,5 +1,5 @@
 /*
- * TestNOr
+ * TestNAnd
  * 
  * @version 1.0
  * 
@@ -8,7 +8,7 @@
  * Copyright FEDPI all rights reserved
  */
 
-package simple.testes;
+package simple.tests;
 
 import java.awt.image.PixelGrabber;
 
@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Classe que testa a classe NOr
+ * Classe que testa a classe NAnd
  * @version 1.0 03/10/05
  * @author Andre Cavalcente Hora
  * @author Eduardo Santiago Moura
@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  * @author Yuska Paola Aguiar
  */
 
-public class TestNOr extends TestCase{
+public class TestNAnd extends TestCase{
 	
 	protected ImageIcon i;
 	protected ImageIcon j;
@@ -36,7 +36,7 @@ public class TestNOr extends TestCase{
 	/**
 	 * Construtor do teste
 	 */
-	public TestNOr(String msg){
+	public TestNAnd(String msg){
 		super(msg);
 	}
 	/**
@@ -44,19 +44,19 @@ public class TestNOr extends TestCase{
 	 * @return O suite da classe
 	 */
 	public static Test suite(){
-	    return new TestSuite(TestNOr.class);
+	    return new TestSuite(TestNAnd.class);
 	}
 	/**
 	 * Metodo setUp que inicializa as variaveis de teste
 	 */
 	public void setUp(){
-		i = new ImageIcon("Imagens/nor.jpg");
-		j = new ImageIcon("Imagens/norOriginal.jpg");				
+		i = new ImageIcon("Imagens/nand.jpg");
+		j = new ImageIcon("Imagens/nandOriginal.jpg");				
 	}
 	/**
 	 * Metodo testAdicao que verifica pixel a pixels se as imagens estao iguais
 	 */
-	public void testNOr(){
+	public void testNAnd(){
 		int[] pixelsMeu = new int[j.getIconWidth()*j.getIconHeight()];
 		PixelGrabber pg1 = new PixelGrabber(j.getImage(),0,0,j.getIconWidth(),j.getIconHeight(),pixelsMeu,0,j.getIconWidth());
 		int[] pixelsOutro = new int[i.getIconWidth()*i.getIconHeight()];

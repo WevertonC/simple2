@@ -113,7 +113,7 @@ public class Facade {
 	 * @throws FourierException caso a imagem não possa ser filtrada, por exemplo, se não é quadrada.
 	 */
 	public BufferedImage passaFaixaEsp(BufferedImage img, double raioInterno,double raioExterno) throws FourierException{
-		return controller.passaFaixaFreq(img,raioInterno,raioExterno);
+		return controller.passaFaixaEsp(img,raioInterno,raioExterno);
 	}
 	
 	public BufferedImage rejeitaFaixaFreq(BufferedImage img, double raioInterno,double raioExterno) throws FourierException{
@@ -121,7 +121,7 @@ public class Facade {
 	}
 	
 	public BufferedImage rejeitaFaixaEsp(BufferedImage img, double raioInterno,double raioExterno) throws FourierException{
-		return controller.rejeitaFaixaFreq(img,raioInterno,raioExterno);
+		return controller.rejeitaFaixaEsp(img,raioInterno,raioExterno);
 	}
 	
 	public BufferedImage reflectanciaFreq(BufferedImage img, double corte) throws FourierException{

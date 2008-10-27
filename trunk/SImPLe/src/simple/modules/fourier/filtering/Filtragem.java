@@ -53,7 +53,7 @@ public class Filtragem {
 
 			}
 		}
-		
+
 		return img;
 	}
 
@@ -100,7 +100,7 @@ public class Filtragem {
 		return img;
 
 	}
-	
+
 	/**
 	 * Realiza a filtragem passa faixa em uma imagem espectral (no dominio da frequencia).
 	 * 
@@ -112,16 +112,16 @@ public class Filtragem {
 	 * 						se o raio do filtro for invalido.
 	 */
 	public static FourierImagem passaFaixa(FourierImagem img, double raioInterno, double raioExterno) throws FourierException{
-		
+
 		if ((raioInterno < 0)||(raioInterno > (double)1)&&
 				(raioExterno < 0)||(raioExterno > (double)1)){
 			throw new FourierException(FourierException.RAIO_INVALIDO);
 		}
-		
+
 		FourierImagem f = passaBaixa(img,raioInterno);
 		return passaAlta(f, raioExterno);
 	}
-	
+
 	/**
 	 * Realiza a filtragem rejeita faixa em uma imagem espectral (no dominio da frequencia).
 	 * 
@@ -133,13 +133,37 @@ public class Filtragem {
 	 * 						se o raio do filtro for invalido.
 	 */
 	public static FourierImagem rejeitaFaixa(FourierImagem img, double raioInterno, double raioExterno) throws FourierException{
+
+		if (!img.isEspectral())
+			throw new FourierException(FourierException.DOMINIO_FREQUENCIA);
+
+		double r1 = raioExterno;
+		double r2 = raioInterno;
+		if (r1 < 0.0 || r2 > 1.0)
+			throw new FourierException(FourierException.RAIO_INVALIDO);
+
+		int u2 = img.getLargura()/2;
+		int v2 = img.getAltura()/2;
+		int su, sv, i = 0;
+		double r, rmax = Math.min(u2, v2);
+
+		for (int v = 0; v < img.getAltura(); ++v) {
+			sv = FourierImagem.shift(v, v2) - v2;
+			for (int u = 0; u < img.getLargura(); ++u, ++i) {
+				su = FourierImagem.shift(u, u2) - u2;
+				r = Math.sqrt(su*su + sv*sv) / rmax;
+				if (r >= r1 && r <= r2){
+					Complexo c = new Complexo(img.getData(i));
+					c.real = c.im = (double)0;
+					img.setData(c, i);
+				}
+			}
+		}
 		
-		FourierImagem f = passaAlta(img,0);
-		FourierImagem f2 = passaFaixa(img,raioInterno,raioExterno);
-		f.diferenca(f2);
-		return f;
+		return img;
+
 	}
-	
+
 	/**
 	 * Computa a função transferência para um filtro Butterworth passa baixa.
 	 * @param n ordem do filtro
@@ -224,7 +248,7 @@ public class Filtragem {
 				img.getData(i).setPolar(mag, img.getData(i).getFase());	        
 			}
 		}
-		
+
 		return img;
 
 	}
@@ -258,7 +282,7 @@ public class Filtragem {
 				img.getData(i).setPolar(mag, img.getData(i).getFase());
 			}
 		}
-		
+
 		return img;
 
 	}
@@ -292,11 +316,11 @@ public class Filtragem {
 				img.getData(i).setPolar(mag, img.getData(i).getFase());	        
 			}
 		}
-		
+
 		return img;
 
 	}
-	
+
 	/**
 	 * Realiza filtragem Gaussiana passa alta em uma imagem espectral (no dominio da frequência).
 	 * @param img imagem no domínio da frequência
@@ -326,7 +350,7 @@ public class Filtragem {
 				img.getData(i).setPolar(mag, img.getData(i).getFase());
 			}
 		}
-		
+
 		return img;
 
 	}

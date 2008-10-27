@@ -34,11 +34,11 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	private static final long serialVersionUID = -1866526303421367909L;
 
 	private JMenu locais, filtros,ruidos, espaciais, passaBaixa, passaAlta, frequencia, filtroMorfologico, abertura,
-	fechamento, geradorRuido,homomorfico, gaussianoFourier, butterworth;
+	fechamento, geradorRuido,homomorfico, gaussianoFourier, butterworth, filtroIdeal;
 
 	private JMenuItem media,mediana,moda, sobel, prewitt, roberts, laplace, gaussiano, emboss, freichen, passaAltaFreq, 
 	passaBaixaFreq, passaFaixaFreq, abertura4, abertura8, fechamento4, fechamento8, rank, morMediana, ruidoSaltPepper,
-	ruidoGaussiano, reflectancia, iluminacao, rejeitaFaixa, gaussianoPassaAlta, gaussianoPassaBaixa, butterworthAlta, butterworthBaixa;
+	ruidoGaussiano, reflectancia, iluminacao, rejeitaFaixaFreq, gaussianoPassaAlta, gaussianoPassaBaixa, butterworthAlta, butterworthBaixa;
 
 	private simple.modules.fourier.facade.Facade fourierFacade = new simple.modules.fourier.facade.Facade();
 
@@ -203,11 +203,19 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	private void configureFrequencia(){
 		frequencia = new JMenu("Frequência");
 		frequencia.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
-
+		
+		filtroIdeal = new JMenu("Filtro Ideal");
+		filtroIdeal.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+		
 		passaAltaFreq = configureMenuItem("Passa-Alta", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
 		passaBaixaFreq = configureMenuItem("Passa-Baixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
 		passaFaixaFreq = configureMenuItem("Passa-Faixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
-		rejeitaFaixa = configureMenuItem("Rejeita-Faixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		rejeitaFaixaFreq = configureMenuItem("Rejeita-Faixa", NO_VALUE, NO_VALUE, NO_VALUE, NO_VALUE, "Resource/Icones/filtro.gif");
+		
+		filtroIdeal.add(passaAltaFreq);
+		filtroIdeal.add(passaBaixaFreq);
+		filtroIdeal.add(passaFaixaFreq);
+		filtroIdeal.add(rejeitaFaixaFreq);
 		
 		// ---- Homomórfico 
 		homomorfico = new JMenu("Filtragem Homomórfica");
@@ -241,10 +249,7 @@ public class MenuOperacoesLocais extends SimpleMenu {
 		butterworth.add(butterworthBaixa);
 
 		// adicione ao menu
-		frequencia.add(passaAltaFreq);
-		frequencia.add(passaBaixaFreq);
-		frequencia.add(passaFaixaFreq);
-		frequencia.add(rejeitaFaixa);
+		frequencia.add(filtroIdeal);
 		frequencia.add(homomorfico);
 		frequencia.add(gaussianoFourier);
 		frequencia.add(butterworth);

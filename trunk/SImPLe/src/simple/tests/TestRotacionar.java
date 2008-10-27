@@ -1,14 +1,14 @@
 /*
- * TestNAnd
+ * TestRotacionar
  * 
  * @version 1.0
  * 
- * Date: 03/10/05
+ * Date: 28/09/05
  * 
  * Copyright FEDPI all rights reserved
  */
 
-package simple.testes;
+package simple.tests;
 
 import java.awt.image.PixelGrabber;
 
@@ -19,8 +19,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Classe que testa a classe NAnd
- * @version 1.0 03/10/05
+ * Classe que testa a classe Rotacionar
+ * @version 1.0 28/09/05
  * @author Andre Cavalcente Hora
  * @author Eduardo Santiago Moura
  * @author Paulo de Tarso Firmino Junior
@@ -28,15 +28,14 @@ import junit.framework.TestSuite;
  * @author Yuska Paola Aguiar
  */
 
-public class TestNAnd extends TestCase{
+public class TestRotacionar extends TestCase{
 	
-	protected ImageIcon i;
-	protected ImageIcon j;
+	protected ImageIcon i, j;
 	
 	/**
 	 * Construtor do teste
 	 */
-	public TestNAnd(String msg){
+	public TestRotacionar(String msg){
 		super(msg);
 	}
 	/**
@@ -44,19 +43,19 @@ public class TestNAnd extends TestCase{
 	 * @return O suite da classe
 	 */
 	public static Test suite(){
-	    return new TestSuite(TestNAnd.class);
+	    return new TestSuite(TestRotacionar.class);
 	}
 	/**
 	 * Metodo setUp que inicializa as variaveis de teste
 	 */
 	public void setUp(){
-		i = new ImageIcon("Imagens/nand.jpg");
-		j = new ImageIcon("Imagens/nandOriginal.jpg");				
+		i = new ImageIcon("Imagens/rotOriginal345.jpg");
+		j = new ImageIcon("Imagens/rotacionada345.jpg");
 	}
 	/**
 	 * Metodo testAdicao que verifica pixel a pixels se as imagens estao iguais
 	 */
-	public void testNAnd(){
+	public void testRotacao45(){
 		int[] pixelsMeu = new int[j.getIconWidth()*j.getIconHeight()];
 		PixelGrabber pg1 = new PixelGrabber(j.getImage(),0,0,j.getIconWidth(),j.getIconHeight(),pixelsMeu,0,j.getIconWidth());
 		int[] pixelsOutro = new int[i.getIconWidth()*i.getIconHeight()];
@@ -65,8 +64,7 @@ public class TestNAnd extends TestCase{
 			pg1.grabPixels();
 			pg2.grabPixels();
 		} catch (InterruptedException e) {}
-	
 		for (int k = 0; k < j.getIconWidth()*j.getIconHeight(); k++) 
-			assertEquals(""+(k+1),pixelsMeu[k],pixelsOutro[k]);
+			assertEquals(""+(k+1),pixelsMeu[k],(int)pixelsOutro[k]);
 	}
 }

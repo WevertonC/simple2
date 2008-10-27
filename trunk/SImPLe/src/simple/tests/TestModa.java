@@ -1,4 +1,4 @@
-package simple.testes;
+package simple.tests;
 
 import java.util.HashMap;
 
