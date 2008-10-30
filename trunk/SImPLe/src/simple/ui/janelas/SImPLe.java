@@ -38,11 +38,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import simple.manipulacoes.util.Emboss;
 import simple.manipulacoes.util.MyImage;
 import simple.manipulacoes.util.MyJInternalFrame;
 import simple.manipulacoes.util.MyScrollPane;
@@ -54,6 +52,7 @@ import simple.ui.menus.MenuClassificacao;
 import simple.ui.menus.MenuEditar;
 import simple.ui.menus.MenuImagem;
 import simple.ui.menus.MenuOperacoes;
+import simple.ui.menus.SimpleToolBar;
 import simple.excecoes.ZoomException;
 import simple.facade.Facade;
 
@@ -86,17 +85,7 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 	public JMenuItem abrirNovo, abrir, fechar, salvar, salvarComo, exportar,
 			refazer, desfazer, brilhoContraste;
 
-	public static JButton buttonAbrir, buttonNovo, buttonSalvarComo, buttonCamera,
-			buttonSccaner, buttonDesfazer, buttonRefazer, buttonZMais,
-			buttonZMenos, buttonRotacionar, buttonRedimensionar, buttonHCanal,
-			buttonHColorido, buttonExportar, buttonPLinha, buttonPColuna,
-			buttonOpLogica, buttonOpAritP, buttonOpAritB, buttonEscCinza,
-			buttonDecompor, buttonRecompor, buttonPseudo;
-
-	public JButton buttonIlusao1, buttonIlusao2, buttonIlusao3, buttonIlusao4;
-
-	public static JMenuItem recortar, copiar, colar, ilusao1, ilusao2, ilusao3,
-			ilusao4, ilusao5, ilusao6, ilusao7, ilusao8, ilusao9, ilusao10;
+	public static JMenuItem recortar, copiar, colar;
 
 	public static JButton buttonRecortar, buttonCopiar, buttonColar;
 	
@@ -110,285 +99,36 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 	// Dimensão da janela
 	private Dimension screenSize;
 	
-	JMenuBar menuBar;
+	private JMenuBar menuBar;
+	private SimpleToolBar simpleBar;
 
 	/**
 	 * Construtor da classe com Desing Pattern Singleton.
 	 */
 	private SImPLe() {
 		
+		/* Configura barra de menus */
 		initializeFrame();
 		menuBar = new JMenuBar();
-
-		
-		
-		
-//		menuBar.add(menuOperacoes);
-//		menuBar.add(menuClassificacao);
 		menuBar.setBorder(BorderFactory.createEmptyBorder());
-
 		setJMenuBar(menuBar);
 
 		// ***********************************************************************//
 		// ****************           Menu de Acesso Direto       ****************//
 		// ***********************************************************************//
 
-		JToolBar jToolBar = new JToolBar();
-		jToolBar.setFloatable(true);
-		jToolBar.setRollover(true);
-		jToolBar.setBounds(0, 0, screenSize.width, 26);
-		jToolBar.setBorder(BorderFactory.createRaisedBevelBorder());
-
-		buttonNovo = new JButton();
-		buttonNovo.setIcon(new ImageIcon("Resource/Icones/new.gif"));
-		buttonNovo.addActionListener(this);
-//		buttonNovo.setActionCommand(abrirNovo.getActionCommand());
-		buttonNovo.setToolTipText("Novo");
-		jToolBar.add(buttonNovo);
-
-		buttonAbrir = new JButton();
-		buttonAbrir.setIcon(new ImageIcon("Resource/Icones/open.gif"));
-		buttonAbrir.addActionListener(this);
-//		buttonAbrir.setActionCommand(abrir.getActionCommand());
-		buttonAbrir.setToolTipText("Abrir");
-		jToolBar.add(buttonAbrir);
-
-		buttonSalvarComo = new JButton();
-		buttonSalvarComo.setIcon(new ImageIcon("Resource/Icones/save.gif"));
-		buttonSalvarComo.addActionListener(this);
-//		buttonSalvarComo.setActionCommand(salvarComo.getActionCommand());
-		buttonSalvarComo.setToolTipText("Salvar Como");
-		jToolBar.add(buttonSalvarComo);
-
-		jToolBar.addSeparator(new Dimension(3, 3));
-
-//		=========================================================================
-//		Tirei do Menu para colocar as novas Ilusoes de Otica
+		simpleBar = new SimpleToolBar(screenSize,this);
 		
-//		buttonIlusao1 = new JButton();
-//		buttonIlusao1.setIcon(new ImageIcon("Resource/Icones/pontosPretos.gif"));
-//		buttonIlusao1.addActionListener(this);
-//		buttonIlusao1.setActionCommand(ilusao1.getActionCommand());
-//		buttonIlusao1.setToolTipText("Ilusão 1");
-//		jToolBar.add(buttonIlusao1);
-//
-//		buttonIlusao2 = new JButton();
-//		buttonIlusao2.setIcon(new ImageIcon("Resource/Icones/retas.gif"));
-//		buttonIlusao2.addActionListener(this);
-//		buttonIlusao2.setActionCommand(ilusao2.getActionCommand());
-//		buttonIlusao2.setToolTipText("Ilusão 2");
-//		jToolBar.add(buttonIlusao2);
-//
-//		buttonIlusao3 = new JButton();
-//		buttonIlusao3.setIcon(new ImageIcon("Resource/Icones/quadrados.gif"));
-//		buttonIlusao3.addActionListener(this);
-//		buttonIlusao3.setActionCommand(ilusao3.getActionCommand());
-//		buttonIlusao3.setToolTipText("Ilusão 3");
-//		jToolBar.add(buttonIlusao3);
-//
-//		buttonIlusao4 = new JButton();
-//		buttonIlusao4.setIcon(new ImageIcon("Resource/Icones/circulos.gif"));
-//		buttonIlusao4.addActionListener(this);
-//		buttonIlusao4.setActionCommand(ilusao4.getActionCommand());
-//		buttonIlusao4.setToolTipText("Ilusão 4");
-//		jToolBar.add(buttonIlusao4);
-//
-//		jToolBar.addSeparator();
-//		======================================================================
 
-		buttonCamera = new JButton();
-		buttonCamera.setIcon(new ImageIcon("Resource/Icones/webcam.gif"));
-		buttonCamera.addActionListener(this);
-//		buttonCamera.setActionCommand(camera.getActionCommand());
-		buttonCamera.setToolTipText("Câmera");
-		jToolBar.add(buttonCamera);
-		buttonCamera.setEnabled(false);
-
-		buttonSccaner = new JButton();
-		buttonSccaner.setIcon(new ImageIcon("Resource/Icones/scanner.gif"));
-		buttonSccaner.addActionListener(this);
-//		buttonSccaner.setActionCommand(scanner.getActionCommand());
-		buttonSccaner.setToolTipText("Scanner");
-		jToolBar.add(buttonSccaner);
-		buttonSccaner.setEnabled(false);
-
-		jToolBar.addSeparator();
-
-		buttonRecortar = new JButton();
-		buttonRecortar.setEnabled(false);
-		buttonRecortar.setIcon(new ImageIcon("Resource/Icones/cut.gif"));
-		buttonRecortar.addActionListener(this);
-//		buttonRecortar.setActionCommand(recortar.getActionCommand());
-		buttonRecortar.setToolTipText("Recortar");
-		jToolBar.add(buttonRecortar);
-
-		buttonCopiar = new JButton();
-		buttonCopiar.setEnabled(false);
-		buttonCopiar.setIcon(new ImageIcon("Resource/Icones/copy.gif"));
-		buttonCopiar.addActionListener(this);
-//		buttonCopiar.setActionCommand(copiar.getActionCommand());
-		buttonCopiar.setToolTipText("Copiar");
-		jToolBar.add(buttonCopiar);
-
-		buttonColar = new JButton();
-		buttonColar.setEnabled(false);
-		buttonColar.setIcon(new ImageIcon("Resource/Icones/paste.gif"));
-		buttonColar.addActionListener(this);
-//		buttonColar.setActionCommand(colar.getActionCommand());
-		buttonColar.setToolTipText("Colar");
-		jToolBar.add(buttonColar);
-
-		jToolBar.addSeparator();
-
-		buttonDesfazer = new JButton();
-		buttonDesfazer.setIcon(new ImageIcon("Resource/Icones/undo.gif"));
-		buttonDesfazer.addActionListener(this);
-//		buttonDesfazer.setActionCommand(desfazer.getActionCommand());
-		buttonDesfazer.setToolTipText("Desfazer");
-		jToolBar.add(buttonDesfazer);
-		buttonDesfazer.setSelected(false);
-
-		buttonRefazer = new JButton();
-		buttonRefazer.setIcon(new ImageIcon("Resource/Icones/redo.gif"));
-		buttonRefazer.addActionListener(this);
-//		buttonRefazer.setActionCommand(refazer.getActionCommand());
-		buttonRefazer.setToolTipText("Refazer");
-		jToolBar.add(buttonRefazer);
-		buttonRefazer.setEnabled(false);
-
-		jToolBar.addSeparator();
-
-		buttonZMenos = new JButton();
-		buttonZMenos.setIcon(new ImageIcon("Resource/Icones/zoomOut.gif"));
-		buttonZMenos.addActionListener(this);
-		buttonZMenos.setActionCommand("Zoom Menos");
-		buttonZMenos.setToolTipText("Zoom Menos");
-		jToolBar.add(buttonZMenos);
-
-		buttonZMais = new JButton();
-		buttonZMais.setIcon(new ImageIcon("Resource/Icones/zoomIn.gif"));
-		buttonZMais.addActionListener(this);
-		buttonZMais.setActionCommand("Zoom Mais");
-		buttonZMais.setToolTipText("Zoom Mais");
-		jToolBar.add(buttonZMais);
-
-		jToolBar.addSeparator();
-
-		buttonRotacionar = new JButton();
-		buttonRotacionar.setIcon(new ImageIcon("Resource/Icones/rotacionar.gif"));
-		buttonRotacionar.addActionListener(this);
-//		buttonRotacionar.setActionCommand(rotacionar.getActionCommand());
-		buttonRotacionar.setToolTipText("Rotacionar");
-		jToolBar.add(buttonRotacionar);
-
-		buttonRedimensionar = new JButton();
-		buttonRedimensionar.setIcon(new ImageIcon("Resource/Icones/resize.gif"));
-		buttonRedimensionar.addActionListener(this);
-//		buttonRedimensionar.setActionCommand(redimensionar.getActionCommand());
-		buttonRedimensionar.setToolTipText("Redimensionar");
-		jToolBar.add(buttonRedimensionar);
-
-		jToolBar.addSeparator();
-
-		buttonHColorido = new JButton();
-		buttonHColorido.setIcon(new ImageIcon("Resource/Icones/histogram.gif"));
-		buttonHColorido.addActionListener(this);
-//		buttonHColorido.setActionCommand(colorido.getActionCommand());
-		buttonHColorido.setToolTipText("Histograma Colorido");
-		jToolBar.add(buttonHColorido);
-
-		buttonHCanal = new JButton();
-		buttonHCanal.setIcon(new ImageIcon("Resource/Icones/histo.gif"));
-		buttonHCanal.addActionListener(this);
-//		buttonHCanal.setActionCommand(porCanal.getActionCommand());
-		buttonHCanal.setToolTipText("Histograma Por Canal");
-		jToolBar.add(buttonHCanal);
-
-		jToolBar.addSeparator();
-
-		buttonPLinha = new JButton();
-		buttonPLinha.setIcon(new ImageIcon("Resource/Icones/perfilLinha.gif"));
-		buttonPLinha.addActionListener(this);
-//		buttonPLinha.setActionCommand(linha.getActionCommand());
-		buttonPLinha.setToolTipText("Perfil de Linha Simples");
-		jToolBar.add(buttonPLinha);
-
-		buttonPColuna = new JButton();
-		buttonPColuna.setIcon(new ImageIcon("Resource/Icones/perfilColuna.gif"));
-		buttonPColuna.addActionListener(this);
-//		buttonPColuna.setActionCommand(coluna.getActionCommand());
-		buttonPColuna.setToolTipText("Perfil de Coluna Simples");
-		jToolBar.add(buttonPColuna);
-
-		jToolBar.addSeparator();
-
-		buttonExportar = new JButton();
-		buttonExportar.setIcon(new ImageIcon("Resource/Icones/exportar.GIF"));
-		buttonExportar.addActionListener(this);
-//		buttonExportar.setActionCommand(exportar.getActionCommand());
-		buttonExportar.setToolTipText("Exportar");
-		jToolBar.add(buttonExportar);
-
-		jToolBar.addSeparator();
-
-		buttonOpLogica = new JButton();
-		buttonOpLogica.setIcon(new ImageIcon("Resource/Icones/oplogica.gif"));
-		buttonOpLogica.addActionListener(this);
-//		buttonOpLogica.setActionCommand(opLogicas.getActionCommand());
-		buttonOpLogica.setToolTipText("Operação Lógica");
-		jToolBar.add(buttonOpLogica);
-
-		buttonOpAritB = new JButton();
-		buttonOpAritB.setIcon(new ImageIcon("Resource/Icones/oparitmetica.gif"));
-		buttonOpAritB.addActionListener(this);
-//		buttonOpAritB.setActionCommand(opAritmetica.getActionCommand());
-		buttonOpAritB.setToolTipText("Operação Aritmética Básica");
-		jToolBar.add(buttonOpAritB);
-
-		buttonOpAritP = new JButton();
-		buttonOpAritP.setIcon(new ImageIcon("Resource/Icones/oparitmeticapessoal.gif"));
-		buttonOpAritP.addActionListener(this);
-//		buttonOpAritP.setActionCommand(ganhoOffset.getActionCommand());
-		buttonOpAritP.setToolTipText("Operação Aritmética Pessoal");
-		jToolBar.add(buttonOpAritP);
-
-		jToolBar.addSeparator();
-
-		buttonEscCinza = new JButton();
-		buttonEscCinza.setIcon(new ImageIcon("Resource/Icones/grayscale.jpg"));
-		buttonEscCinza.addActionListener(this);
-//		buttonEscCinza.setActionCommand(escalaCinza.getActionCommand());
-		buttonEscCinza.setToolTipText("Escala de Cinza");
-		jToolBar.add(buttonEscCinza);
-
-		buttonDecompor = new JButton();
-		buttonDecompor.setIcon(new ImageIcon("Resource/Icones/decompor.gif"));
-		buttonDecompor.addActionListener(this);
-//		buttonDecompor.setActionCommand(decompor.getActionCommand());
-		buttonDecompor.setToolTipText("Decompor Canais");
-		jToolBar.add(buttonDecompor);
-
-		buttonRecompor = new JButton();
-		buttonRecompor.setIcon(new ImageIcon("Resource/Icones/recompor.gif"));
-		buttonRecompor.addActionListener(this);
-//		buttonRecompor.setActionCommand(combinar.getActionCommand());
-		buttonRecompor.setToolTipText("Combinar Canais");
-		jToolBar.add(buttonRecompor);
-
-		buttonPseudo = new JButton();
-		buttonPseudo.setIcon(new ImageIcon("Resource/Icones/pseudo.GIF"));
-		buttonPseudo.addActionListener(this);
-//		buttonPseudo.setActionCommand(pseudoColorizacao.getActionCommand());
-		buttonPseudo.setToolTipText("Pseudo Colorizacao");
-		jToolBar.add(buttonPseudo);
-
-		getContentPane().add(jToolBar, BorderLayout.NORTH);
+		getContentPane().add(simpleBar, BorderLayout.NORTH);
 		getContentPane().add(dp, BorderLayout.CENTER);
+		
 		dp.setBackground(new Color(128, 128, 128));
 		facade = Facade.getInstance();
 	}
 	
 	public void start(){
+		
 		configureMenuBar();
 		habilitaBotoes(false);
 		this.setVisible(true);
@@ -443,27 +183,9 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		meuMenuImagem.habilitaBotoes(habilita);
 		meuMenuOperacoes.habilitaBotoes(habilita);
 		meuMenuClassificacao.habilitaBotoes(habilita);
-		
 		meuMenuEditar.setEnabled(habilita);
-//		buttonSalvarComo.setEnabled(b);
-		buttonExportar.setEnabled(habilita);
-		buttonDesfazer.setEnabled(habilita);
-		buttonRefazer.setEnabled(habilita);
-		buttonZMais.setEnabled(habilita);
-		buttonZMenos.setEnabled(habilita);
-		buttonRotacionar.setEnabled(habilita);
-		buttonRedimensionar.setEnabled(habilita);
-		buttonHCanal.setEnabled(habilita);
-		buttonHColorido.setEnabled(habilita);
-		buttonPLinha.setEnabled(habilita);
-		buttonPColuna.setEnabled(habilita);
-		buttonOpLogica.setEnabled(habilita);
-		buttonOpAritP.setEnabled(habilita);
-		buttonOpAritB.setEnabled(habilita);
-		buttonEscCinza.setEnabled(habilita);
-		buttonDecompor.setEnabled(habilita);
-		buttonRecompor.setEnabled(habilita);
-		buttonPseudo.setEnabled(habilita);
+		simpleBar.habilitaBotoes(habilita);
+		
 	}
 
 	/**
@@ -869,14 +591,14 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		}
 		else if (evento.equals("Fechamento 8")){
 			meuMenuOperacoes.fechamento8();
-//		}
+		}
 		
 		
 		// ***********************************************************************//
 		// ****************              Menu Ajuda                  *************//
 		// ***********************************************************************//
-//		else if (evento.equals("Sobre o SImPLe")){
-//			meuMenuAjuda.sobre();
+		else if (evento.equals("Sobre o SImPLe")){
+			meuMenuAjuda.sobre();
 		} else if (evento.equals("Tópicos de Ajuda")){
 			meuMenuAjuda.topicos();
 		}

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Simple" default="all" basedir=".">
-    <description>Builds, tests, and runs the project blms.</description>
+    <description>
+    	Builds, tests, and runs the project blms.
+    </description>
      
     <!-- Basic folders -->
-    <property name="bin" value="${basedir}/bin" />
     <property name="source" value="${basedir}/src" />
-	 <!-- <property name="test" value="${basedir}/examples" /> -->
+	<property name="bin" value="${basedir}/bin" />
     <property name="lib" value="${basedir}/lib" />
 	<property name="jar" value="${lib}/simple.jar" />
     <property name="doc" value="${basedir}/doc" />
+	<property name="dist"  location="dist"/>
         
-    <!-- Target that creates the necessary folders -->
-   
+    <!-- Target that creates the necessary folders -->   
     <target name="init">
         <echo>Creating folders</echo>
         <mkdir dir="${bin}" />
@@ -79,5 +80,58 @@
 	<mkdir dir="${doc}" />
 	<javadoc access="package" author="true" classpath="allJars" destdir="${doc}" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="blms.dataBase,blms.exceptions,blms.facade,blms.servlet,blms.users" source="1.5" sourcepath="${source}" splitindex="true" use="true" version="true"/>
     </target>
+	
+	<!-- Target that runs code coverage with clover -->
+	<taskdef resource="clovertasks"/>
+	<target name="with.clover">
+		<clover-setup initString=".clover/coverage.db"/>
+		<!-- <files>
+			<exclude name="**/ui/**/*.java"/>
+		</files> -->
+	</target>
+	
+	<target name="clover.report" depends="with.clover">
+		<!-- generate a historypoint for the current coverage -->
+		<clover-historypoint historyDir="clover_hist"/>
+		<clover-report>
+			<!-- generate a current report -->
+			<current outfile="clover_html">
+				<format type="html"/>
+			</current>
+			<!-- generate a historical report -->
+			<historical outfile="clover_html/historical.html"
+				historyDir="clover_hist">
+				<format type="html"/>
+			</historical>
+		</clover-report>
+	</target>
+	
+	<target name="dist" depends="compila">
+	    <mkdir dir="${dist}"/>
+		
+	  	<copy todir="${dist}">
+	  		<fileset dir="." includes="lib/**">
+	  		</fileset>
+	  	</copy>
+		
+		<copy todir="${dist}/lib">
+			  		<fileset dir="." includes="Resource/**">
+			  		</fileset>
+			  	</copy>
+
+	  	<copy todir="${dist}" file="batch/SImPLe.bat"/>
+	   <jar jarfile="${dist}/lib/simple-${DSTAMP}.jar" basedir="${bin}">
+	    	<manifest>
+	    		<attribute name="Main-Class" value="simple/main/Main"/> 
+	    	    <attribute name="Built-By"   value="DSC/UFCG"/>
+	    	    <section name="common">
+	    	      <attribute name="Implementation-Title" value="SImPLe"/>
+	    	      <attribute name="Implementation-Version" value="${DSTAMP}"/>     	      
+	    	    </section>
+	    	  </manifest>
+	  	</jar> 
+	</target>
+
+
 </project>
 
