@@ -1,4 +1,5 @@
 #summary Guia para instalação e execução do SImPLe
+#labels Featured
 
 = Guia do Usuário =
 
