@@ -16,48 +16,40 @@
 TODO -> escrever detalhamento.
 
 || Atividades || Responsável || Percentual ||
-|| Refatoração das classes relativas à lógica de negócio || Elloá e Odilon ||  ||
-|| Escrita da monografia || Elloá e Odilon ||  ||
+|| Refatoração das classes relativas à lógica de negócio || Elloá e Odilon || 95% ||
+|| Escrita da monografia || Elloá e Odilon || 100% ||
 
 
 = Iteração 2 =
 
 == User Story 2 ==
 
-TODO -> escrever detalhamento.
-
 || Atividades || Responsável || Percentual ||
-|| Refatoração das classes relativas à interface gráfica || Elloá e Odilon ||  ||
-|| Escrita da monografia || Elloá e Odilon ||  ||
+|| Refatoração das classes relativas à interface gráfica || Elloá e Odilon || 100% ||
+|| Escrita da monografia || Elloá e Odilon || 100% ||
 
 = Iteração 3 =
 
 == User Story 3 ==
 
-TODO -> escrever detalhamento.
-
 || Atividades || Responsável || Percentual ||
-|| Implementação do filtro homomórfico || Elloá e Odilon ||  ||
-|| Implementação do filtro de suavização gaussiana || Elloá e Odilon ||  ||
-|| Implementação do filtro de aguçamento gaussiano || Elloá e Odilon ||  ||
-|| Escrita da monografia || Elloá e Odilon ||  ||
+|| Implementação do filtro homomórfico || Elloá e Odilon || 70% ||
+|| Implementação do filtro de suavização gaussiana || Elloá e Odilon || 100% ||
+|| Implementação do filtro de aguçamento gaussiano || Elloá e Odilon || 100% ||
+|| Escrita da monografia || Elloá e Odilon || 85% ||
 
 = Iteração 4 =
 
 == User Story 4 ==
 
-TODO -> escrever detalhamento.
-
 || Atividades || Responsável || Percentual ||
-|| Implementação do filtro de suavização de Butterworth || Elloá e Odilon ||  ||
-|| Implementação do filtro de aguçamento de Butterworth || Elloá e Odilon ||  ||
-|| Escrita da monografia || Elloá e Odilon ||  ||
+|| Implementação do filtro de suavização de Butterworth || Elloá e Odilon || 100% ||
+|| Implementação do filtro de aguçamento de Butterworth || Elloá e Odilon || 100% ||
+|| Escrita da monografia || Elloá e Odilon || 80% ||
 
 = Iteração 5 =
 
 == User Story 5 ==
-
-TODO -> escrever detalhamento.
 
 || Atividades || Responsável || Percentual ||
 || Refatoração e criação de novos arquivos de ajuda || Elloá e Odilon ||  ||
