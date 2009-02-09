@@ -1,0 +1,5 @@
+Descrição
+
+  Apresenta um gráfico contendo a variação, por coluna, de tons vermelho, verde e azul
+  presentes na imagem, a medida que o curso se desloca sob a mesma
+  Essa função é desabilitada ao clicar no botão esquerdo do mouse.

@@ -1,0 +1,13 @@
+Descrição
+
+  Combina imagens referentes a canais de modelos cromáticos diferentes
+  em uma única imagem. Os modelos cromáticos disponíveis para combinação 
+  são: XYZ, RGB, CMY, CMYK, YCbCr e HSV
+  
+Passos
+
+  1 - Selecionar o modelo cromático desejado
+  2 - Selecionar, cara cada canal ativo uma imagem para o representar
+  3 - Confirmar a operação - pressionar botão Ok
+  ou
+  3 - Cancelar a operação - pressionar o botão Cancelar
