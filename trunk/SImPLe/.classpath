@@ -6,6 +6,5 @@
 	<classpathentry kind="lib" path="lib/jai_core.jar"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/mlibwrapper.jar"/>
-	<classpathentry kind="lib" path="lib/simple.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
