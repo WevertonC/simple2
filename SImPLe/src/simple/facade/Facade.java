@@ -560,6 +560,18 @@ public class Facade{
 		return array;
 	}
 	/**
+	 * @param frame
+	 * @return
+	 */
+	public Object[] decomporHSL(MyJInternalFrame frame) {
+		DecompositorHSL hsl = new DecompositorHSL(MyBufferedImage.makeBufferedImage(frame.getImage()), frame.getName());
+		Image[] imagens = hsl.getHSLChannels();
+		Object[] array = new Object[imagens.length + 1];
+		for (int i = 0; i < array.length -1; i++) array[i] = imagens[i];
+		array[array.length - 1] = hsl.getNome();		
+		return array;
+	}
+	/**
 	 * Metodo que decompoe a imagem em tres canais, Y, Cr e Cb
 	 * @param frame O frame a ser decomposto
 	 * @return Um Array de frames.

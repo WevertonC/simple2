@@ -414,6 +414,41 @@ public class MenuImagem extends SimpleMenu {
 					}
 
 					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("HSL")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporHSL((MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame());
+					MyJInternalFrame h = new MyJInternalFrame(getSimple(), getSimple().getFacade(), array[array.length - 1] + " - H", new MyImage(
+							(Image) array[0]));
+					h.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(h.getScrollPane());
+					h.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(h);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame s = new MyJInternalFrame(getSimple(), getSimple().getFacade(), array[array.length - 1] + " - S", new MyImage(
+							(Image) array[1]));
+					s.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(s.getScrollPane());
+					s.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(s);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame l = new MyJInternalFrame(getSimple(), getSimple().getFacade(), array[array.length - 1] + " - L", new MyImage(
+							(Image) array[2]));
+					l.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(l.getScrollPane());
+					l.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(l);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(h);
+					getSimple().getDesktopPane().setSelectedFrame(s);
+					getSimple().getDesktopPane().setSelectedFrame(l);
+					try {
+						h.setSelected(true);
+						s.setSelected(true);
+						l.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
+
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				} else if (modelo.equals("HSV")) {
 					setCursor(new Cursor(Cursor.WAIT_CURSOR));
 					Object[] array = getSimple().getFacade().decomporHSV((MyJInternalFrame) getSimple().getDesktopPane()

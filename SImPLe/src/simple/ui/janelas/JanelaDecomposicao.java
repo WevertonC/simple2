@@ -37,7 +37,7 @@ import simple.manipulacoes.util.AjudaButton;
 
 public class JanelaDecomposicao extends JDialog implements ActionListener, KeyListener{
 	
-	private JRadioButton rgb, cmy, cmyk, hsv, ycrcb, xyz; 
+	private JRadioButton rgb, cmy, cmyk, hsl, hsv, ycrcb, xyz; 
 	private JButton buttonOk, buttonCancel, buttonAjuda;
 	private ButtonGroup botoesModelos;
 	private String modelo;
@@ -51,9 +51,9 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 	 */
 	public JanelaDecomposicao(){
 		this.setLayout(null);
-		this.setSize(400,200);
+		this.setSize(485,200);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation(d.width/2 - 400/2,d.height/2 - 200/2);
+		setLocation(d.width/2 - 485/2,d.height/2 - 200/2);
 		this.setTitle("Decomposição de Canais");
 		this.setModal(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -64,6 +64,7 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 		rgb.addKeyListener(this);
 		cmy.addKeyListener(this);
 		cmyk.addKeyListener(this);
+		hsl.addKeyListener(this);
 		hsv.addKeyListener(this);
 		ycrcb.addKeyListener(this);
 		xyz.addKeyListener(this);
@@ -87,6 +88,9 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 		cmyk = new JRadioButton("CMYK");
 		cmyk.addActionListener(this);
 		
+		hsl = new JRadioButton("HSL");
+		hsl.addActionListener(this);
+		
 		hsv = new JRadioButton("HSV");
 		hsv.addActionListener(this);
 		
@@ -104,29 +108,32 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 		cmy.setBounds(90,40,50,50);
 		botoesModelos.add(cmyk);
 		cmyk.setBounds(150,40,60,50);
+		botoesModelos.add(hsl);
+		hsl.setBounds(215,40,50,50);
 		botoesModelos.add(hsv);
-		hsv.setBounds(215,40,50,50);
+		hsv.setBounds(270,40,50,50);
 		botoesModelos.add(ycrcb);
-		ycrcb.setBounds(270,40,60,50);
+		ycrcb.setBounds(330,40,60,50);
 		botoesModelos.add(xyz);
-		xyz.setBounds(335,40,50,50);
+		xyz.setBounds(400,40,50,50);
 		
 		buttonOk = new JButton("OK");
-		buttonOk.setBounds(110,120,57,25);
+		buttonOk.setBounds(150,120,57,25);
 		buttonOk.addActionListener(this);
 		
 		buttonCancel = new JButton("Cancelar");
-		buttonCancel.setBounds(180,120,85,25);
+		buttonCancel.setBounds(230,120,85,25);
 		buttonCancel.addActionListener(this);
 		
 		buttonAjuda = new AjudaButton();
 		buttonAjuda.setActionCommand("?");
-		buttonAjuda.setLocation(368,0);
+		buttonAjuda.setLocation(445,0);
 		buttonAjuda.addActionListener(this);
 		
 		getContentPane().add(rgb);
 		getContentPane().add(cmy);
 		getContentPane().add(cmyk);
+		getContentPane().add(hsl);
 		getContentPane().add(hsv);
 		getContentPane().add(xyz);
 		getContentPane().add(ycrcb);
@@ -147,6 +154,8 @@ public class JanelaDecomposicao extends JDialog implements ActionListener, KeyLi
 		}else if(evt.equalsIgnoreCase("CMY")){
 			modelo = evt;
 		}else if(evt.equalsIgnoreCase("CMYK")){
+			modelo = evt;
+		}else if(evt.equalsIgnoreCase("HSL")){
 			modelo = evt;
 		}else if(evt.equalsIgnoreCase("HSV")){
 			modelo = evt;
