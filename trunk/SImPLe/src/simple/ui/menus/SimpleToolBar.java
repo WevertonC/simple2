@@ -75,7 +75,7 @@ public class SimpleToolBar extends JToolBar {
 		salvarComo = new JButton();
 		salvarComo.setIcon(new ImageIcon("Resource/Icones/save.gif"));
 		salvarComo.addActionListener(s);
-		salvarComo.setActionCommand(salvarComo.getActionCommand());
+		salvarComo.setActionCommand("Salvar Como");
 		salvarComo.setToolTipText("Salvar Como");
 		this.add(salvarComo);
 
@@ -283,5 +283,35 @@ public class SimpleToolBar extends JToolBar {
 		buttonRecompor.setEnabled(habilita);
 		buttonPseudo.setEnabled(habilita);
 	}
+
+
+	public JButton getRecortar() {
+		return recortar;
+	}
+
+
+	public JButton getCopiar() {
+		return copiar;
+	}
+
+
+	public JButton getColar() {
+		return colar;
+	}
+
+
+	public JButton getDesfazer() {
+		return desfazer;
+	}
+
+
+	public JButton getRefazer() {
+		return refazer;
+	}
+	
+	
+	
+	
+	
 	
 }

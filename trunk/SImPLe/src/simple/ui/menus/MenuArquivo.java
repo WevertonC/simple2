@@ -2,6 +2,7 @@ package simple.ui.menus;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -15,10 +16,13 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
+import simple.excecoes.FormatoInvalidoException;
+import simple.excecoes.ImagemNaoExisteException;
+import simple.excecoes.ImagemNaoPodeSalvarException;
+import simple.excecoes.ImagemNaoSelecionadaException;
+import simple.excecoes.NomeInvalidoException;
+import simple.excecoes.RedimensionarException;
 import simple.manipulacoes.manipularArquivo.AbrirImagem;
 import simple.manipulacoes.manipularArquivo.BMPFilter;
 import simple.manipulacoes.manipularArquivo.GIFFilter;
@@ -29,13 +33,7 @@ import simple.manipulacoes.manipularArquivo.SalvarImagem;
 import simple.manipulacoes.util.MyBufferedImage;
 import simple.manipulacoes.util.MyImage;
 import simple.manipulacoes.util.MyJInternalFrame;
-import simple.excecoes.FormatoInvalidoException;
-import simple.excecoes.ImagemNaoExisteException;
-import simple.excecoes.ImagemNaoPodeSalvarException;
-import simple.excecoes.ImagemNaoSelecionadaException;
-import simple.excecoes.NomeInvalidoException;
-import simple.excecoes.RedimensionarException;
-
+import simple.ui.janelas.JanelaErro;
 import simple.ui.janelas.JanelaNovo;
 import simple.ui.janelas.JanelaSair;
 import simple.ui.janelas.SImPLe;
@@ -57,6 +55,7 @@ public class MenuArquivo extends SimpleMenu {
 
 	private JMenuItem abrirNovo, abrir, fechar, salvar, salvarComo, exportar, scanner, sair, camera;
 	private JMenu capturar;
+	private JanelaErro je;
 
 	/**
 	 * Instancia um novo Menu Arquivo e também cria os submenus.
@@ -215,35 +214,43 @@ public class MenuArquivo extends SimpleMenu {
 	 * Permite que o conteúdo em uma das janelas seja salvo.
 	 */
 	public void salvar(){
-		if (super.getSimple().verificaInstancia(super.getSimple().getDesktopPane().getSelectedFrame())) {
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			MyJInternalFrame i = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
-			if (i != null) {
-				try {
-					if (i.getFoiModificado() || super.getSimple().getFacade().modificouImagem()) {
-						i.getScrollPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-						i.setSalvou(true);
-						super.getSimple().getFacade().salvar(i);
-						i.getScrollPane().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+		try {
+			if (super.getSimple().verificaInstancia(super.getSimple().getDesktopPane().getSelectedFrame())) {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				MyJInternalFrame i = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
+				if (i != null) {
+					try {
+						if (i.getFoiModificado() || super.getSimple().getFacade().modificouImagem()) {
+							i.getScrollPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+							i.setSalvou(true);
+							super.getSimple().getFacade().salvar(i);
+							i.getScrollPane().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(this, e.getMessage(),
+								"ERRO!", JOptionPane.ERROR_MESSAGE);
 					}
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(this, e.getMessage(),
-							"ERRO!", JOptionPane.ERROR_MESSAGE);
 				}
-			}
-		} else
-			JOptionPane.showMessageDialog(null,"Selecione uma imagem para realizar a operação!!!",
-					"ERRO NAS INFORMAÇÕES", JOptionPane.ERROR_MESSAGE);
-		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			} else
+				JOptionPane.showMessageDialog(null,"Selecione uma imagem para realizar a operação!!!",
+						"ERRO NAS INFORMAÇÕES", JOptionPane.ERROR_MESSAGE);
+		} catch (HeadlessException e) {
+			je = new JanelaErro(e.getMessage());
+		}catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		}
 	}
 
 	/**
 	 * Permite salvar o conteúdo de uma janela como um novo arquivo.
 	 */
 	public void salvarComo(){
+		try {
 		MyJInternalFrame i = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
 		if (i != null) {
-			try {
+
 				i.setSalvou(true);
 				SalvarImagem.caminho = i.getName();
 				SalvarImagem.caminhoImagem = AbrirImagem.caminho;
@@ -268,7 +275,7 @@ public class MenuArquivo extends SimpleMenu {
 					i.getScrollPane().setCursor(
 							new Cursor(Cursor.CROSSHAIR_CURSOR));
 				}
-			} catch (ImagemNaoSelecionadaException e) {
+			} } catch (ImagemNaoSelecionadaException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(),
 						"ERRO!", JOptionPane.ERROR_MESSAGE);
 			} catch (ImagemNaoPodeSalvarException e) {
@@ -281,9 +288,11 @@ public class MenuArquivo extends SimpleMenu {
 				JOptionPane.showMessageDialog(this, e.getMessage(),
 						"ERRO!", JOptionPane.ERROR_MESSAGE);
 			} catch (PropertyVetoException e) {
+			}catch (ClassCastException e0){
+				je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+			} finally {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		}
 	}
 
 	/**
@@ -293,8 +302,12 @@ public class MenuArquivo extends SimpleMenu {
 		JInternalFrame[] frames = super.getSimple().getDesktopPane().getAllFrames();
 		if (frames != null) {
 			for (int i = 0; i < frames.length; i++) {
-				if (super.getSimple().verificaInstancia(frames[i]))
-					((MyJInternalFrame) frames[i]).fecharAoSair();
+				try{
+					if (super.getSimple().verificaInstancia(frames[i]))
+						((MyJInternalFrame) frames[i]).fecharAoSair();
+				} catch (ClassCastException e0) {
+					frames[i].dispose();
+				}
 			}
 		}
 		JanelaSair js = new JanelaSair("Deseja realmente sair?");
@@ -309,54 +322,67 @@ public class MenuArquivo extends SimpleMenu {
 	 * Permite que um arquivo aberto seja comprimido antes de ser salvo.
 	 */
 	public void comprimir(){
-		MyJInternalFrame f = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
-		JFileChooser fc = new JFileChooser(new File("."));
-		fc.addChoosableFileFilter(new GIFFilter());
-		fc.addChoosableFileFilter(new PNGFilter());
-		fc.addChoosableFileFilter(new BMPFilter());
-		fc.addChoosableFileFilter(new JPGFilter());
-		fc.setFileView(new ImageFileView());
-		int returnVal = fc.showDialog(new JFrame(), "Exportar");
-		if (returnVal == JFileChooser.CANCEL_OPTION)
-			return;
-		else {
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			String formato = fc.getFileFilter().getDescription();
-			String caminho = fc.getSelectedFile().getAbsolutePath();
-			File arquivo = new File(caminho);
-			String nomeArquivo = (arquivo.toString()).replace(fc
-					.getCurrentDirectory().toString(), "");
-			nomeArquivo = nomeArquivo.replaceFirst("\\\\", "");
-			if (nomeArquivo.contains("/") || nomeArquivo.contains(":")
-					|| nomeArquivo.contains("\\")
-					|| nomeArquivo.contains("<")
-					|| nomeArquivo.contains(">")
-					|| nomeArquivo.contains("|"))
-				JOptionPane.showMessageDialog(this,
-						"Arquivo com nome invalido!", "ERRO!",
-						JOptionPane.ERROR_MESSAGE);
+		try {
+			MyJInternalFrame f = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
+			JFileChooser fc = new JFileChooser(new File("."));
+			fc.addChoosableFileFilter(new GIFFilter());
+			fc.addChoosableFileFilter(new PNGFilter());
+			fc.addChoosableFileFilter(new BMPFilter());
+			fc.addChoosableFileFilter(new JPGFilter());
+			fc.setFileView(new ImageFileView());
+			int returnVal = fc.showDialog(new JFrame(), "Exportar");
+			if (returnVal == JFileChooser.CANCEL_OPTION)
+				return;
 			else {
-				try {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				String formato = fc.getFileFilter().getDescription();
+				String caminho = fc.getSelectedFile().getAbsolutePath();
+				File arquivo = new File(caminho);
+				String nomeArquivo = (arquivo.toString()).replace(fc
+						.getCurrentDirectory().toString(), "");
+				nomeArquivo = nomeArquivo.replaceFirst("\\\\", "");
+				if (nomeArquivo.contains("/") || nomeArquivo.contains(":")
+						|| nomeArquivo.contains("\\")
+						|| nomeArquivo.contains("<")
+						|| nomeArquivo.contains(">")
+						|| nomeArquivo.contains("|"))
+					JOptionPane.showMessageDialog(this,
+							"Arquivo com nome invalido!", "ERRO!",
+							JOptionPane.ERROR_MESSAGE);
+				else {
 					try {
-						super.getSimple().getFacade().comprimirImagem(formato, caminho,MyBufferedImage.makeBufferedImage(f.getImage()));
-					} catch (FormatoInvalidoException e) {
+						try {
+							super.getSimple().getFacade().comprimirImagem(formato, caminho,MyBufferedImage.makeBufferedImage(f.getImage()));
+						} catch (FormatoInvalidoException e) {
+						}
+					} catch (InterruptedException e) {
+						JOptionPane.showMessageDialog(this, e.getMessage(),
+								"ERRO!", JOptionPane.ERROR_MESSAGE);
 					}
-				} catch (InterruptedException e) {
-					JOptionPane.showMessageDialog(this, e.getMessage(),
-							"ERRO!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		} catch (HeadlessException e) {
+			je = new JanelaErro(e.getMessage());
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	/**
 	 * Fecha uma janela aberta.
 	 */
 	public void fechar(){
-		MyJInternalFrame i = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
-		if (i != null) {
-			i.fechar();
+		
+		try {
+			MyJInternalFrame i = (MyJInternalFrame) super.getSimple().getDesktopPane().getSelectedFrame();
+			if (i != null) {
+				i.fechar();
+			}
+		} catch (ClassCastException e) {
+			JInternalFrame i0 = super.getSimple().getDesktopPane().getSelectedFrame();
+			i0.dispose();
 		}
 	}
 
@@ -370,6 +396,12 @@ public class MenuArquivo extends SimpleMenu {
 		exportar.setEnabled(b);
 	}
 
+	public JMenuItem getSalvar() {
+		return salvar;
+	}
+
+
+	
 
 
 }

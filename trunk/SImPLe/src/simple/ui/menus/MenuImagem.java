@@ -32,6 +32,7 @@ import simple.modules.propriedades.ilusaoOptica.Ilusao8;
 import simple.modules.propriedades.ilusaoOptica.Ilusao9;
 import simple.ui.janelas.JanelaCombinar;
 import simple.ui.janelas.JanelaDecomposicao;
+import simple.ui.janelas.JanelaErro;
 import simple.ui.janelas.JanelaHistogramaColorido;
 import simple.ui.janelas.JanelaHistogramaPorCanal;
 import simple.ui.janelas.JanelaPseudoColorizacao;
@@ -55,6 +56,8 @@ public class MenuImagem extends SimpleMenu {
 	ilusao3, ilusao4, ilusao5, ilusao6, ilusao7, ilusao8, ilusao9, ilusao10;
 
 	private JRadioButtonMenuItem coordenadaPixel;
+
+	private JanelaErro je;
 
 	/**
 	 * Cria um menu do tipo Imagem
@@ -112,10 +115,7 @@ public class MenuImagem extends SimpleMenu {
 
 		brilhoContraste = configureMenuItem("Brilho e Contraste", NO_VALUE, NO_VALUE, NO_VALUE, KeyEvent.VK_B, "Resource/Icones/transparente.gif"); 
 
-		coordenadaPixel = new JRadioButtonMenuItem("Coordenada de Pixel");
-		coordenadaPixel.setIcon(new ImageIcon("Resource/Icones/coordinate.gif"));
-		coordenadaPixel.setMnemonic(KeyEvent.VK_C);
-		coordenadaPixel.addChangeListener(super.getSimple());
+		coordenadaPixel = getInstanciaCoordenadaPixel();
 
 		modoApresentacao = new JMenu("Modo de Apresentação");
 		modoApresentacao.setIcon(new ImageIcon("Resource/Icones/transparente.gif"));
@@ -211,6 +211,17 @@ public class MenuImagem extends SimpleMenu {
 		add(ilusao);
 	}
 
+	private JRadioButtonMenuItem getInstanciaCoordenadaPixel() {
+		// TODO Auto-generated method stub
+		if (coordenadaPixel == null) {
+			coordenadaPixel = new JRadioButtonMenuItem("Coordenada de Pixel");
+			coordenadaPixel.setIcon(new ImageIcon("Resource/Icones/coordinate.gif"));
+			coordenadaPixel.setMnemonic(KeyEvent.VK_C);
+			coordenadaPixel.addChangeListener(super.getSimple());
+		}
+		return coordenadaPixel;
+	}
+
 	/**
 	 * Habilita ou desabilita (de acordo com o valor do parâmetro) os botões de histograma,
 	 * perfilLC, brilho e Contraste, coordenadaPixel, modo de apresentação, decomposição
@@ -222,7 +233,6 @@ public class MenuImagem extends SimpleMenu {
 		histograma.setEnabled(habilita);
 		perfilLC.setEnabled(habilita);
 		brilhoContraste.setEnabled(habilita);
-		coordenadaPixel.setEnabled(habilita);
 		modoApresentacao.setEnabled(habilita);
 		combDecompor.setEnabled(habilita);
 		requantizacao.setEnabled(habilita);
@@ -232,307 +242,329 @@ public class MenuImagem extends SimpleMenu {
 	 * Método que realiza o histograma colorido
 	 */
 	public void colorido(){
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		new JanelaHistogramaColorido(f.getImage(), getSimple().getFacade());
+		try {
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();		
+			new JanelaHistogramaColorido(f.getImage(), getSimple().getFacade());
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		}
 	}
 
 	/**
 	 * Realização do histograma por canais
 	 */
 	public void porCanal(){
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		new JanelaHistogramaPorCanal(f.getImage(), getSimple().getFacade());
+
+		try{ 
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+			new JanelaHistogramaPorCanal(f.getImage(), getSimple().getFacade());
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		}
+
 	}
 
 	/**
 	 * Permite que o brilho e contraste da imagem sejam alterados
 	 */
 	public void brilhoEContraste(){
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		try {
-			new ImageContrast(f, super.getSimple());
-		} catch (Exception e){
 
+		try {
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			new ImageContrast(f, super.getSimple());
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	/**
 	 * Realiza a decomposição da imagem em canais.
 	 */
 	public void decomposicao(){
-		JanelaDecomposicao jd = new JanelaDecomposicao();
-		String modelo = jd.getModelo();
-		if (jd.ok()) {
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			if (modelo.equals("RGB")) {
-				Object[] array = getSimple().getFacade().decomporRGB((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame r = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Red", new MyImage(
-								(Image) array[0]));
-				r.setFoiOperacao(true);
-				r.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().addPropertyChangeListener(r.getScrollPane());
-				getSimple().getDesktopPane().add(r);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame g = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Green", new MyImage(
-								(Image) array[1]));
-				g.setFoiOperacao(true);
-				g.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().addPropertyChangeListener(g.getScrollPane());
-				getSimple().getDesktopPane().add(g);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame b = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Blue", new MyImage(
-								(Image) array[2]));
-				b.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(b.getScrollPane());
-				b.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(b);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(r);
-				getSimple().getDesktopPane().setSelectedFrame(g);
-				getSimple().getDesktopPane().setSelectedFrame(b);
-				try {
-					r.setSelected(true);
-					g.setSelected(true);
-					b.setSelected(true);
-				} catch (PropertyVetoException e) {
-				}
+		try {
+			JanelaDecomposicao jd = new JanelaDecomposicao();
+			String modelo = jd.getModelo();
+			if (jd.ok()) {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				if (modelo.equals("RGB")) {
+					Object[] array = getSimple().getFacade().decomporRGB((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame r = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Red", new MyImage(
+									(Image) array[0]));
+					r.setFoiOperacao(true);
+					r.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().addPropertyChangeListener(r.getScrollPane());
+					getSimple().getDesktopPane().add(r);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame g = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Green", new MyImage(
+									(Image) array[1]));
+					g.setFoiOperacao(true);
+					g.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().addPropertyChangeListener(g.getScrollPane());
+					getSimple().getDesktopPane().add(g);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame b = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Blue", new MyImage(
+									(Image) array[2]));
+					b.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(b.getScrollPane());
+					b.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(b);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(r);
+					getSimple().getDesktopPane().setSelectedFrame(g);
+					getSimple().getDesktopPane().setSelectedFrame(b);
+					try {
+						r.setSelected(true);
+						g.setSelected(true);
+						b.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
 
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			} else if (modelo.equals("CMY")) {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				Object[] array = getSimple().getFacade().decomporCMY((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame c = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Cyan", new MyImage(
-								(Image) array[0]));
-				c.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(c.getScrollPane());
-				c.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(c);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame m = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Magenta",
-						new MyImage((Image) array[1]));
-				m.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(m.getScrollPane());
-				m.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(m);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Yellow", new MyImage(
-								(Image) array[2]));
-				y.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(y.getScrollPane());
-				y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(y);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(c);
-				getSimple().getDesktopPane().setSelectedFrame(m);
-				getSimple().getDesktopPane().setSelectedFrame(y);
-				try {
-					c.setSelected(true);
-					m.setSelected(true);
-					y.setSelected(true);
-				} catch (PropertyVetoException e) {
-				}
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			} else if (modelo.equals("CMYK")) {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				Object[] array = getSimple().getFacade().decomporCMYK((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame c = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - C", new MyImage(
-								(Image) array[0]));
-				c.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(c.getScrollPane());
-				c.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(c);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame m = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - M", new MyImage(
-								(Image) array[1]));
-				m.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(m.getScrollPane());
-				m.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(m);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Y", new MyImage(
-								(Image) array[2]));
-				y.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(y.getScrollPane());
-				y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(y);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame k = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - K", new MyImage(
-								(Image) array[3]));
-				k.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(k.getScrollPane());
-				k.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(k);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(c);
-				getSimple().getDesktopPane().setSelectedFrame(m);
-				getSimple().getDesktopPane().setSelectedFrame(y);
-				getSimple().getDesktopPane().setSelectedFrame(k);
-				try {
-					c.setSelected(true);
-					m.setSelected(true);
-					y.setSelected(true);
-					k.setSelected(true);
-				} catch (PropertyVetoException e) {
-				}
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("CMY")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporCMY((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame c = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Cyan", new MyImage(
+									(Image) array[0]));
+					c.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(c.getScrollPane());
+					c.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(c);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame m = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Magenta",
+							new MyImage((Image) array[1]));
+					m.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(m.getScrollPane());
+					m.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(m);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Yellow", new MyImage(
+									(Image) array[2]));
+					y.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(y.getScrollPane());
+					y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(y);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(c);
+					getSimple().getDesktopPane().setSelectedFrame(m);
+					getSimple().getDesktopPane().setSelectedFrame(y);
+					try {
+						c.setSelected(true);
+						m.setSelected(true);
+						y.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("CMYK")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporCMYK((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame c = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - C", new MyImage(
+									(Image) array[0]));
+					c.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(c.getScrollPane());
+					c.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(c);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame m = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - M", new MyImage(
+									(Image) array[1]));
+					m.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(m.getScrollPane());
+					m.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(m);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Y", new MyImage(
+									(Image) array[2]));
+					y.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(y.getScrollPane());
+					y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(y);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame k = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - K", new MyImage(
+									(Image) array[3]));
+					k.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(k.getScrollPane());
+					k.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(k);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(c);
+					getSimple().getDesktopPane().setSelectedFrame(m);
+					getSimple().getDesktopPane().setSelectedFrame(y);
+					getSimple().getDesktopPane().setSelectedFrame(k);
+					try {
+						c.setSelected(true);
+						m.setSelected(true);
+						y.setSelected(true);
+						k.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
 
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			} else if (modelo.equals("HSV")) {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				Object[] array = getSimple().getFacade().decomporHSV((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame h = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - H", new MyImage(
-								(Image) array[0]));
-				h.setFoiOperacao(true);
-				h.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().addPropertyChangeListener(h.getScrollPane());
-				getSimple().getDesktopPane().add(h);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame s = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - S", new MyImage(
-								(Image) array[1]));
-				s.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(s.getScrollPane());
-				s.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(s);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame v = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - V", new MyImage(
-								(Image) array[2]));
-				v.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(v.getScrollPane());
-				v.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(v);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(h);
-				getSimple().getDesktopPane().setSelectedFrame(s);
-				getSimple().getDesktopPane().setSelectedFrame(v);
-				try {
-					h.setSelected(true);
-					s.setSelected(true);
-					v.setSelected(true);
-				} catch (PropertyVetoException e) {
-				}
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("HSV")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporHSV((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame h = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - H", new MyImage(
+									(Image) array[0]));
+					h.setFoiOperacao(true);
+					h.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().addPropertyChangeListener(h.getScrollPane());
+					getSimple().getDesktopPane().add(h);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame s = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - S", new MyImage(
+									(Image) array[1]));
+					s.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(s.getScrollPane());
+					s.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(s);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame v = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - V", new MyImage(
+									(Image) array[2]));
+					v.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(v.getScrollPane());
+					v.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(v);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(h);
+					getSimple().getDesktopPane().setSelectedFrame(s);
+					getSimple().getDesktopPane().setSelectedFrame(v);
+					try {
+						h.setSelected(true);
+						s.setSelected(true);
+						v.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
 
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			} else if (modelo.equals("YCrCb")) {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				Object[] array = getSimple().getFacade().decomporYCrCb((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Y", new MyImage(
-								(Image) array[0]));
-				y.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(y.getScrollPane());
-				y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(y);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame cr = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Cb", new MyImage(
-								(Image) array[1]));
-				cr.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(cr.getScrollPane());
-				cr.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(cr);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame cb = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Cr", new MyImage(
-								(Image) array[2]));
-				cb.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(cb.getScrollPane());
-				cb.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(cb);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(y);
-				getSimple().getDesktopPane().setSelectedFrame(cr);
-				getSimple().getDesktopPane().setSelectedFrame(cb);
-				try {
-					y.setSelected(true);
-					cr.setSelected(true);
-					cb.setSelected(true);
-				} catch (PropertyVetoException e) {
-				}
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			} else if (modelo.equals("XYZ")) {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				Object[] array = getSimple().getFacade().decomporXYZ((MyJInternalFrame) getSimple().getDesktopPane()
-						.getSelectedFrame());
-				MyJInternalFrame x = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - X", new MyImage(
-								(Image) array[0]));
-				x.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(x.getScrollPane());
-				x.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(x);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Y", new MyImage(
-								(Image) array[1]));
-				y.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(y.getScrollPane());
-				y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(y);
-				getSimple().getFacade().incrementaPosicao();
-				MyJInternalFrame z = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
-						array[array.length - 1] + " - Z", new MyImage(
-								(Image) array[2]));
-				z.setFoiOperacao(true);
-				getSimple().addPropertyChangeListener(z.getScrollPane());
-				z.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-				getSimple().getDesktopPane().add(z);
-				getSimple().getFacade().incrementaPosicao();
-				getSimple().getDesktopPane().setSelectedFrame(x);
-				getSimple().getDesktopPane().setSelectedFrame(y);
-				getSimple().getDesktopPane().setSelectedFrame(z);
-				try {
-					x.setSelected(true);
-					y.setSelected(true);
-					z.setSelected(true);
-				} catch (PropertyVetoException e) {
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("YCrCb")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporYCrCb((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Y", new MyImage(
+									(Image) array[0]));
+					y.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(y.getScrollPane());
+					y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(y);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame cr = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Cb", new MyImage(
+									(Image) array[1]));
+					cr.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(cr.getScrollPane());
+					cr.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(cr);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame cb = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Cr", new MyImage(
+									(Image) array[2]));
+					cb.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(cb.getScrollPane());
+					cb.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(cb);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(y);
+					getSimple().getDesktopPane().setSelectedFrame(cr);
+					getSimple().getDesktopPane().setSelectedFrame(cb);
+					try {
+						y.setSelected(true);
+						cr.setSelected(true);
+						cb.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				} else if (modelo.equals("XYZ")) {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					Object[] array = getSimple().getFacade().decomporXYZ((MyJInternalFrame) getSimple().getDesktopPane()
+							.getSelectedFrame());
+					MyJInternalFrame x = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - X", new MyImage(
+									(Image) array[0]));
+					x.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(x.getScrollPane());
+					x.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(x);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame y = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Y", new MyImage(
+									(Image) array[1]));
+					y.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(y.getScrollPane());
+					y.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(y);
+					getSimple().getFacade().incrementaPosicao();
+					MyJInternalFrame z = new MyJInternalFrame(getSimple(), getSimple().getFacade(),
+							array[array.length - 1] + " - Z", new MyImage(
+									(Image) array[2]));
+					z.setFoiOperacao(true);
+					getSimple().addPropertyChangeListener(z.getScrollPane());
+					z.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+					getSimple().getDesktopPane().add(z);
+					getSimple().getFacade().incrementaPosicao();
+					getSimple().getDesktopPane().setSelectedFrame(x);
+					getSimple().getDesktopPane().setSelectedFrame(y);
+					getSimple().getDesktopPane().setSelectedFrame(z);
+					try {
+						x.setSelected(true);
+						y.setSelected(true);
+						z.setSelected(true);
+					} catch (PropertyVetoException e) {
+					}
 				}
 			}
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	/**
 	 * Realiza o procedimento de combinação de uma imagem
 	 */
 	public void combinacao() { 
-		MyJInternalFrame original = (MyJInternalFrame) getSimple().getDesktopPane()
-		.getSelectedFrame();
-		JanelaCombinar r = new JanelaCombinar(getSimple().getDesktopPane().getAllFrames(), original
-				.getImage());
-		if (r.ok()) {
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			MyJInternalFrame f = new MyJInternalFrame(getSimple(), getSimple().getFacade(), r
-					.getNome(), new MyImage(r.getImageRecomposta()));
-			f.setFoiOperacao(true);
-			this.addPropertyChangeListener(f.getScrollPane());
-			f.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-			getSimple().getDesktopPane().add(f);
-			getSimple().getFacade().incrementaPosicao();
-			try {
-				f.setSelected(true);
-			} catch (PropertyVetoException e) {
+		try{ 
+			MyJInternalFrame original = (MyJInternalFrame) getSimple().getDesktopPane()
+			.getSelectedFrame();
+			JanelaCombinar r = new JanelaCombinar(getSimple().getDesktopPane().getAllFrames(), original
+					.getImage());
+			if (r.ok()) {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				MyJInternalFrame f = new MyJInternalFrame(getSimple(), getSimple().getFacade(), r
+						.getNome(), new MyImage(r.getImageRecomposta()));
+				f.setFoiOperacao(true);
+				this.addPropertyChangeListener(f.getScrollPane());
+				f.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+				getSimple().getDesktopPane().add(f);
+				getSimple().getFacade().incrementaPosicao();
+				try {
+					f.setSelected(true);
+				} catch (PropertyVetoException e) {
+				}
 			}
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 	}
 
@@ -541,13 +573,16 @@ public class MenuImagem extends SimpleMenu {
 	 */
 	public void pretoBranco(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+
 		try {
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 			PlanarImage image = (PlanarImage)JAI.create("AWTImage",f.getImage());
 			new Binarize(image, getSimple(), f.getName());
-		} catch (Exception e){				
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));	
 	}
 
 	/**
@@ -555,22 +590,25 @@ public class MenuImagem extends SimpleMenu {
 	 */
 	public void escalaCinza(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		f.getScrollPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		MyJInternalFrame n = new MyJInternalFrame(getSimple(), getSimple().getFacade(), f.getName()+ " em Escala de Cinza", new MyImage(getSimple().getFacade().escalaCinza(f.getImage())));
-		n.setFoiOperacao(true);
-		n.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-		getSimple().getDesktopPane().add(n, BorderLayout.CENTER);
-		getSimple().getDesktopPane().setSelectedFrame(n);
-		this.addPropertyChangeListener(n.getScrollPane());
-		getSimple().getFacade().incrementaPosicao();
 		try {
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+			f.getScrollPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			MyJInternalFrame n = new MyJInternalFrame(getSimple(), getSimple().getFacade(), f.getName()+ " em Escala de Cinza", new MyImage(getSimple().getFacade().escalaCinza(f.getImage())));
+			n.setFoiOperacao(true);
+			n.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+			getSimple().getDesktopPane().add(n, BorderLayout.CENTER);
+			getSimple().getDesktopPane().setSelectedFrame(n);
+			this.addPropertyChangeListener(n.getScrollPane());
+			getSimple().getFacade().incrementaPosicao();
+			f.getScrollPane().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 			n.setSelected(true);
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		f.getScrollPane().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	/**
@@ -603,6 +641,8 @@ public class MenuImagem extends SimpleMenu {
 					getSimple().getDesktopPane().setSelectedFrame(pseudo);
 				} catch (PseudoColorException e) {
 					e.printStackTrace();
+				} catch (ClassCastException e0){
+					je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 				}
 			}
 			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -616,18 +656,23 @@ public class MenuImagem extends SimpleMenu {
 	 * Realiza o procedimento de requantização de uma imagem.
 	 */
 	public void requantizacao(){
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		JanelaRequantizar r = new JanelaRequantizar(((MyJInternalFrame) f)
-				.getImage());
-		if (r.getIGS() && r.getOk()) {
-			getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			mostraTela(f, r);
+		try { 
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+			JanelaRequantizar r = new JanelaRequantizar(((MyJInternalFrame) f)
+					.getImage());
+			if (r.getIGS() && r.getOk()) {
+				getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				mostraTela(f, r);
+			}
+			if (r.getNumCores() != 0 && r.foiEscolhido() && r.getOk()) {
+				getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				mostraTela(f, r);
+			}
+		}catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} finally {
+			getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		if (r.getNumCores() != 0 && r.foiEscolhido() && r.getOk()) {
-			getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			mostraTela(f, r);
-		}
-		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	/**
@@ -639,33 +684,42 @@ public class MenuImagem extends SimpleMenu {
 	 *            A JanelaRequantizar que esta sendo usada
 	 */
 	private void mostraTela(MyJInternalFrame f, JanelaRequantizar r) {
-		MyJInternalFrame ift = new MyJInternalFrame(getSimple(), getSimple().getFacade(), f.getName()+ " " + r.getNome(), new MyImage(r.getImagem()));
-		ift.setFoiOperacao(true);
-		getSimple().getDesktopPane().add(ift);
-		getSimple().getDesktopPane().setSelectedFrame(ift);
-		this.addPropertyChangeListener(ift.getScrollPane());
+
 		try {
-			ift.setSelected(true);
-		} catch (PropertyVetoException e) {
+			MyJInternalFrame ift = new MyJInternalFrame(getSimple(), getSimple().getFacade(), f.getName()+ " " + r.getNome(), new MyImage(r.getImagem()));
+			ift.setFoiOperacao(true);
+			getSimple().getDesktopPane().add(ift);
+			getSimple().getDesktopPane().setSelectedFrame(ift);
+			this.addPropertyChangeListener(ift.getScrollPane());
+			try {
+				ift.setSelected(true);
+			} catch (PropertyVetoException e) {
+			}
+			ift.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+			getSimple().getFacade().incrementaPosicao();
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 		}
-		ift.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-		getSimple().getFacade().incrementaPosicao();
+
 	}
 
 	/**
 	 * Invoca a janela de ilusão de óptica do tipo 1.
 	 */
 	public void ilusao1(){
-		JInternalFrame i = Ilusao1.create(getSimple(),getSimple().getFacade());
-		getSimple().getDesktopPane().add(i);
-		i.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
-		addMouseListener((MouseListener) i);
-		getSimple().getFacade().incrementaPosicao();
-		getSimple().getDesktopPane().setSelectedFrame(i);
-		ilusao1.setEnabled(false);
-		try {
-			i.setSelected(true);
-		} catch (PropertyVetoException e) {}
+
+		if (ilusao1.isEnabled()){
+			JInternalFrame i = Ilusao1.create(getSimple(),getSimple().getFacade());
+			getSimple().getDesktopPane().add(i);
+			i.setLocation(getSimple().getFacade().getPosicao(), getSimple().getFacade().getPosicao());
+			addMouseListener((MouseListener) i);
+			getSimple().getFacade().incrementaPosicao();
+			getSimple().getDesktopPane().setSelectedFrame(i);
+			ilusao1.setEnabled(false);
+			try {
+				i.setSelected(true);
+			} catch (PropertyVetoException e) {}
+		}
 	}
 
 	/**
@@ -854,29 +908,37 @@ public class MenuImagem extends SimpleMenu {
 	}
 
 	public JRadioButtonMenuItem getCoordenadaPixel() {
-		return coordenadaPixel;
+		return getInstanciaCoordenadaPixel();
 	}
 
 	/**
 	 * Indica a tonalidade e as coordenadas de um pixel em uma imagem.
 	 */
 	public void coordenadaPixel(){
-		JRadioButtonMenuItem bt = (JRadioButtonMenuItem) coordenadaPixel;
-		if (bt.isSelected()) {
-			JInternalFrame[] frames = getSimple().getDesktopPane().getAllFrames();
-			for (int k = 0; k < frames.length; k++) {
-				((MyJInternalFrame) frames[k]).getScrollPane()
-				.setExibirPixel(true);
+		try {
+			JRadioButtonMenuItem bt = (JRadioButtonMenuItem) coordenadaPixel;
+			if (bt.isSelected()) {
+				JInternalFrame[] frames = getSimple().getDesktopPane().getAllFrames();
+				for (int k = 0; k < frames.length; k++) {
+					((MyJInternalFrame) frames[k]).getScrollPane()
+					.setExibirPixel(true);
+				}
+				boolean tmp = getSimple().isShowColors();
+				getSimple().setShowColors(bt.isSelected());
+				this.firePropertyChange("show-color", tmp, getSimple().isShowColors());
+			} else {
+				JInternalFrame[] frames = getSimple().getDesktopPane().getAllFrames();
+				for (int k = 0; k < frames.length; k++) {
+
+					if (frames[k] instanceof MyJInternalFrame) {
+						if (getSimple().verificaInstancia((MyJInternalFrame) frames[k]))
+							((MyJInternalFrame) frames[k]).getScrollPane().setExibirPixel(false);
+					}
+
+				}
 			}
-			boolean tmp = getSimple().isShowColors();
-			getSimple().setShowColors(bt.isSelected());
-			this.firePropertyChange("show-color", tmp, getSimple().isShowColors());
-		} else {
-			JInternalFrame[] frames = getSimple().getDesktopPane().getAllFrames();
-			for (int k = 0; k < frames.length; k++) {
-				if (getSimple().verificaInstancia((MyJInternalFrame) frames[k]))
-					((MyJInternalFrame) frames[k]).getScrollPane().setExibirPixel(false);
-			}
+		}catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 		}
 	}
 
