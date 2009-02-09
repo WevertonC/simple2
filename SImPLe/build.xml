@@ -119,7 +119,7 @@
 			  		</fileset>
 			  	</copy>
 
-	  	<copy todir="${dist}" file="batch/SImPLe.bat"/>
+	  	<!-- copy todir="${dist}" file="batch/SImPLe.bat"/ -->
 	   <jar jarfile="${dist}/lib/simple-${DSTAMP}.jar" basedir="${bin}">
 	    	<manifest>
 	    		<attribute name="Main-Class" value="simple/main/Main"/> 
