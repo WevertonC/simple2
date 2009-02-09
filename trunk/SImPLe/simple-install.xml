@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<!-- 
+    Definition of SImPLe install file.	
+    To compile it :
+    - go in the bin directory where you installed IzPack
+    - call "compile ../SImPLe/simple-install.xml -b ../SImPLe"
+-->
+
+<installation version="1.0">
+
+    <!-- 
+        The info section.
+        The meaning of the tags should be natural ...
+    -->
+    <info>
+        <appname>SImPLe - System for Image Processing Learning</appname>
+        <appversion>2.0 beta</appversion>
+        <authors>
+            <author name="Andre Hora" email="andre"/>
+		<author name="Eduardo Moura" email="eduardo"/>
+		<author name="Paulo de Tarso" email="paulodt@gmail.com"/>
+		<author name="Vinicius Porto" email="vinicius.porto@gmail.com"/>
+		<author name="Yuska Aguiar" email="yuska"/>
+		<author name="Luciana Cavalcante" email="luciana"/>
+		<author name="Ricardo Madeira" email="ricardo"/>
+		<author name="Elloá Guedes" email="elloa"/>
+        <author name="Odilon Lima" email="odilonflj@gmail.com"/>
+        <author name="Renato Miceli" email="renatomiceli@gmail.com"/>
+        </authors>
+        <url>http://code.google.com/p/simple2/</url>
+    </info>
+
+    <!-- 
+        The gui preferences indication.
+        Sets the installer window to 640x480. It will not be able to change the size.
+    -->
+    <guiprefs width="640" height="480" resizable="no"/>
+
+    <locale>
+        <langpack iso3="por"/>
+	  <langpack iso3="eng"/>
+        <langpack iso3="fra"/>
+    </locale>
+
+    <resources>
+        <res id="LicencePanel.licence" src="Licence.txt"/>
+        <res id="InfoPanel.info" src="Readme.txt"/>
+    </resources>
+
+    <!-- 
+        The panels section.
+        We indicate here which panels we want to use. The order will be respected.
+    -->
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="FinishPanel"/>
+    </panels>
+
+    <!-- 
+        The packs section.
+        We specify here our packs.
+    -->
+    <packs>
+        <pack name="Base" required="yes">
+            <description>The base files</description>
+            <file src="Readme.txt" targetdir="$INSTALL_PATH"/>
+            <file src="Licence.txt" targetdir="$INSTALL_PATH"/>
+            <file src="run.bat" targetdir="$INSTALL_PATH"/>
+            <file src="bin" targetdir="$INSTALL_PATH"/>
+		<file src="Resource" targetdir="$INSTALL_PATH"/> 
+		<file src="lib" targetdir="$INSTALL_PATH"/>
+		<file src="imagens" targetdir="$INSTALL_PATH"/>  
+            <parsable targetfile="$INSTALL_PATH/run.bat"/>
+            <!-- The file will be parsed -->
+        </pack>
+        <pack name="Docs" required="no">
+            <description>The documentation</description>
+            <file src="doc" targetdir="$INSTALL_PATH"/>
+            <!-- Reccursive adding -->
+        </pack>
+        <pack name="Sources" required="yes">
+            <description>The sources</description>
+            <file src="src" targetdir="$INSTALL_PATH"/>
+        </pack>
+    </packs>
+
+</installation>
