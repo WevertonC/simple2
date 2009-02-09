@@ -42,6 +42,27 @@ public class Facade {
 			e.printStackTrace();
 		}		
 	}
+	
+	/**
+	 * Realiza a Transformada Rápida de Fourier em uma imagem.
+	 * 
+	 * @param imagePath O caminho do arquivo da imagem de entrada
+	 * @param outputFileName O caminho do arquivo da imagem de saída
+	 */
+	public void ifft(String imagePath){
+		int pos = imagePath.substring(1).indexOf(".");
+		String outputFileName = imagePath.substring(0, pos+1) + "-outputInverse" + ".jpg";
+
+		try {
+			if (controller.ifft(imagePath, outputFileName)){
+				System.out.println("Operação realizada com sucesso.");
+			}
+		} catch (FourierException e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	
 
 	/**
 	 * Aplicação do filtro Passa Alta com raio dado pelo usuário

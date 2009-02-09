@@ -535,6 +535,37 @@ public class Controller {
 
 		return resultadoEspaco;
 	}
+
+	public boolean ifft(String imagePath, String outputFileName) throws FourierException{
+		
+		setFile(new File(imagePath));	// Define objeto BufferedImage para encapsular a imagem
+		BufferedImage src,output = null;
+		FourierImagem fft;
+
+		// Armazena arquivo imagem numa BufferedImage
+		try {
+			src = ImageIO.read(inputFile);
+		} catch (IOException e1) {
+			throw new FourierException(FourierException.ARQUIVO_N_EXISTE);
+		}
+
+		// Espectro de fourier como saída
+		fft = new FourierImagem(src);
+		fft.transform(); // direta
+		fft.transform(); // inversa
+		output = fft.toImage(fft.getGrayImage());
+
+		
+		// Persistência em arquivo com formato bmp
+		File outputFile = new File(outputFileName);
+		try {
+			ImageIO.write(output, "JPG", outputFile);
+		} catch (IOException e) {
+			throw new FourierException(FourierException.ERRO_SALVAR_SAIDA);
+		}
+
+		return true;
+	}
 	
 	
 

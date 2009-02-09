@@ -197,9 +197,6 @@ public class PixelUtils {
      * @return Math.log(x)
      */
     public static int log(int x){
-    	
-//    	System.out.println("X: " + x + " LOG: " + (new Double(Math.log(Math.abs((x)))*46.02).intValue() - 500));
-    	
     	return (new Double(Math.log(Math.abs((x)))*46.02).intValue());
     }
 }

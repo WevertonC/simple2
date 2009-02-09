@@ -1,7 +1,7 @@
 /*
  * Main
  * 
- * version 1.0
+ * version 2.0
  * 
  * Data 09/11/2005
  * 
