@@ -1,0 +1,10 @@
+Descrição
+
+  Permite decompor a imagem selecionada nos modelos cromáticos XYZ, RGB, CMY, CMYK, YCbCr, HSV. A depender do modelo cromático selecionado, a função exibe três ou quadro imagens que representam  os canais referentes ao modelo cromático. As imagens exibidas podem ser salvas, se desejado.
+  
+ Passos
+ 
+  1 - Selecionar Modelo Cromático
+  2 - Confirmar a operação - pressionar botão OK
+  ou 
+  2 - Cancelar a operação - pressionar o botão CANCELAR

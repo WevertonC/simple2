@@ -1,0 +1,9 @@
+Segmentação que ocorre baseada na limiarização de dimensão.
+
+
+Passos
+
+	1 - Informar valor do o limiar para dimensão (valor maior que zero)
+	2 - Confimar a operação - pressionar o botão Ok
+	ou
+	2 - Cancelat a operação - pressionar o botão Cancelar

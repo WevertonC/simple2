@@ -1,0 +1,11 @@
+Descrição
+
+  Fecha a imagem selecionada.
+  A imagem pode ser fechada através do Menu Arquivo, ao selecionar 
+  a opção Fechar, pela tecla de atalho Ctrl + F, ou pela própria janela.
+ 
+  Caso a imagem tenha sofrido alguma modificação e não tenha sido salva,
+  uma mensagem perguntando se deseja salvar modificações deve ser feita.
+    Caso deseje Salvar as modificações selecionar a opção Sim
+    Caso contrário, selecionar a opção Não
+    Caso deseje cancelar o fechamento da janela, selecionar Cancelar
