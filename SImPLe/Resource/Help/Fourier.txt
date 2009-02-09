@@ -1,1 +1,10 @@
-TODO!
+A saída de uma imagem no espaço transformado pode ser analisada, interpretada e posteriormente processada para a implementação de diversas tarefas do processamento de imagens. Tais transformações são bastante utilizadas, pois a partir dos resultados obtidos, é possível expressar uma imagem como a combinação de um conjunto de sinais básicos, conhecidos como funções básicas.
+
+Um domínio de grande interesse é o domínio da freqüência. A representação de imagens neste domínio parte do pressuposto de que qualquer sinal espacial ou temporal possui uma representação equivalente no domínio da freqüência. Considerando uma imagem digital, a freqüência significa a variação sofrida ao longo de uma imagem dos valores associados aos pixels [Rossin 2006].
+
+A figura 5.1 ilustra uma imagem no domínio do espaço que, com a utilização da Transformada de Fourier, foi convertida para o domínio da freqüência. Como se realiza esta transformação e as operações que se pode realizar no domínio da freqüência serão aprendidas no decorrer das próximas seções.
+
+Transformada de Fourier no Processamento Digital de Imagens
+
+A compreensão da formação e análise de sinais bidimensionais, a exemplo de imagens, têm sido possível graças ao advento das várias transformações ortogonais. A transformada de Fourier é uma das ferramentas mais importante e vem sendo amplamente utilizada não somente para a compreensão da natureza de uma imagem e sua formação, mas também no seu processamento.
+No caso da Transformada de Fourier de uma imagem, os sinais básicos são senóides de diferentes períodos, descrevendo as freqüências espaciais de uma imagem. Isto implica que uma imagem é decomposta em senóides, utilizando a Transformada de Fourier, e as diferentes amplitudes constituem o espectro de freqüências de uma imagem . Assim, dado que uma imagem é um sinal bidimensional no domínio do espaço, a utilização da Transformada de Fourier possibilita a análise desta imagem como um conjunto de senóides em várias direções, onde cada uma delas possui uma freqüência precisa [Acharya and Ray 2005].

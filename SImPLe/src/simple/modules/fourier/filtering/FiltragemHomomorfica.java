@@ -30,9 +30,9 @@ public class FiltragemHomomorfica {
 
 	public BufferedImage reflectanciaEsp(BufferedImage input, double corte) throws FourierException{
 
-		Image i = exp(new ImageIcon(MyBufferedImage.makeImage(input)));
+		Image i = log(new ImageIcon(MyBufferedImage.makeImage(input)));
 		BufferedImage out = Controller.passaAltaEsp(MyBufferedImage.makeBufferedImage(i),corte);
-		i = log(new ImageIcon(out));
+		i = exp(new ImageIcon(out));
 		return MyBufferedImage.makeBufferedImage(i);
 	}
 
@@ -43,9 +43,9 @@ public class FiltragemHomomorfica {
 
 	public BufferedImage iluminacaoEsp(BufferedImage input, double corte) throws FourierException{
 
-		Image i = exp(new ImageIcon(MyBufferedImage.makeImage(input)));
+		Image i = log(new ImageIcon(MyBufferedImage.makeImage(input)));
 		BufferedImage out = Controller.passaBaixaEsp(MyBufferedImage.makeBufferedImage(i),corte);
-		i = log(new ImageIcon(MyBufferedImage.makeImage(out)));
+		i = exp(new ImageIcon(MyBufferedImage.makeImage(out)));
 		return escalaCinza(MyBufferedImage.makeBufferedImage(i));
 	}
 
@@ -102,7 +102,7 @@ public class FiltragemHomomorfica {
 		for (int i =0; i < pixels.length; i++){
 
 			Color c = new Color(pixels[i]);
-			int red = PixelUtils.log(c.getRed());
+			int red = PixelUtils.log(c.getRed() + 1);
 			if (red < 0) red = 0;
 			Color c2 = new Color(red,red,red);
 			pixels[i] = c2.getRGB();
