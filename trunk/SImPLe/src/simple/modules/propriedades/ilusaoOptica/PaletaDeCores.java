@@ -18,6 +18,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,14 +65,14 @@ public class PaletaDeCores {
 		frame = _frame;
 		pinturaAtivada = false;
 		cursorImage = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("Resource/Icones/cursor.gif"));
+				getClass().getResource("cursor.gif"));
 		cursorImageGrande = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("Resource/Icones/cursorGrande.gif"));
+				getClass().getResource("cursorGrande.gif"));
 		escolhaDeCor = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("Resource/Icones/cores.gif"));
+				getClass().getResource("cores.gif"));
 		initComponents();
 		botaoCor.setIcon(new ImageIcon(cursorImage));
-		botaoEscolherCor.setIcon(new ImageIcon(escolhaDeCor));		
+		//botaoEscolherCor.setIcon(new ImageIcon(escolhaDeCor));		
 	}
 	
 	/**

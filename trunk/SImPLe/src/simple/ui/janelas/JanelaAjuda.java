@@ -56,11 +56,11 @@ public class JanelaAjuda extends JDialog implements MouseListener, KeyListener {
 			"Operações Aritméticas - Básica","Operações Aritméticas - Pessoal","Decompor Canais",
 			"Combinar Canais","Escala de Cinza", "Pseudo-Colorização", "Requantização", "Segementação Básica",
 			"Segementação Adaptativa","Média","Gaussiano","Sobel Vertical","Sobel Horizontal","Mediana",
-			"Prewit","Laplace"};
+			"Prewit","Laplace", "Fourier"};
 	
 	private String[] caminhos = new String[]{"Abrir.txt","AbrirNovo.txt","Colar.txt",
 			"CombinarCanais.txt","Comprimir.txt","CoordenadasPixels.txt","Copiar.txt","DecomporCanais.txt",
-			"Desfazer.txt","EscalaCinza.txt","Fechar.txt","Gaussiano.txt","HistogramaColorido.txt",
+			"Desfazer.txt","EscalaCinza.txt","Fechar.txt","Fourier.txt","Gaussiano.txt","HistogramaColorido.txt",
 			"HistogramaCanal.txt","IlusaoOtica.txt","Laplace.txt","Mediana.txt","Média.txt","OperacoesAritmeticasBasica.txt",
 			"OperacoesAritmeticasPessoal.txt","OperacoesLogicas.txt","PerfilColunaSimples.txt",
 			"PerfilLinhaSimples.txt","Prewitt.txt","Pseudo-Colorizacao.txt","Recortar.txt","Redimensionar.txt","Refazer.txt",
@@ -251,6 +251,9 @@ public class JanelaAjuda extends JDialog implements MouseListener, KeyListener {
 			break;
 		case 37:
 			leEscreveTexto(caminhos[37]);
+			break;
+		case 38:
+			leEscreveTexto(caminhos[38]);
 			break;
 		}
 	}
