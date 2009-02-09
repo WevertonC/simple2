@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import simple.manipulacoes.imagem.DeteccaoBordas;
+import simple.excecoes.ImageProcessingException;
 import simple.manipulacoes.util.DisplayDEM;
 import simple.manipulacoes.util.MyBufferedImage;
 import simple.manipulacoes.util.MyImage;
@@ -25,8 +25,7 @@ import simple.modules.classificacao.paralelepipedo.Legenda;
 import simple.modules.classificacao.paralelepipedo.Opcao1;
 import simple.modules.classificacao.paralelepipedo.Opcao2;
 import simple.modules.classificacao.paralelepipedo.Opcao3;
-import simple.excecoes.ImageProcessingException;
-
+import simple.ui.janelas.JanelaErro;
 import simple.ui.janelas.JanelaSegmentacaoAdaptativa;
 import simple.ui.janelas.JanelaSegmentacaoGlobal;
 import simple.ui.janelas.SImPLe;
@@ -42,6 +41,7 @@ public class MenuClassificacao extends SimpleMenu {
 
 	private JMenu segmentacao, classificadores;
 	private JMenuItem global, adaptativa, regionGrowing, paralelepipedo;
+	private JanelaErro je;
 
 	public MenuClassificacao(SImPLe simple) {
 		super(MENU_CLASSIFICACAO, simple);
@@ -102,6 +102,8 @@ public class MenuClassificacao extends SimpleMenu {
 			BufferedImage img = MyBufferedImage.makeBufferedImage(myImage.getImage());
 			getSimple().buildFrame(img, "  Segmentação Global");	
 		} catch (ImageProcessingException e) {
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 		}
 
 	}
@@ -137,6 +139,8 @@ public class MenuClassificacao extends SimpleMenu {
 				getSimple().changeFire();
 			} catch (ImageProcessingException e) {
 			} catch (PropertyVetoException e) {
+			} catch (ClassCastException e0){
+				je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 			}
 		}
 		getSimple().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -151,38 +155,42 @@ public class MenuClassificacao extends SimpleMenu {
 	 */
 	public void paralelepipedo(){
 		
-		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
-		final String nome = f.getName();
-		PlanarImage img0 = (PlanarImage)JAI.create("AWTImage",f.getImage());
-		GerenciadorClassesParalelepipedo.getInstance().setImagem(img0.getAsBufferedImage());
-		final Opcao2 opcao2 = new Opcao2();
-		opcao2.addWindowFocusListener(new WindowFocusListener(){
-			public void windowGainedFocus(WindowEvent arg0) {
-				if (!opcao2.notClosed()) {
-					criaImagemClassificada(opcao2, nome);
+		try {
+			MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
+			final String nome = f.getName();
+			PlanarImage img0 = (PlanarImage)JAI.create("AWTImage",f.getImage());
+			GerenciadorClassesParalelepipedo.getInstance().setImagem(img0.getAsBufferedImage());
+			final Opcao2 opcao2 = new Opcao2();
+			opcao2.addWindowFocusListener(new WindowFocusListener(){
+				public void windowGainedFocus(WindowEvent arg0) {
+					if (!opcao2.notClosed()) {
+						criaImagemClassificada(opcao2, nome);
+					}
 				}
-			}
-			public void windowLostFocus(WindowEvent arg0) {
-				if (!opcao2.notClosed()) {
-					criaImagemClassificada(opcao2, nome);
+				public void windowLostFocus(WindowEvent arg0) {
+					if (!opcao2.notClosed()) {
+						criaImagemClassificada(opcao2, nome);
+					}
 				}
-			}
-		});	
-		final Opcao3 opcao3 = new Opcao3();
-		opcao3.addWindowFocusListener(new WindowFocusListener(){
-			public void windowGainedFocus(WindowEvent arg0) {
-				if (!opcao3.notClosed()) {
-					criaImagemClassificada(opcao3, nome);
+			});	
+			final Opcao3 opcao3 = new Opcao3();
+			opcao3.addWindowFocusListener(new WindowFocusListener(){
+				public void windowGainedFocus(WindowEvent arg0) {
+					if (!opcao3.notClosed()) {
+						criaImagemClassificada(opcao3, nome);
+					}
 				}
-			}
-			public void windowLostFocus(WindowEvent arg0) {
-				if (!opcao3.notClosed()) {
-					criaImagemClassificada(opcao3, nome);
+				public void windowLostFocus(WindowEvent arg0) {
+					if (!opcao3.notClosed()) {
+						criaImagemClassificada(opcao3, nome);
+					}
 				}
-			}
-		});				
-		final Opcao1 opcao = new Opcao1(opcao2, opcao3);
-		opcao.setVisible(true);
+			});				
+			final Opcao1 opcao = new Opcao1(opcao2, opcao3);
+			opcao.setVisible(true);
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		}
 	}
 	
 	private void criaImagemClassificada(Opcao2 opcao2, String nome){
@@ -202,9 +210,12 @@ public class MenuClassificacao extends SimpleMenu {
 			GerenciadorClassesParalelepipedo.getInstance().zeraClasses();
 			legenda.setLocation(getSimple().getFacade().getPosicao() + 5,getSimple().getFacade().getPosicao()+ 5);
 			legenda.setVisible(true);
-		} catch (Exception e){
-			
-		}			
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		}	catch (Exception e){
+			je = new JanelaErro(e.getMessage());
+		} 
+		
 	}
 	
 	private void criaImagemClassificada(Opcao3 opcao2, String nome){
@@ -224,8 +235,10 @@ public class MenuClassificacao extends SimpleMenu {
 			GerenciadorClassesParalelepipedo.getInstance().zeraClasses();
 			legenda.setLocation(getSimple().getFacade().getPosicao() + 5,getSimple().getFacade().getPosicao()+ 5);
 			legenda.setVisible(true);
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
 		} catch (Exception e){
-			
+			je = new JanelaErro(e.getMessage());
 		}			
 	}
 	
@@ -234,9 +247,10 @@ public class MenuClassificacao extends SimpleMenu {
 	 */
 	public void crescimentoRegiao(){
 		getSimple().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		try {
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 		final String nome = f.getName();
-		try {
+	
 			f.getScrollPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			PlanarImage image = (PlanarImage)JAI.create("AWTImage",f.getImage());
 			RegionGrowingSegmentation task = new RegionGrowingSegmentation(image,false,true);
@@ -255,9 +269,13 @@ public class MenuClassificacao extends SimpleMenu {
 			this.addPropertyChangeListener(segmentacaoRegionGrowing.getScrollPane());	
 			this.firePropertyChange("show-color", false, getSimple().isShowColors());
 			f.getScrollPane().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-		} catch (Exception e){				
+		} catch (ClassCastException e0){
+			je = new JanelaErro(JanelaErro.JANELA_INVALIDA);
+		} catch (Exception e){
+			je = new JanelaErro(e.getMessage());
+		} finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
-		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));			
 	}
 
 

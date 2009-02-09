@@ -14,7 +14,7 @@ import simple.ui.janelas.MyJWindow;
 import simple.ui.janelas.SImPLe;
 
 public class MenuEditar extends SimpleMenu {
-	
+
 	/**
 	 * 
 	 */
@@ -26,9 +26,9 @@ public class MenuEditar extends SimpleMenu {
 		super.setMnemonic(KeyEvent.VK_E);
 		configureMenu();
 	}
-	
+
 	private void configureMenu(){
-		
+
 		desfazer = configureMenuItem("Desfazer",NO_VALUE, KeyEvent.VK_Z,ActionEvent.CTRL_MASK, KeyEvent.VK_D, "Resource/Icones/undo.gif");
 		desfazer.setEnabled(false);
 
@@ -37,10 +37,10 @@ public class MenuEditar extends SimpleMenu {
 
 		recortar = configureMenuItem("Recortar",NO_VALUE, KeyEvent.VK_X,ActionEvent.CTRL_MASK, KeyEvent.VK_T, "Resource/Icones/cut.gif");
 		recortar.setEnabled(false);
-		
+
 		copiar = configureMenuItem("Copiar",NO_VALUE, KeyEvent.VK_C,ActionEvent.CTRL_MASK, KeyEvent.VK_O, "Resource/Icones/copy.gif");
 		recortar.setEnabled(false);
-		
+
 		colar = configureMenuItem("Colar",NO_VALUE, KeyEvent.VK_V,ActionEvent.CTRL_MASK, KeyEvent.VK_C, "Resource/Icones/paste.gif");
 		colar.setEnabled(false);
 
@@ -51,7 +51,7 @@ public class MenuEditar extends SimpleMenu {
 		add(copiar);
 		add(colar);
 	}
-	
+
 	public void desfazer(){
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 		if (f != null) {
@@ -59,7 +59,7 @@ public class MenuEditar extends SimpleMenu {
 			f.setImage(i);
 		}
 	}
-	
+
 	public void refazer(){
 		MyJInternalFrame f = (MyJInternalFrame) getSimple().getDesktopPane().getSelectedFrame();
 		if (f != null) {
@@ -67,7 +67,7 @@ public class MenuEditar extends SimpleMenu {
 			f.setImage(i);
 		}
 	}
-	
+
 	public void recortar(){
 		boolean recortou = getSimple().getFacade().recortar(getSimple(), getSimple().getFrameAberto()
 				.getImage());
@@ -84,7 +84,7 @@ public class MenuEditar extends SimpleMenu {
 		copiar.setEnabled(false);
 		getSimple().buttonCopiar.setEnabled(false);
 	}
-	
+
 	public void copiar(){
 		boolean copiou = getSimple().getFacade().copiar(getSimple(), getSimple().getFrameAberto().getImage());
 		if (copiou) {
@@ -99,7 +99,7 @@ public class MenuEditar extends SimpleMenu {
 		copiar.setEnabled(false);
 		getSimple().buttonCopiar.setEnabled(false);
 	}
-	
+
 	public void colar(){
 		if (getSimple().verificaInstancia(getSimple().getDesktopPane().getSelectedFrame())) {
 			ImageIcon colada = new ImageIcon(getSimple().getFacade().colar());
@@ -109,8 +109,29 @@ public class MenuEditar extends SimpleMenu {
 					+ getSimple().getFrameAberto().getY() + 105);
 		}
 	}
-	
-	
-	
+
+	public JMenuItem getCopiar(){
+		return copiar;
+	}
+
+	public JMenuItem getDesfazer() {
+		return desfazer;
+	}
+
+	public JMenuItem getRefazer() {
+		return refazer;
+	}
+
+
+	public JMenuItem getRecortar() {
+		return recortar;
+	}
+
+
+	public JMenuItem getColar() {
+		return colar;
+	}
+
+
 
 }

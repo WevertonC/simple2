@@ -14,7 +14,7 @@ import simple.ui.janelas.SImPLe;
  * Superclasse de um menu do SImPLe
  *
  */
-public class SimpleMenu extends JMenu implements ActionListener {
+public class SimpleMenu extends JMenu {
 
 	/**
 	 * 
@@ -77,11 +77,6 @@ public class SimpleMenu extends JMenu implements ActionListener {
 		return temp;
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		
-		System.out.println("LALALA");
-		
-	}
 
 
 
