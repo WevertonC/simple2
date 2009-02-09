@@ -87,7 +87,7 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 
 	public static JMenuItem recortar, copiar, colar;
 
-	public static JButton buttonRecortar, buttonCopiar, buttonColar;
+	public static JButton buttonRecortar, buttonCopiar, buttonColar, buttonDesfazer, buttonRefazer;
 	
 	private MenuArquivo meuMenuArquivo;
 	private MenuEditar meuMenuEditar;
@@ -125,11 +125,36 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		
 		dp.setBackground(new Color(128, 128, 128));
 		facade = Facade.getInstance();
+		
+		// ***********************************************************************//
+		// ****************          Configura Copiar, Colar...   ****************//
+		// ***********************************************************************//
+		
 	}
 	
+	private void configurarBotoesEditar() {
+		this.recortar = meuMenuEditar.getRecortar();
+		this.copiar = meuMenuEditar.getCopiar();
+		this.colar = meuMenuEditar.getColar();
+		this.buttonColar = simpleBar.getColar();
+		this.buttonCopiar = simpleBar.getCopiar();
+		this.buttonRecortar = simpleBar.getRecortar();
+		this.salvar = meuMenuArquivo.getSalvar();
+		this.desfazer = meuMenuEditar.getDesfazer();
+		this.refazer = meuMenuEditar.getRefazer();
+		this.buttonDesfazer = simpleBar.getDesfazer();
+		this.buttonRefazer = simpleBar.getRefazer();
+		
+		this.buttonCopiar.setEnabled(false);
+		this.buttonColar.setEnabled(false);
+		this.buttonRecortar.setEnabled(false);
+		
+	}
+
 	public void start(){
 		
 		configureMenuBar();
+		configurarBotoesEditar();
 		habilitaBotoes(false);
 		this.setVisible(true);
 
@@ -210,13 +235,13 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		if (dp.getAllFrames().length == 0) {
 			habilitaBotoes(false);
 			habilitaBotoes(false);
-//			recortar.setEnabled(false);
-//			buttonRecortar.setEnabled(false);
-//			copiar.setEnabled(false);
-//			buttonCopiar.setEnabled(false);
-//			colar.setEnabled(false);
-//			buttonColar.setEnabled(false);
-//			salvar.setEnabled(false);
+			recortar.setEnabled(false);
+			buttonRecortar.setEnabled(false);
+			copiar.setEnabled(false);
+			buttonCopiar.setEnabled(false);
+			colar.setEnabled(false);
+			buttonColar.setEnabled(false);
+			salvar.setEnabled(false);
 		}
 	}
 
@@ -685,17 +710,17 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 			if (dp.getSelectedFrame() != null
 					&& ((MyJInternalFrame) dp.getSelectedFrame())
 							.getFoiModificado()) {
-//				refazer.setEnabled(true);
-//				desfazer.setEnabled(true);
-//				buttonDesfazer.setEnabled(true);
-//				buttonRefazer.setEnabled(true);
-//				salvar.setEnabled(true);
+				refazer.setEnabled(true);
+				desfazer.setEnabled(true);
+				buttonDesfazer.setEnabled(true);
+				buttonRefazer.setEnabled(true);
+				salvar.setEnabled(true);
 			} else {
-//				refazer.setEnabled(false);
-//				desfazer.setEnabled(false);
-//				buttonDesfazer.setEnabled(false);
-//				buttonRefazer.setEnabled(false);
-//				salvar.setEnabled(false);
+				refazer.setEnabled(false);
+				desfazer.setEnabled(false);
+				buttonDesfazer.setEnabled(false);
+				buttonRefazer.setEnabled(false);
+				salvar.setEnabled(false);
 			}
 		}
 	}
