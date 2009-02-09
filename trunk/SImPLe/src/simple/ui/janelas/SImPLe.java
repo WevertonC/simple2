@@ -541,8 +541,12 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 			meuMenuOperacoes.emboss();
 		}
 		else if (evento.equals("Frei & Chen")){
-				meuMenuOperacoes.freiChen();
+			meuMenuOperacoes.freiChen();
 		}
+		else if (evento.equals("Filtro Bilateral")) {
+			meuMenuOperacoes.filtroBilateral();
+		}
+
 		
 		// **********************************//
 		// ****   Geradores de Ruído    *****//

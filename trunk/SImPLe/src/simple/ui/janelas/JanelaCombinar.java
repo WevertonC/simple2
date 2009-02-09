@@ -36,6 +36,7 @@ import simple.manipulacoes.util.MyBufferedImage;
 import simple.manipulacoes.util.MyJInternalFrame;
 import simple.modules.propriedades.decomporCanais.DecompositorCMY;
 import simple.modules.propriedades.decomporCanais.DecompositorCMYK;
+import simple.modules.propriedades.decomporCanais.DecompositorHSL;
 import simple.modules.propriedades.decomporCanais.DecompositorHSV;
 import simple.modules.propriedades.decomporCanais.DecompositorRGB;
 import simple.modules.propriedades.decomporCanais.DecompositorXYZ;
@@ -56,7 +57,7 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
-	private JRadioButton botaoRGB, botaoCMY, botaoCMYK, botaoHSV, botaoYCrCb, botaoXYZ;
+	private JRadioButton botaoRGB, botaoCMY, botaoCMYK, botaoHSL, botaoHSV, botaoYCrCb, botaoXYZ;
 	private JLabel jLabel , jLabel2 , jLabelChannel1, jLabelChannel2, jLabelChannel3, jLabelChannel4;
 	private JComboBox jComboBoxChannel1, jComboBoxChannel2, jComboBoxChannel3, jComboBoxChannel4;
 	private JButton botaoOK, botaoCancelar, botaoAjuda;
@@ -77,9 +78,9 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 	 */
 	@SuppressWarnings("unchecked")
 	public JanelaCombinar(Object[] lista, Image original){
-		setSize(450, 350);
+		setSize(450, 390);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation(d.width/2 - 450/2,d.height/2 - 350/2);
+		setLocation(d.width/2 - 450/2,d.height/2 - 390/2);
 		this.lista = lista;
 		setModal(true);
 		setTitle("Combinar Canais");
@@ -118,11 +119,11 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 		
 		//Botões
 		botaoOK = new JButton("OK");
-		botaoOK.setBounds(140, 275, 57, 25);
+		botaoOK.setBounds(140, 315, 57, 25);
 		botaoOK.addActionListener(this);
 		
 		botaoCancelar = new JButton("Cancelar");
-		botaoCancelar.setLocation(210, 275);
+		botaoCancelar.setLocation(210, 315);
 		botaoCancelar.setSize(85, 25);
 		botaoCancelar.addActionListener(this);			
 		
@@ -145,25 +146,31 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 		botaoCMYK.setLocation(12, 130);
 		botaoCMYK.addActionListener(this);
 		
+		botaoHSL = new JRadioButton("HSL");
+		botaoHSL.setSize(70, 21);
+		botaoHSL.setLocation(12, 170);
+		botaoHSL.addActionListener(this);
+		
 		botaoHSV = new JRadioButton("HSV");
 		botaoHSV.setSize(70, 21);
-		botaoHSV.setLocation(12, 170);
+		botaoHSV.setLocation(12, 210);
 		botaoHSV.addActionListener(this);
 		
 		botaoYCrCb = new JRadioButton("YCrCb");
 		botaoYCrCb.setSize(70, 21);
-		botaoYCrCb.setLocation(12, 210);
+		botaoYCrCb.setLocation(12, 250);
 		botaoYCrCb.addActionListener(this);
 		
 		botaoXYZ = new JRadioButton("XYZ");
 		botaoXYZ.setSize(70, 21);
-		botaoXYZ.setLocation(12, 250);
+		botaoXYZ.setLocation(12, 290);
 		botaoXYZ.addActionListener(this);
 		
 		ButtonGroup botoes = new ButtonGroup();
 		botoes.add(botaoRGB);
 		botoes.add(botaoCMY);
 		botoes.add(botaoCMYK);
+		botoes.add(botaoHSL);
 		botoes.add(botaoHSV);
 		botoes.add(botaoYCrCb);
 		botoes.add(botaoXYZ);
@@ -188,6 +195,7 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 		getContentPane().add(jLabel);
 		getContentPane().add(botaoCMY);
 		getContentPane().add(botaoCMYK);
+		getContentPane().add(botaoHSL);
 		getContentPane().add(botaoHSV);
 		getContentPane().add(botaoXYZ);
 		getContentPane().add(botaoYCrCb);
@@ -209,6 +217,7 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 		botaoRGB.addKeyListener(this);
 		botaoCMY.addKeyListener(this);
 		botaoCMYK.addKeyListener(this);
+		botaoHSL.addKeyListener(this);
 		botaoHSV.addKeyListener(this);
 		botaoYCrCb.addKeyListener(this);
 		botaoXYZ.addKeyListener(this);
@@ -281,6 +290,13 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 			jLabelChannel4.setText("-");
 			modelo = "XYZ";
 			jComboBoxChannel4.setEnabled(false);
+		} else if(evento.equalsIgnoreCase("HSL")){
+			jLabelChannel1.setText("H");
+			jLabelChannel2.setText("S");
+			jLabelChannel3.setText("L");
+			jLabelChannel4.setText("-");					
+			modelo = "HSL";
+			jComboBoxChannel4.setEnabled(false);
 		} else if(evento.equalsIgnoreCase("HSV")){
 			jLabelChannel1.setText("H");
 			jLabelChannel2.setText("S");
@@ -334,6 +350,14 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 							dispose();
 						}else JOptionPane.showMessageDialog(null,"Imagens de tamanhos diferentes, Impossível realizar combinação!!!" 
 								,"ERRO NAS INFORMAÇÕES", JOptionPane.ERROR_MESSAGE);
+					} else if (modelo.equals("HSL")){
+						BufferedImage[] array = new BufferedImage[3];
+						array[0] = MyBufferedImage.makeBufferedImage(i1);
+						array[1] = MyBufferedImage.makeBufferedImage(i2);
+						array[2] = MyBufferedImage.makeBufferedImage(i3);
+						imageRecomposta = DecompositorHSL.setCanaisHSL(array, alpha);
+						nome += "HSL";
+						dispose();
 					} else if (modelo.equals("HSV")){
 						BufferedImage[] array = new BufferedImage[3];
 						array[0] = MyBufferedImage.makeBufferedImage(i1);
@@ -438,6 +462,14 @@ public class JanelaCombinar extends JDialog implements ActionListener, KeyListen
 						array[3] = MyBufferedImage.makeBufferedImage(((MyJInternalFrame) lista[jComboBoxChannel4.getSelectedIndex()]).getImage());
 						imageRecomposta = DecompositorCMYK.setCanaisCMYK(array);
 						nome = "CMYK";
+						dispose();
+					} else if (modelo.equals("HSL")){
+						BufferedImage[] array = new BufferedImage[3];
+						array[0] = MyBufferedImage.makeBufferedImage(((MyJInternalFrame) lista[jComboBoxChannel1.getSelectedIndex()]).getImage());
+						array[1] = MyBufferedImage.makeBufferedImage(((MyJInternalFrame) lista[jComboBoxChannel2.getSelectedIndex()]).getImage());
+						array[2] = MyBufferedImage.makeBufferedImage(((MyJInternalFrame) lista[jComboBoxChannel3.getSelectedIndex()]).getImage());
+						imageRecomposta = DecompositorHSL.setCanaisHSL(array, alpha);
+						nome = "HSL";
 						dispose();
 					} else if (modelo.equals("HSV")){
 						BufferedImage[] array = new BufferedImage[3];
