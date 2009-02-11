@@ -546,6 +546,9 @@ public class SImPLe extends JFrame implements ActionListener, ChangeListener,
 		else if (evento.equals("Filtro Bilateral")) {
 			meuMenuOperacoes.filtroBilateral();
 		}
+		else if (evento.equals("Filtro Bilateral Adaptativo")) {
+			meuMenuOperacoes.filtroBilateralAdaptativo();
+		}
 
 		
 		// **********************************//

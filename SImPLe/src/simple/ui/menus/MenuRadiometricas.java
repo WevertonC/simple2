@@ -188,5 +188,9 @@ public class MenuRadiometricas extends SimpleMenu{
 	public void filtroBilateral() {
 		locais.filtroBilateral();
 	}
+	
+	public void filtroBilateralAdaptativo() {
+		locais.filtroBilateralAdaptativo();
+	}
 
 }

@@ -214,5 +214,9 @@ public class MenuOperacoes extends SimpleMenu{
 	public void filtroBilateral() {
 		radiometricas.filtroBilateral();
 	}
+	
+	public void filtroBilateralAdaptativo() {
+		radiometricas.filtroBilateralAdaptativo();
+	}
 
 }

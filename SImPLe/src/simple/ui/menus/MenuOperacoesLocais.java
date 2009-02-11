@@ -18,6 +18,7 @@ import simple.modules.operacoes.ruido.GeradorDeRuido;
 import simple.modules.operacoes.ruido.RuidoGaussiano;
 import simple.ui.janelas.JanelaFiltro;
 import simple.ui.janelas.JanelaFiltroBilateral;
+import simple.ui.janelas.JanelaFiltroBilateralAdaptativo;
 import simple.ui.janelas.JanelaFrequencia;
 import simple.ui.janelas.JanelaFrequenciaFaixa;
 import simple.ui.janelas.JanelaRuidoGaussiano;
@@ -37,7 +38,8 @@ public class MenuOperacoesLocais extends SimpleMenu {
 
 	private JMenuItem media, mediana, moda, sobel, prewitt, roberts, laplace, gaussiano, emboss, freichen, passaAltaFreq, passaBaixaFreq,
 			passaFaixaFreq, abertura4, abertura8, fechamento4, fechamento8, rank, morMediana, ruidoSaltPepper, ruidoGaussiano, reflectancia,
-			iluminacao, rejeitaFaixaFreq, gaussianoPassaAlta, gaussianoPassaBaixa, butterworthAlta, butterworthBaixa, filtroBilteral;
+			iluminacao, rejeitaFaixaFreq, gaussianoPassaAlta, gaussianoPassaBaixa, butterworthAlta, butterworthBaixa, filtroBilateral,
+			filtroBilateralAdaptativo;
 
 	private simple.modules.fourier.facade.Facade fourierFacade = new simple.modules.fourier.facade.Facade();
 
@@ -55,6 +57,7 @@ public class MenuOperacoesLocais extends SimpleMenu {
 		configureFrequencia();
 		configureMorfologicas();
 		configureBilateral();
+		configureBilateralAdaptativo();
 		configureGeraRuido();
 
 	}
@@ -542,11 +545,19 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	}
 
 	private void configureBilateral() {
-		filtroBilteral = new JMenuItem("Filtro Bilateral");
-		filtroBilteral.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
-		filtroBilteral.addActionListener(getSimple());
+		filtroBilateral = new JMenuItem("Filtro Bilateral");
+		filtroBilateral.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+		filtroBilateral.addActionListener(getSimple());
 
-		filtros.add(filtroBilteral);
+		filtros.add(filtroBilateral);
+	}
+
+	private void configureBilateralAdaptativo() {
+		filtroBilateralAdaptativo = new JMenuItem("Filtro Bilateral Adaptativo");
+		filtroBilateralAdaptativo.setIcon(new ImageIcon("Resource/Icones/filtro.gif"));
+		filtroBilateralAdaptativo.addActionListener(getSimple());
+
+		filtros.add(filtroBilateralAdaptativo);
 	}
 
 	public void saltPepper() {
@@ -585,6 +596,11 @@ public class MenuOperacoesLocais extends SimpleMenu {
 	public void filtroBilateral() {
 
 		new JanelaFiltroBilateral(getSimple());
+	}
+
+	public void filtroBilateralAdaptativo() {
+
+		new JanelaFiltroBilateralAdaptativo(getSimple());
 	}
 
 }
