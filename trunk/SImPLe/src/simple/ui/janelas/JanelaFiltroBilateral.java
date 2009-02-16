@@ -191,8 +191,8 @@ public class JanelaFiltroBilateral extends JDialog {
 		this.setLayout(null);
 		this.setResizable(false);
 
-		final JLabel pleasingInfoLabel = new JLabel("Por favor, informe...");
-		pleasingInfoLabel.setBounds(40, 20, 100, 20);
+		final JLabel pleasingInfoLabel = new JLabel("Informe os parâmetros do filtro.");
+		pleasingInfoLabel.setBounds(40, 20, 200, 20);
 
 		final JLabel maskLabel = new JLabel("Comprimento da Máscara:");
 		maskLabel.setBounds(40, 60, 160, 15);
