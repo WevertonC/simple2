@@ -98,7 +98,7 @@ public class JanelaFiltroBilateralAdaptativo extends JDialog {
 		this.setLayout(null);
 		this.setResizable(false);
 
-		final JLabel pleasingInfoLabel = new JLabel("Por favor, informe o tamanho da máscara...");
+		final JLabel pleasingInfoLabel = new JLabel("Informe o tamanho da máscara.");
 		pleasingInfoLabel.setBounds(40, 20, 250, 20);
 
 		x7 = new JRadioButton("7x7");
