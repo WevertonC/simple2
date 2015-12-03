@@ -1,0 +1,5 @@
+# Tabela de Riscos #
+
+| Status | Descrição do risco | Data em que foi identificado | Gravidade (baixo, médio, alto) | Ordem (1 = pior risco) | Ordem semana passada | Número de semanas na lista |Responsável por fazer o risco sumir | Observações |
+|:-------|:-------------------|:-----------------------------|:-------------------------------|:-----------------------|:---------------------|:---------------------------|:-----------------------------------|:------------|
+| Superado (09/07/2008) | Troca das datas da Iteração 1 | 07/07/08                     | Médio                          | 1                      | 0                    | 1                          | Elloá e Odilon                     | Ocorreu em virtude dos dois membros da equipe terem confundido a data final da iteração. O ocorrido já está superado.|
